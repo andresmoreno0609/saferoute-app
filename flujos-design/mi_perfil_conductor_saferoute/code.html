@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#f7f9fb",
+                    "tertiary-container": "#0d1c2f",
+                    "on-surface": "#191c1e",
+                    "on-secondary-fixed": "#00201d",
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "inverse-surface": "#2d3133",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#dae2fd",
+                    "secondary": "#006a61",
+                    "inverse-on-surface": "#eff1f3",
+                    "tertiary-fixed": "#d5e3fd",
+                    "primary-fixed-dim": "#bec6e0",
+                    "outline": "#76777d",
+                    "surface-container-low": "#f2f4f6",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d8dadc",
+                    "inverse-primary": "#bec6e0",
+                    "background": "#f7f9fb",
+                    "outline-variant": "#c6c6cd",
+                    "primary-container": "#131b2e",
+                    "tertiary": "#000000",
+                    "secondary-fixed": "#89f5e7",
+                    "surface-variant": "#e0e3e5",
+                    "surface-container": "#eceef0",
+                    "surface-bright": "#f7f9fb",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "surface-container-high": "#e6e8ea",
+                    "secondary-container": "#86f2e4",
+                    "on-secondary-container": "#006f66",
+                    "surface-tint": "#565e74",
+                    "error": "#ba1a1a",
+                    "primary": "#000000",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "on-tertiary-container": "#76859b",
+                    "on-primary-container": "#7c839b",
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-secondary-fixed-variant": "#005049",
+                    "on-primary-fixed": "#131b2e",
+                    "error-container": "#ffdad6",
+                    "on-surface-variant": "#45464d",
+                    "on-primary": "#ffffff",
+                    "on-background": "#191c1e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "24px",
+                    "base": "8px",
+                    "xs": "4px",
+                    "xl": "64px",
+                    "lg": "40px",
+                    "container-padding": "20px",
+                    "sm": "12px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "h3": ["Inter"],
+                    "h2": ["Inter"],
+                    "h1": ["Inter"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                    "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f8fafc;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-lg text-on-surface">
+<header class="bg-slate-50/90 dark:bg-slate-950/90 font-sans antialiased font-semibold docked full-width top-0 sticky z-40 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between px-5 h-16 w-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-teal-600" data-icon="school">school</span>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-50">SafeRoute</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-500" data-icon="settings">settings</span>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-container-padding py-lg space-y-md mb-24">
+<section class="grid grid-cols-1 md:grid-cols-12 gap-md">
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col items-center text-center">
+<div class="relative mb-base">
+<img class="w-32 h-32 rounded-full object-cover border-4 border-secondary-container" data-alt="A professional headshot of a smiling middle-aged Hispanic bus driver wearing a clean navy blue uniform. He is positioned in front of a modern, brightly lit office environment with soft natural light streaming in. The image is captured in a high-quality corporate style with a shallow depth of field, focusing on his friendly yet authoritative expression. The overall aesthetic is clean, reliable, and trustworthy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYBa_ILx0wRJNqOokGypxFAWn9mI-s5pXdX_n0A8O_MBRoN7DMxkhduu5zBks28PmLtno9VCeyepG_DlhJdWV8BZ4SPpJWj4WCTkip-cPB-gHAiSEoGM1U-a3Dz_tyMKn-b_goPOCvWfrtYV_ri2jA63_F5TRTmC3wao8mKR0KSFCzyO6HFdYm87djBt3Ai6Hx7yRLDTVrL-57VVm2OfRgYisgsBFRrvXT-GlwA0v8AB5AydUpiQg3SXj-fZ6_vIg2Tcs6SuUfNG2G"/>
+<div class="absolute bottom-1 right-1 bg-secondary text-white rounded-full p-1 border-2 border-white">
+<span class="material-symbols-outlined text-sm" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<h2 class="font-h2 text-h2 text-on-surface">Carlos Mendoza</h2>
+<p class="font-body-sm text-on-surface-variant mb-base">Conductor de Ruta Escolar Especializada</p>
+<div class="flex items-center gap-1 mb-base">
+<span class="material-symbols-outlined text-amber-500" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-h3 text-h3 text-on-surface">4.95</span>
+<span class="font-body-sm text-outline">(128 reseñas)</span>
+</div>
+<div class="w-full pt-md mt-md border-t border-surface-variant space-y-sm">
+<div class="flex justify-between items-center px-xs">
+<span class="font-label-caps text-label-caps text-outline uppercase">Experiencia</span>
+<span class="font-body-lg text-body-lg font-semibold">12 Años</span>
+</div>
+<div class="flex justify-between items-center px-xs">
+<span class="font-label-caps text-label-caps text-outline uppercase">Nacionalidad</span>
+<span class="font-body-lg text-body-lg font-semibold">Española</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-8 space-y-md">
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-h3 text-h3">Estadísticas de la Semana</h3>
+<span class="font-label-caps text-label-caps text-secondary bg-secondary-container px-3 py-1 rounded-full uppercase">En Vivo</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-gutter">
+<div class="bg-surface-container rounded-lg p-base text-center">
+<span class="material-symbols-outlined text-secondary block mb-xs" data-icon="route">route</span>
+<p class="font-h2 text-h2 text-on-surface">420</p>
+<p class="font-label-caps text-label-caps text-outline uppercase">Km Recorridos</p>
+</div>
+<div class="bg-surface-container rounded-lg p-base text-center">
+<span class="material-symbols-outlined text-secondary block mb-xs" data-icon="schedule">schedule</span>
+<p class="font-h2 text-h2 text-on-surface">32.5</p>
+<p class="font-label-caps text-label-caps text-outline uppercase">Horas en Ruta</p>
+</div>
+<div class="bg-surface-container rounded-lg p-base text-center">
+<span class="material-symbols-outlined text-secondary block mb-xs" data-icon="sentiment_very_satisfied">sentiment_very_satisfied</span>
+<p class="font-h2 text-h2 text-on-surface">98%</p>
+<p class="font-label-caps text-label-caps text-outline uppercase">Seguridad</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
+<h3 class="font-h3 text-h3 mb-md">Documentación Verificada</h3>
+<div class="space-y-sm">
+<div class="flex items-center justify-between p-sm border border-outline-variant rounded-lg">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-slate-500" data-icon="badge">badge</span>
+<div>
+<p class="font-body-lg font-semibold leading-none">Licencia de Conducir D</p>
+<p class="font-body-sm text-outline">Vence: 12/2026</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center justify-between p-sm border border-outline-variant rounded-lg">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-slate-500" data-icon="description">description</span>
+<div>
+<p class="font-body-lg font-semibold leading-none">Seguro de Responsabilidad Civil</p>
+<p class="font-body-sm text-outline">Póliza: #TR-998822</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center justify-between p-sm border border-outline-variant rounded-lg">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-slate-500" data-icon="medical_services">medical_services</span>
+<div>
+<p class="font-body-lg font-semibold leading-none">Certificado Médico</p>
+<p class="font-body-sm text-outline">Válido hasta: 08/2024</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+<div class="pt-base">
+<button class="w-full h-12 rounded-xl border border-error text-error font-semibold flex items-center justify-center gap-2 hover:bg-error-container transition-colors duration-200 active:scale-95">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                        Cerrar Sesión
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<nav class="fixed bottom-0 w-full z-50 rounded-t-2xl border-t bg-white/95 dark:bg-slate-900/95 border-slate-200 dark:border-slate-800 shadow-[0_-4px_20px_rgba(0,0,0,0.04)] fixed bottom-0 left-0 w-full flex justify-around items-center px-2 py-3 pb-safe">
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-teal-500 active:scale-95 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[11px] font-medium tracking-wide uppercase Inter">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-teal-500 active:scale-95 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="directions_bus">directions_bus</span>
+<span class="text-[11px] font-medium tracking-wide uppercase Inter">Ruta</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-teal-500 active:scale-95 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-[11px] font-medium tracking-wide uppercase Inter">Estudiantes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-teal-500 active:scale-95 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="text-[11px] font-medium tracking-wide uppercase Inter">Alertas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-teal-600 dark:text-teal-400 font-bold scale-105 transition-transform active:scale-95 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-[11px] font-medium tracking-wide uppercase Inter">Perfil</span>
+</a>
+</nav>
+</body></html>

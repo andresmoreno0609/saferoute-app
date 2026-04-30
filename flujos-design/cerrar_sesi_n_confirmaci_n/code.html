@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-container": "#86f2e4",
+                      "on-secondary-container": "#006f66",
+                      "on-primary-fixed": "#131b2e",
+                      "on-error": "#ffffff",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff",
+                      "surface-container": "#eceef0",
+                      "surface": "#f7f9fb",
+                      "surface-tint": "#565e74",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#76777d",
+                      "on-tertiary-fixed": "#0d1c2f",
+                      "on-surface": "#191c1e",
+                      "on-primary-container": "#7c839b",
+                      "primary-fixed": "#dae2fd",
+                      "on-background": "#191c1e",
+                      "secondary-fixed-dim": "#6bd8cb",
+                      "secondary": "#006a61",
+                      "error": "#ba1a1a",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed": "#00201d",
+                      "primary": "#000000",
+                      "tertiary-fixed-dim": "#b9c7e0",
+                      "tertiary-container": "#0d1c2f",
+                      "surface-dim": "#d8dadc",
+                      "surface-variant": "#e0e3e5",
+                      "surface-container-high": "#e6e8ea",
+                      "outline-variant": "#c6c6cd",
+                      "inverse-primary": "#bec6e0",
+                      "surface-container-low": "#f2f4f6",
+                      "on-tertiary-fixed-variant": "#3a485c",
+                      "secondary-fixed": "#89f5e7",
+                      "on-tertiary-container": "#76859b",
+                      "primary-fixed-dim": "#bec6e0",
+                      "background": "#f7f9fb",
+                      "on-surface-variant": "#45464d",
+                      "on-primary": "#ffffff",
+                      "inverse-surface": "#2d3133",
+                      "tertiary-fixed": "#d5e3fd",
+                      "tertiary": "#000000",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-secondary-fixed-variant": "#005049",
+                      "surface-bright": "#f7f9fb",
+                      "on-secondary": "#ffffff",
+                      "primary-container": "#131b2e"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "xl": "64px",
+                      "xs": "4px",
+                      "md": "24px",
+                      "base": "8px",
+                      "lg": "40px",
+                      "container-padding": "20px",
+                      "sm": "12px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "h3": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "label-caps": ["Inter"],
+                      "h2": ["Inter"],
+                      "h1": ["Inter"]
+              },
+              "fontSize": {
+                      "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                      "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                      "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-white dark:bg-slate-950 shadow-sm dark:shadow-none docked full-width top-0 border-b border-slate-200 dark:border-slate-800 z-40 fixed w-full">
+<div class="flex justify-between items-center w-full px-5 py-3">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-teal-600 dark:text-teal-400 cursor-pointer active:opacity-70 transition-opacity" data-icon="menu">menu</span>
+<h1 class="text-lg font-bold text-slate-900 dark:text-white font-['Inter']">Mi Cuenta</h1>
+</div>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-slate-200">
+<img alt="Avatar del usuario" class="h-full w-full object-cover" data-alt="A professional close-up portrait of a corporate executive in a modern office setting. The lighting is soft and diffused, creating a clean and reliable aesthetic consistent with a high-end safety service. The color palette is dominated by neutral greys and whites with subtle teal accents in the background, reflecting the SafeRoute brand identity of vigilance and composure." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeO3cs2hIKWxQJv4bIloGb-7FBXz2B_82Tc0p8kZUjb6X2NtyRlqtRUG-hneBdBOIqN-iWK5AFof8Wq6O6l8aV-2qMkEoXsmFHW8SU97CH1SQphdZWZ3l09FphqFIEIlGThwWWyFVjZBPhFMXWUV-rT3VVZgITkgXfp4eVyq4PxJXvs06MMO1y7a90rPxNwAKbwQEdpJXKSw9JBuXzjdyiR57NRZxbL7GEPFltxhXAxb36ZgHSmJp812xshoy_mYYdgAPCQ849UBFn"/>
+</div>
+</div>
+</header>
+<!-- NavigationDrawer (Simulated as open for this view) -->
+<aside class="fixed inset-y-0 left-0 z-50 flex flex-col bg-white dark:bg-slate-900 h-full w-80 rounded-r-lg shadow-2xl transition-transform transform translate-x-0">
+<!-- Header Profile -->
+<div class="p-6 flex flex-col items-start gap-4 border-b border-slate-100 dark:divide-slate-800">
+<div class="h-16 w-16 rounded-xl overflow-hidden shadow-sm">
+<img alt="Foto de perfil" class="h-full w-full object-cover" data-alt="Detailed professional headshot of a middle-aged male user with a friendly and trustworthy expression, set against a blurred minimalist corporate background. The image uses a cool color temperature with soft blues and crisp whites to align with the SafeRoute visual tokens of reliability and safety. The composition is clean and centered for a premium UI profile experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC86yZLo_D3iqjrAKR6hJ9mrXEoJn3TkcPKYTbAm4jOjlB1D30wNb0jnTTWNuC0QXfbooG6t3AU4YfrGWtoJOCi3ixoyNUz2mJm7s-3R3GvBRQwaL06vRdOIdubREaYXlb8-d1SCOnJB4VqDIR4KAFgTIa86WzJUPU6kd4_vsLLmNn97Cy_C91gvtR5zmCyvTkMWVTcfqY_cvmrBLR_H4bdRnfzN2qUJiCV1R6RUIog8u_H_l8raVVD7poPo0T_tzn7qQK75B3z2wF7"/>
+</div>
+<div>
+<h2 class="text-xl font-black text-slate-900 dark:text-white font-['Inter']">Usuario Principal</h2>
+<p class="text-sm text-slate-500 font-['Inter']">Cuenta Corporativa</p>
+</div>
+</div>
+<!-- Navigation Items -->
+<nav class="flex-1 py-4 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800">
+<div class="px-3 space-y-1">
+<a class="flex items-center gap-4 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-transform duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined text-teal-600" data-icon="dashboard">dashboard</span>
+<span class="font-['Inter'] text-base">Panel de Control</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-teal-700 dark:text-teal-300 font-bold bg-teal-50 dark:bg-teal-900/20 border-l-4 border-teal-600 hover:translate-x-1 transition-transform duration-200 rounded-r-lg group" href="#">
+<span class="material-symbols-outlined text-teal-600" data-icon="settings">settings</span>
+<span class="font-['Inter'] text-base">Configuración</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:translate-x-1 transition-transform duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined text-teal-600" data-icon="shield">shield</span>
+<span class="font-['Inter'] text-base">Seguridad</span>
+</a>
+</div>
+<div class="px-3 pt-4">
+<button class="w-full flex items-center gap-4 px-4 py-3 text-error hover:bg-error-container/20 hover:translate-x-1 transition-transform duration-200 rounded-lg group text-left">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-['Inter'] text-base font-semibold">Cerrar Sesión</span>
+</button>
+</div>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pt-20 pl-0 md:pl-80 min-h-screen">
+<div class="container mx-auto p-gutter max-w-5xl">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Profile Header Card -->
+<div class="md:col-span-12 bg-white rounded-xl p-md shadow-[0px_4px_20px_rgba(0,0,0,0.04)] flex flex-col md:flex-row items-center gap-6">
+<div class="h-32 w-32 rounded-full border-4 border-surface-container relative overflow-hidden">
+<img alt="Profile Large" class="h-full w-full object-cover" data-alt="A high-quality, professional portrait of a man in his 40s wearing a smart-casual blazer, set against a bright, airy architectural background. The image is crisp and utilizes high-key lighting to emphasize a clean, modern aesthetic. The colors are muted and professional, focusing on reliability and composure, perfectly fitting the 'Modern Corporate' brand personality of SafeRoute." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH9a5Fz6amxDrBXQblYoLJK4fG7jdKP-X_BZ7b97WJuT-bebG-H8loqSXtJ5exb5GGz7oOZgAlwqchDNuCfuFKX37SfWpGuecLqQWSyynhvGm0Nin16Qw_1MVA2r1kyUJJXoB9IpVicg_yvwjVdoBSAPVhyz9NtCTtvinVgx_ab7jgLspNr8pdmQGk6NzuNtaxGp7Qw1-4VknAuyZIwMQ5IV4hvNvsHt0qOT2NCvuS2FsrezoVE7vm-JWQumYCJdJnBgcD7qpdzTYF"/>
+</div>
+<div class="text-center md:text-left flex-1">
+<h2 class="font-h1 text-h1 text-on-surface">Usuario Principal</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Gestor de Flota Senior • Madrid, ES</p>
+<div class="mt-4 flex flex-wrap gap-2 justify-center md:justify-start">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-caps font-label-caps">VERIFICADO</span>
+<span class="bg-surface-container text-on-surface-variant px-3 py-1 rounded-full text-label-caps font-label-caps">PREMIUM</span>
+</div>
+</div>
+<button class="bg-primary text-on-primary px-lg py-3 rounded-lg font-h3 text-body-sm h-[48px] flex items-center justify-center transition-all active:scale-95 shadow-md">
+                        Editar Perfil
+                    </button>
+</div>
+<!-- Stats Grid (Bento Style) -->
+<div class="md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-white rounded-xl p-md shadow-[0px_4px_20px_rgba(0,0,0,0.04)]">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-teal-600 bg-teal-50 p-2 rounded-lg" data-icon="route">route</span>
+<span class="text-teal-600 text-xs font-bold">+12% vs mes anterior</span>
+</div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Kilómetros Protegidos</h3>
+<p class="text-h2 font-h2 text-on-surface mt-1">12,480 km</p>
+</div>
+<div class="bg-white rounded-xl p-md shadow-[0px_4px_20px_rgba(0,0,0,0.04)]">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-teal-600 bg-teal-50 p-2 rounded-lg" data-icon="verified_user">verified_user</span>
+<span class="text-teal-600 text-xs font-bold">Excelente</span>
+</div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Puntaje de Seguridad</h3>
+<p class="text-h2 font-h2 text-on-surface mt-1">98/100</p>
+</div>
+<div class="md:col-span-2 bg-white rounded-xl p-md shadow-[0px_4px_20px_rgba(0,0,0,0.04)]">
+<h3 class="font-h3 text-h3 mb-4">Actividad Reciente</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between py-2 border-b border-slate-50 last:border-0">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="minor_crash">minor_crash</span>
+</div>
+<div>
+<p class="font-body-sm text-body-sm font-semibold">Alerta de Proximidad</p>
+<p class="text-xs text-on-surface-variant">Calle Mayor, Hace 2 horas</p>
+</div>
+</div>
+<span class="text-xs font-medium text-teal-600">Resuelto</span>
+</div>
+<div class="flex items-center justify-between py-2 border-b border-slate-50 last:border-0">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="local_parking">local_parking</span>
+</div>
+<div>
+<p class="font-body-sm text-body-sm font-semibold">Estacionamiento Seguro</p>
+<p class="text-xs text-on-surface-variant">Parking Centro, Ayer 18:30</p>
+</div>
+</div>
+<span class="text-xs font-medium text-teal-600">Finalizado</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar Settings -->
+<div class="md:col-span-4 space-y-6">
+<div class="bg-white rounded-xl p-md shadow-[0px_4px_20px_rgba(0,0,0,0.04)]">
+<h3 class="font-h3 text-h3 mb-4">Preferencias</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm">Notificaciones Push</span>
+<div class="w-10 h-5 bg-secondary rounded-full relative">
+<div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm">Compartir Ubicación</span>
+<div class="w-10 h-5 bg-secondary rounded-full relative">
+<div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm">Modo Oscuro</span>
+<div class="w-10 h-5 bg-outline-variant rounded-full relative">
+<div class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-tertiary-container text-white rounded-xl p-md shadow-[0px_4px_20px_rgba(0,0,0,0.04)]">
+<h3 class="font-h3 text-h3 mb-2">SafeRoute Pro</h3>
+<p class="text-xs opacity-80 mb-4">Accede a reportes detallados y asistencia 24/7 en carretera.</p>
+<button class="w-full bg-white text-primary py-2 rounded-lg font-bold text-sm">Saber más</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Confirm Dialog Overlay (Active State) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/40 backdrop-blur-sm px-gutter">
+<!-- Minimalist Confirm Dialog -->
+<div class="bg-white dark:bg-slate-900 w-full max-w-sm rounded-xl p-md shadow-2xl border border-slate-100 dark:border-slate-800 flex flex-col items-center text-center">
+<div class="w-16 h-16 bg-error-container/20 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-error text-3xl" data-icon="logout">logout</span>
+</div>
+<h2 class="font-h2 text-h2 text-on-surface mb-2">¿Cerrar sesión?</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-8 px-4">¿Estás seguro de que quieres salir?</p>
+<div class="flex flex-col w-full gap-3">
+<button class="w-full h-12 bg-error text-on-error rounded-lg font-h3 text-body-sm flex items-center justify-center transition-all active:scale-95 shadow-sm">
+                    Salir
+                </button>
+<button class="w-full h-12 bg-white dark:bg-slate-800 border border-outline-variant text-on-surface rounded-lg font-h3 text-body-sm flex items-center justify-center transition-all active:scale-95">
+                    Cancelar
+                </button>
+</div>
+</div>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 flex justify-around items-center px-4 py-3 pb-safe shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-teal-500 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Inter'] text-[11px] font-medium">Inicio</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-teal-500 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-['Inter'] text-[11px] font-medium">Actividad</span>
+</div>
+<div class="flex flex-col items-center justify-center text-teal-600 dark:text-teal-400 scale-110 transition-transform active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="person" data-weight="fill">person</span>
+<span class="font-['Inter'] text-[11px] font-medium">Perfil</span>
+</div>
+</nav>
+</body></html>

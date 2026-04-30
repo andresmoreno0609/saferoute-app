@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SafeRoute - Centro de Alertas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f7f9fb",
+                        "tertiary-container": "#0d1c2f",
+                        "on-surface": "#191c1e",
+                        "on-secondary-fixed": "#00201d",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "inverse-surface": "#2d3133",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#dae2fd",
+                        "secondary": "#006a61",
+                        "inverse-on-surface": "#eff1f3",
+                        "tertiary-fixed": "#d5e3fd",
+                        "primary-fixed-dim": "#bec6e0",
+                        "outline": "#76777d",
+                        "surface-container-low": "#f2f4f6",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "inverse-primary": "#bec6e0",
+                        "background": "#f7f9fb",
+                        "outline-variant": "#c6c6cd",
+                        "primary-container": "#131b2e",
+                        "tertiary": "#000000",
+                        "secondary-fixed": "#89f5e7",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container": "#eceef0",
+                        "surface-bright": "#f7f9fb",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-container": "#86f2e4",
+                        "on-secondary-container": "#006f66",
+                        "surface-tint": "#565e74",
+                        "error": "#ba1a1a",
+                        "primary": "#000000",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "on-tertiary-container": "#76859b",
+                        "on-primary-container": "#7c839b",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-primary-fixed": "#131b2e",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#45464d",
+                        "on-primary": "#ffffff",
+                        "on-background": "#191c1e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "container-padding": "20px",
+                        "sm": "12px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h3": ["Inter"],
+                        "h2": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                        "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { background-color: #f7f9fb; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-lg text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-slate-50/90 dark:bg-slate-950/90 docked full-width top-0 sticky z-40 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between px-5 h-16 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-teal-600 dark:text-teal-400" data-icon="school">school</span>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-50 font-sans antialiased font-semibold">SafeRoute</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 ease-in-out">
+<span class="material-symbols-outlined text-slate-500" data-icon="search">search</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-slate-200">
+<img alt="Conductor Perfil" data-alt="A professional headshot of a friendly middle-aged male school bus driver wearing a neat uniform shirt. He is set against a clean, softly blurred background of a modern transport terminal. The lighting is bright and natural, conveying a sense of reliability, safety, and approachable authority in line with the modern corporate visual identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeaPjDuqe8X_ShcmHdAgY8i6qn-rkql4vG-i5p07TeW4NZDYfrrWvcVLyeQ6UvltQE_av7SvbHqlhS70ljZxmXCwkLOxC_HsB0lNQqCeRFIp1bPD9MmoCku8zfwjxyTjNzAFh9ytazzzscPGMyk5eNIIBk2HQEccASwtAmhC4qKA8bG8aWG_Lcb16PX_gidvJ3IJMI2zoCr2HFZkOyBUFNInVzNi0w9vNzXqc0ujHnK0XSlKfiCBvzyD5-HXmfy0ErToKFp3xiVsXf"/>
+</div>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-container-padding py-md pb-xl">
+<!-- Welcome & Status Bento -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-lg">
+<div class="md:col-span-2 bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col justify-between">
+<div>
+<h2 class="font-h1 text-h1 text-on-surface mb-xs">Centro de Alertas</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Mantente informado sobre los cambios en tiempo real en tu ruta y mensajes de seguridad.</p>
+</div>
+<div class="mt-md flex gap-base">
+<span class="inline-flex items-center gap-xs px-sm py-1 bg-secondary-container text-on-secondary-container rounded-full text-label-caps font-label-caps">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        Sistema Activo
+                    </span>
+<span class="inline-flex items-center gap-xs px-sm py-1 bg-surface-container text-on-surface-variant rounded-full text-label-caps font-label-caps">
+<span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span>
+                        Ruta de la Tarde
+                    </span>
+</div>
+</div>
+<div class="bg-primary-container text-on-primary-container p-md rounded-xl shadow-lg relative overflow-hidden flex flex-col justify-center items-center text-center">
+<div class="absolute top-0 right-0 p-base opacity-20">
+<span class="material-symbols-outlined text-6xl" data-icon="notification_important">notification_important</span>
+</div>
+<div class="relative z-10">
+<div class="text-4xl font-bold mb-xs">03</div>
+<div class="font-label-caps text-label-caps uppercase tracking-widest text-on-tertiary-container">Alertas Pendientes</div>
+</div>
+</div>
+</section>
+<!-- Filter Chips -->
+<nav class="flex gap-base mb-md overflow-x-auto pb-xs">
+<button class="px-md py-2 bg-secondary text-on-secondary rounded-full font-label-caps text-label-caps shadow-sm">Todas</button>
+<button class="px-md py-2 bg-surface-container-lowest text-on-surface-variant border border-outline-variant rounded-full font-label-caps text-label-caps hover:bg-surface-variant transition-colors">Críticas</button>
+<button class="px-md py-2 bg-surface-container-lowest text-on-surface-variant border border-outline-variant rounded-full font-label-caps text-label-caps hover:bg-surface-variant transition-colors">Ruta</button>
+<button class="px-md py-2 bg-surface-container-lowest text-on-surface-variant border border-outline-variant rounded-full font-label-caps text-label-caps hover:bg-surface-variant transition-colors">Padres</button>
+</nav>
+<!-- Alerts Feed -->
+<div class="space-y-gutter">
+<!-- Critical Alert -->
+<article class="bg-error-container border-l-4 border-error p-md rounded-xl shadow-sm flex gap-md items-start group">
+<div class="p-base bg-on-error rounded-lg text-error shadow-sm">
+<span class="material-symbols-outlined" data-icon="priority_high" data-weight="fill" style="font-variation-settings: 'FILL' 1;">priority_high</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-h3 text-h3 text-on-error-container">Cambio de Parada Urgente</h3>
+<span class="font-label-caps text-[10px] text-on-error-container/60 uppercase">Hace 2 min</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-error-container mb-md">La parada en <b>Calle Mayor 45</b> ha sido movida a <b>Avenida de la Paz 12</b> para el estudiante Mateo García debido a obras viales.</p>
+<div class="flex gap-base">
+<button class="bg-error text-on-error px-md py-2 rounded-lg font-label-caps text-label-caps hover:brightness-90 transition-all">Ver en Mapa</button>
+<button class="border border-error/30 text-error px-md py-2 rounded-lg font-label-caps text-label-caps hover:bg-error/5 transition-all">Entendido</button>
+</div>
+</div>
+</article>
+<!-- Parent Message -->
+<article class="bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex gap-md items-start border border-transparent hover:border-outline-variant transition-all">
+<div class="p-base bg-secondary-container text-on-secondary-container rounded-lg">
+<span class="material-symbols-outlined" data-icon="chat_bubble" data-weight="fill" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-h3 text-h3 text-on-surface">Mensaje de Padre</h3>
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Hace 15 min</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-base italic">"Hola conductor, hoy Lucía no tomará el transporte de regreso. Pasaremos por ella a la escuela directamente. Gracias."</p>
+<div class="flex items-center gap-base">
+<img alt="Sra. Elena" class="w-6 h-6 rounded-full border border-outline-variant" data-alt="A portrait of a professional woman in her late 30s, looking into the camera with a calm and thankful expression. The lighting is soft and corporate, set in a modern home office environment with blurred bookshelves in the background. The aesthetic is clean and high-fidelity, matching the premium reliable feel of the SafeRoute brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR7X3acq65Vo2Tburc5bC1Q1G7Q4a2rwDj0G8hoFXUyNAl_ssgTZu_YyJ5PPIo1uOzO-8g-JVZgioqrLs6cwltqRpn0l7Qpf3ceCL0TCCytjRMv6TJYnUY-lUuS3HcKS4s8-VewDwn5PxFXCoIYKhR-BtTc4KcjN6gqf_qibBuGn1NyP_VfaAMitDXBp-Wz8CiwJFmBePmKQ66Hn5eO9P_RSVNPxXKBrUkwIo9prbp_83OTReCxRUi9R2evu9YBdiKd-F1I4M0hJlc"/>
+<span class="text-xs font-medium text-on-surface">Elena M. (Madre de Lucía)</span>
+</div>
+</div>
+</article>
+<!-- Traffic Alert -->
+<article class="bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex gap-md items-start">
+<div class="p-base bg-surface-container text-on-surface-variant rounded-lg">
+<span class="material-symbols-outlined" data-icon="traffic">traffic</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-h3 text-h3 text-on-surface">Aviso de Tráfico</h3>
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Hace 40 min</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Retraso de 10 minutos detectado en el tramo de la Autovía del Norte. El sistema sugiere una ruta alternativa por la vía de servicio.</p>
+</div>
+</article>
+<!-- Map View Card (Asymmetric Layout Element) -->
+<div class="relative w-full h-48 rounded-xl overflow-hidden shadow-sm group">
+<img alt="Mapa de Tráfico" class="w-full h-full object-cover" data-alt="A top-down stylized digital map visualization of a city center like Madrid, featuring clean white and soft grey road networks. Minimalist teal lines represent active bus routes, while a small section is highlighted in soft red to indicate a construction zone. The style is professional, data-centric, and uncluttered, designed for high-end automotive UI interfaces." data-location="Madrid, Spain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj8enhyYHV00Xub_rQNKixqOTh_ct5Bsu2AXXcQPDzAStO0NFHtY_2net0pN4o5lXZOk-s_nvfVHYRT6GFZNYWbOWp1TZ5kHOf0TiGeCkqmbJekVKoH9IpuKW6Gp2s9aqmFSSI309LFEjd_7mrYJO7OKRVf9HypkqTZukvUfevkcxosfcRDbEWUYWL1F-TsP1f6673Opqk7RdZ5Rb4Qtu1CNvRQEGtmSzGAS6S7Fo0ZLVxXXdNCBaHgi2esnRrQfYiI90ScieCZmHX"/>
+<div class="absolute inset-0 bg-gradient-to-t from-tertiary-container/80 to-transparent flex items-end p-md">
+<div class="text-on-tertiary">
+<p class="font-label-caps text-label-caps uppercase opacity-80">Vista de Red</p>
+<p class="font-h3 text-h3">Visualizar afectaciones en tiempo real</p>
+</div>
+</div>
+</div>
+<!-- Parent Message (Standard) -->
+<article class="bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex gap-md items-start">
+<div class="p-base bg-secondary-container text-on-secondary-container rounded-lg">
+<span class="material-symbols-outlined" data-icon="chat_bubble" data-weight="fill" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-h3 text-h3 text-on-surface">Confirmación de Recogida</h3>
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Hace 1 hora</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">El estudiante Jorge Ruiz ha sido confirmado para la parada de las 17:30.</p>
+</div>
+</article>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-2 py-3 pb-safe bg-white/95 dark:bg-slate-900/95 z-50 rounded-t-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.04)] border-t border-slate-200 dark:border-slate-800">
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-300 active:scale-95 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[11px] font-medium tracking-wide uppercase Inter">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-300 active:scale-95 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="directions_bus">directions_bus</span>
+<span class="text-[11px] font-medium tracking-wide uppercase Inter">Ruta</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-300 active:scale-95 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-[11px] font-medium tracking-wide uppercase Inter">Estudiantes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-teal-600 dark:text-teal-400 font-bold scale-105 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="notifications" data-weight="fill" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="text-[11px] font-medium tracking-wide uppercase Inter">Alertas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-300 active:scale-95 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[11px] font-medium tracking-wide uppercase Inter">Perfil</span>
+</a>
+</nav>
+</body></html>

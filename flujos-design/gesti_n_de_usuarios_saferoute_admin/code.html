@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f7f9fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-secondary-fixed": "#00201d",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#131b2e",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#565e74",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#d5e3fd",
+                        "tertiary": "#000000",
+                        "surface-variant": "#e0e3e5",
+                        "primary": "#000000",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "outline-variant": "#c6c6cd",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "inverse-primary": "#bec6e0",
+                        "secondary-container": "#86f2e4",
+                        "surface-dim": "#d8dadc",
+                        "on-surface": "#191c1e",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "background": "#f7f9fb",
+                        "surface-container": "#eceef0",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#89f5e7",
+                        "on-tertiary-container": "#76859b",
+                        "secondary": "#006a61",
+                        "tertiary-container": "#0d1c2f",
+                        "error": "#ba1a1a",
+                        "surface": "#f7f9fb",
+                        "primary-container": "#131b2e",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "on-secondary-container": "#006f66",
+                        "on-primary": "#ffffff",
+                        "on-background": "#191c1e",
+                        "surface-container-low": "#f2f4f6",
+                        "primary-fixed": "#dae2fd",
+                        "outline": "#76777d",
+                        "on-surface-variant": "#45464d",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "on-primary-container": "#7c839b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "lg": "40px",
+                        "container-padding": "20px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "gutter": "16px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Inter"],
+                        "h2": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "h1": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                        "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-bright text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-slate-50 border-b border-slate-200 shadow-sm flex justify-between items-center w-full px-5 py-3 sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-slate-100 transition-colors duration-200 rounded-full">
+<span class="material-symbols-outlined text-teal-600">menu</span>
+</button>
+<h1 class="text-lg font-bold text-slate-900 font-['Inter'] tracking-tight">SafeRoute Admin</h1>
+</div>
+<div class="flex items-center gap-3">
+<div class="hidden md:flex flex-col items-end mr-2">
+<span class="text-xs font-semibold text-slate-900">Admin Profile</span>
+<span class="text-[10px] text-slate-500">Super Usuario</span>
+</div>
+<img alt="Admin Profile" class="w-10 h-10 rounded-full border-2 border-teal-600" data-alt="A professional headshot of a corporate administrator in a modern office environment. The image uses a soft-focus background with minimalist white and slate-grey tones. High-key lighting highlights the subject's friendly but authoritative expression, aligned with a premium tech-service aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2nvE90l-qRp-VYnwdTMy7uyPa5oQXJu-7WmP1l5y6z0qNr40BsDyjh0xjlzI8IUthRjTXcbyURdR0sOA0OcEsWriQ1cn6iw9qq2r4Fp3csumcPL6-rmdFQ8ejOhaOLgh58MdoXVQApPMc523IsQJKWgFMV_nl2G5oed4Gcwslk4SgO9N-ucBB3a4ixOKx4bK_zyeYyi5VTKE_65QGPfS1zb5x6d1h0VFauPZAAvmrOSyc-LN4g9NtMlOCFs5gl4X68GeTFf61F_2O"/>
+</div>
+</header>
+<main class="min-h-screen pb-32">
+<!-- Content Container -->
+<div class="max-w-6xl mx-auto px-container-padding pt-md">
+<!-- Page Header & Search -->
+<div class="mb-lg flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h2 class="font-h1 text-h1 text-on-surface mb-xs">Gestión de Usuarios</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Administra los accesos y roles de la plataforma SafeRoute.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-sm w-full md:w-auto">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full sm:w-80 pl-10 pr-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition-all font-body-sm text-body-sm" placeholder="Buscar por nombre o correo..." type="text"/>
+</div>
+</div>
+</div>
+<!-- Filters Area -->
+<div class="flex flex-wrap gap-sm mb-md">
+<button class="px-md py-2 rounded-full bg-secondary text-white font-label-caps text-label-caps flex items-center gap-base shadow-sm">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                    Todos
+                </button>
+<button class="px-md py-2 rounded-full bg-surface-container-highest text-on-surface-variant font-label-caps text-label-caps hover:bg-surface-container-high transition-colors">
+                    Administradores
+                </button>
+<button class="px-md py-2 rounded-full bg-surface-container-highest text-on-surface-variant font-label-caps text-label-caps hover:bg-surface-container-high transition-colors">
+                    Conductores
+                </button>
+<button class="px-md py-2 rounded-full bg-surface-container-highest text-on-surface-variant font-label-caps text-label-caps hover:bg-surface-container-high transition-colors">
+                    Acudientes
+                </button>
+</div>
+<!-- User List - Bento/Card Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- User Card 1 -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow flex flex-col gap-md relative group">
+<div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-surface-container rounded-lg text-outline">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-md">
+<img alt="Usuario" class="w-14 h-14 rounded-full bg-surface-container" data-alt="A detailed digital avatar of a young professional man with a clean, modern style. The portrait is set against a solid, soft mint green background that complements the corporate teal theme. The lighting is even and bright, creating a high-quality, friendly profile image for a modern software application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGZq68GzFoPFWAihQRUh_X4jTI2LmT8Ma6s9B-iHBYqfETsWpgF07LWLI_x4FcgK-GFMuYtVtzTF6eGZm4K3DanhwIL2lC3pWhLnrX7lTgr6XAEtiqrehhtOYDbxncW0toVNKci-oRk1P-ecgWhCzCIJZvuXQ87yWxB2SejJabY_c0WXt-a_IuKufa19yFyIyud38ShY4NRTPoQOvsBiIhu8JiMTELIqeQvO2ree4JdTicPlTUdKlMzD---VXfzCUPF1YGCf0C3ZSl"/>
+<div class="flex flex-col">
+<span class="font-h3 text-h3 text-on-surface">Carlos Mendoza</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">c.mendoza@saferoute.com</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-sm border-t border-surface-container">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-lg font-label-caps text-[10px] uppercase tracking-wider">Administrador</span>
+<span class="font-body-sm text-body-sm text-secondary flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Activo
+                        </span>
+</div>
+</div>
+<!-- User Card 2 -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow flex flex-col gap-md relative group border-l-4 border-secondary">
+<div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-surface-container rounded-lg text-outline">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-md">
+<img alt="Usuario" class="w-14 h-14 rounded-full bg-surface-container" data-alt="A professional profile photo of a woman in her 30s with a warm, trustworthy expression. She has dark hair and is wearing professional attire. The background is a soft, minimalist blue-grey. The overall style is clean and corporate, fitting for a safe transportation service app interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_-s5_tj2mtnSKfmyh3M2rpKB_bJvUvaKDu6nrfZ4Sx9_yWwJc5Yw3xX8s4CnrNvM8C8A-NYhFLad-bgAajMrxLlSyPH2yeg-GAicOfTDuzqdjRAr8FksA_Nf7V2HyvBjADSMMpTkuhvIvgbOk-Y-XkWSBrzI9S1ic52-N093-wVoy11IacKSVyyXev2da8pHcjCywUgKXsOC32YL1OSUKQ0U3kCYQAvq5UAU2AZEfejLDUc85F8KdQQpEBUyjpjDAaou66021NY4f"/>
+<div class="flex flex-col">
+<span class="font-h3 text-h3 text-on-surface">Elena Rodriguez</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">elena.rod@rutas.com</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-sm border-t border-surface-container">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-lg font-label-caps text-[10px] uppercase tracking-wider">Conductor</span>
+<span class="font-body-sm text-body-sm text-secondary flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> En Ruta
+                        </span>
+</div>
+</div>
+<!-- User Card 3 -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow flex flex-col gap-md relative group">
+<div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-surface-container rounded-lg text-outline">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-md">
+<img alt="Usuario" class="w-14 h-14 rounded-full bg-surface-container" data-alt="Portrait of a friendly father-figure smiling, representing a parent or guardian. The image is bright and airy with soft natural lighting. Background is a neutral minimalist cream tone. The aesthetic is warm and reliable, focusing on the safe family-oriented nature of the service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW-FH7ckbgTylNBFUmU-6VAKr9wXd-cl-UIhSipZS-6EQ-sw3bqtQdpme11CzQyEkDcoxS_lQeTvtXf_Tu5uN4zk_prpppyZcW4tnChM-MDB3Pc5lDwzbZqes-vTgqn-bcdue29CnPS-dpyeC8tJ5Uhh5IEEAde39OKVIoCQkgph8lEIeEXcIpIgMo_Wo7SuwOUW_ZQ7VJmUlqMfU-yWicZtq26VSt10QiFJ8yul1CeAPNPzWsbXN48r2Ov606GyD_IXiTza-6wjAX"/>
+<div class="flex flex-col">
+<span class="font-h3 text-h3 text-on-surface">Roberto Gomez</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">rgomez_padre@mail.com</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-sm border-t border-surface-container">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant rounded-lg font-label-caps text-[10px] uppercase tracking-wider">Acudiente</span>
+<span class="font-body-sm text-body-sm text-outline flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-outline"></span> Offline
+                        </span>
+</div>
+</div>
+<!-- User Card 4 -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow flex flex-col gap-md relative group">
+<div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-surface-container rounded-lg text-outline">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-md">
+<img alt="Usuario" class="w-14 h-14 rounded-full bg-surface-container" data-alt="A crisp, high-resolution profile image of a professional woman wearing glasses and a smart blazer. The lighting is professional studio quality with soft shadows. Background is a pristine light grey. The image exudes competence and reliability, matching a modern corporate management dashboard style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQmi-v3_2dyV3hME91ZmVK4Gu6BsXs0YjVbKvWHDPnfT6UVPHrhewfaUubecPJxmuFRqW62b09Vg16H7I5W6SgFiesbp7FRXBc4m50tVro-zBRbIPnyGLqsnShiIWU2O0tLOMJvgF0NEWziN7R5bSl9rsY7h3OW1yztQUPgu5I8Y_Q-6Egtk4uoojkgV0PxKN8Cbnx4N4IaqwmPjiLHJZqOlK1eC2rbYItD0fCMXz3t7iId0gxAbOim38jHwgU-lL0G3jR4OqRZY_7"/>
+<div class="flex flex-col">
+<span class="font-h3 text-h3 text-on-surface">Ana Lucia Vega</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">al.vega@saferoute.com</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-sm border-t border-surface-container">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-lg font-label-caps text-[10px] uppercase tracking-wider">Administrador</span>
+<span class="font-body-sm text-body-sm text-secondary flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Activo
+                        </span>
+</div>
+</div>
+<!-- User Card 5 -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow flex flex-col gap-md relative group border-l-4 border-error">
+<div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-surface-container rounded-lg text-outline">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-md">
+<img alt="Usuario" class="w-14 h-14 rounded-full bg-surface-container" data-alt="Headshot of a man in uniform, suggesting a transportation professional. The style is sharp and corporate with a focus on safety and alertness. The background is a very light grey with subtle geometric patterns. High-key lighting emphasizes a clean and modern professional look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7lJsg-2ZI9KVIjr6eJZoGiWFlfeLsgMqT2ErdyLCJJHmAPjqgFkzVuZhpExie1Sb_-WE9sVUuSy0EqBPVpYTjbHuIaUSiaM5CG75LlpvTcbmtu3mrDpfz2yZGuXX0ZLBer34rIJ4mbwV0gUbSJgdAcOFdwEhPzvT_ZoIQRr2VOr-2HJ2jjfQHtImWUtx5FJZCnZEpPDnzJNRNkg9WYUKVVzpW50NUJcyQEkGYa_6hnhyHfpAXNJQzx-ibeKLDqC6OhHrgNYQIuLBF"/>
+<div class="flex flex-col">
+<span class="font-h3 text-h3 text-on-surface">Mario Silva</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">msilva_trans@rutas.com</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-sm border-t border-surface-container">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-lg font-label-caps text-[10px] uppercase tracking-wider">Conductor</span>
+<span class="font-body-sm text-body-sm text-error flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">warning</span> Suspendido
+                        </span>
+</div>
+</div>
+<!-- User Card 6 -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow flex flex-col gap-md relative group">
+<div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-surface-container rounded-lg text-outline">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-md">
+<img alt="Usuario" class="w-14 h-14 rounded-full bg-surface-container" data-alt="Profile image of a friendly woman representing a mother. Bright, soft lighting creates a positive and welcoming mood. Set against a clean white and slate grey corporate background. The design is modern, accessible, and high-end, focusing on user trust and safety within the app ecosystem." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOwKG96_35G6IkfnqFem6MIFRFTM_P2CS4P-_9_g-kH2HcMjjq937BvScyWyA95YiHqXl9laO9RCQdfLrmmSiZrn1tScbnqDNjmA5dTmOsTYWJ8JRyZpZg2DUQ5ZB2VJXdXOvdTx5tjsj8VNriIm_024KklIkec4jkx6Mq64D9ifKwYJeguSkYY6DeSv-AmS0S9k5f5w9Hpw1aH3dn4MPLg4M-tWIJqfwJ0Aocc4a00cszaBGyzEMd3cl7iCdrI5oB6gpK4D1N4Pgr"/>
+<div class="flex flex-col">
+<span class="font-h3 text-h3 text-on-surface">Claudia Ortiz</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">claudia.o@gmail.com</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-sm border-t border-surface-container">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant rounded-lg font-label-caps text-[10px] uppercase tracking-wider">Acudiente</span>
+<span class="font-body-sm text-body-sm text-secondary flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Activo
+                        </span>
+</div>
+</div>
+</div>
+<!-- Stats/Insight Bento Card (Bottom) -->
+<div class="mt-lg grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="md:col-span-3 bg-primary-container text-white p-md rounded-xl flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-primary-container mb-xs uppercase">Resumen de Usuarios</span>
+<div class="flex gap-md mt-sm">
+<div class="flex flex-col">
+<span class="text-h2 font-h2">124</span>
+<span class="text-[10px] text-on-primary-container">Total Usuarios</span>
+</div>
+<div class="w-px bg-white/20 h-10 self-center"></div>
+<div class="flex flex-col">
+<span class="text-h2 font-h2">12</span>
+<span class="text-[10px] text-on-primary-container">Nuevos (Mes)</span>
+</div>
+<div class="w-px bg-white/20 h-10 self-center"></div>
+<div class="flex flex-col">
+<span class="text-h2 font-h2 text-secondary-fixed">98%</span>
+<span class="text-[10px] text-on-primary-container">Actividad</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-[48px] text-white/10 hidden sm:block">analytics</span>
+</div>
+<div class="bg-secondary-container p-md rounded-xl flex flex-col justify-center items-center text-center">
+<span class="font-h2 text-h2 text-on-secondary-container">2</span>
+<span class="font-body-sm text-body-sm text-on-secondary-container">Registros Pendientes</span>
+<button class="mt-sm px-4 py-2 bg-white rounded-lg text-secondary text-[11px] font-bold shadow-sm">REVISAR</button>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-24 right-6 w-16 h-16 bg-secondary text-white rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-transform z-50">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe pt-2 bg-white border-t border-slate-200 shadow-[0_-4px_20px_rgba(0,0,0,0.04)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-teal-50 text-teal-700 rounded-xl px-3 py-1.5 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-['Inter'] text-[11px] font-medium">Usuarios</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 px-3 py-1.5 hover:text-teal-500 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">route</span>
+<span class="font-['Inter'] text-[11px] font-medium">Rutas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 px-3 py-1.5 hover:text-teal-500 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="font-['Inter'] text-[11px] font-medium">Vehículos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 px-3 py-1.5 hover:text-teal-500 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-['Inter'] text-[11px] font-medium">Verificar</span>
+</a>
+</nav>
+</body></html>

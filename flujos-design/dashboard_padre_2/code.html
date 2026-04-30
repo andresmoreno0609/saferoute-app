@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#3f465c",
+                    "surface-tint": "#565e74",
+                    "primary-fixed-dim": "#bec6e0",
+                    "on-secondary-fixed": "#00201d",
+                    "surface-bright": "#f7f9fb",
+                    "tertiary-fixed": "#d5e3fd",
+                    "primary": "#000000",
+                    "secondary-fixed": "#89f5e7",
+                    "error": "#ba1a1a",
+                    "background": "#f7f9fb",
+                    "on-secondary-fixed-variant": "#005049",
+                    "secondary-container": "#86f2e4",
+                    "inverse-surface": "#2d3133",
+                    "inverse-primary": "#bec6e0",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "on-tertiary-container": "#76859b",
+                    "secondary": "#006a61",
+                    "on-primary-container": "#7c839b",
+                    "surface-container-high": "#e6e8ea",
+                    "outline-variant": "#c6c6cd",
+                    "on-secondary": "#ffffff",
+                    "surface-variant": "#e0e3e5",
+                    "surface": "#f7f9fb",
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "on-secondary-container": "#006f66",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f2f4f6",
+                    "primary-container": "#131b2e",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-container": "#0d1c2f",
+                    "on-surface": "#191c1e",
+                    "tertiary": "#000000",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d8dadc",
+                    "on-background": "#191c1e",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#dae2fd",
+                    "surface-container-highest": "#e0e3e5",
+                    "inverse-on-surface": "#eff1f3",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "outline": "#76777d",
+                    "surface-container": "#eceef0",
+                    "on-surface-variant": "#45464d",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed": "#131b2e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "base": "8px",
+                    "lg": "40px",
+                    "gutter": "16px",
+                    "xl": "64px",
+                    "md": "24px",
+                    "sm": "12px",
+                    "container-padding": "20px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "h3": ["Inter"],
+                    "h2": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "h1": ["Inter"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                    "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { background-color: #f7f9fb; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-body-lg text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none docked full-width top-0 sticky z-50 flex justify-between items-center h-16 px-6 w-full">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container">
+<img alt="Parent profile" class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged woman with a gentle expression, wearing a neutral-toned business casual outfit. She is positioned in a bright, airy office environment with soft morning sunlight streaming through a window. The overall aesthetic is clean, modern, and high-quality light mode photography with a shallow depth of field, emphasizing reliability and calm." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPHTOmTgmNESSG9ZpERKjVdTlm9S3yTWW-Ut3gExCdQpXqYQuplp4VgPVOySAKUEQo8PuCalDR-4vt3XslOhEHB38BrYz3qds-41cfWp24VEbY0ZJe2rPvgEPyB-RDjsh0B7xKyzhxYjdg8hE2V9dpyu_nrUkocyCp1tvm2QYib-O5-jSHU0HMR_Nmj_JnX3EhbLrtSfrmYsuJ-fWMmhavGXayly_u9VaUTj5ewt9TapgYtx91Yamqn2PayNFVTdO1xC1v6jSOHff2"/>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-50 font-['Inter']">SafeRoute</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="active:opacity-80 transition-all duration-200 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-container-padding py-base pb-32">
+<!-- Profile Incomplete Banner (Flow 02C) -->
+<div class="mt-base mb-md p-md bg-secondary-container rounded-xl flex items-center gap-4 border border-secondary/10 shadow-sm">
+<div class="flex-shrink-0 w-12 h-12 bg-white rounded-full flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="account_circle" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</div>
+<div class="flex-grow">
+<h4 class="font-h3 text-on-secondary-container">Profile Incomplete</h4>
+<p class="text-body-sm text-on-secondary-container/80">Complete your details to unlock full emergency features.</p>
+</div>
+<button class="px-md py-xs bg-secondary text-on-secondary font-label-caps rounded-full active:scale-95 transition-transform">
+                COMPLETE
+            </button>
+</div>
+<!-- Section Title -->
+<div class="flex justify-between items-end mb-md">
+<div>
+<h2 class="font-h2 text-on-surface">Estado de los Hijos</h2>
+<p class="text-body-sm text-on-surface-variant">Real-time updates for your dependents</p>
+</div>
+<button class="flex items-center gap-xs text-secondary font-label-caps"><span class="material-symbols-outlined text-[18px]" data-icon="add_circle">add_circle</span> AÑADIR HIJO</button>
+</div>
+<!-- Bento Grid for Kids Status -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Maria Garcia Card (En Ruta) -->
+<div class="bg-white rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-outline-variant/30 flex flex-col gap-md">
+<div class="flex justify-between items-start">
+<div class="flex gap-sm">
+<div class="w-14 h-14 rounded-2xl overflow-hidden">
+<img alt="Maria Garcia" class="w-full h-full object-cover" data-alt="A portrait of a young girl with a cheerful smile, wearing a yellow raincoat against a soft, rainy day backdrop. The image is bright and high-contrast with a focus on her expressive eyes. The style is modern, professional, and family-oriented, using a warm color palette that suggests safety and care within a clean, minimalist photographic frame." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuO-_4VGrbxSZ6vNv3XKgqaPcBaucOkvXmV1FOlreVnj5LR1CPKVSUIlpQZyQlUZhcQCdrpxrnpL4-u2T6vI273_oCMdBWICy2oDq5UT7j2JONk93esQYsJh-IgUzeHmBYHa72BTO_ABh-5DIN_OruorbCqMGJT2LVCcHnQTJ4FIdIXfZW6mrnHKa19MyvCYnE97Ae19qc000DTyd7MTXErg_NaOgyteHPNtQkZd3XFapHvzPkZTTMqc0BnJKSxs1UShOaVIf1QMSf"/>
+</div>
+<div>
+<h3 class="font-h3 text-on-surface">Maria Garcia</h3>
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                EN RUTA
+                            </div>
+</div>
+</div>
+<button class="text-on-surface-variant p-1">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="directions_bus">directions_bus</span>
+<div>
+<p class="text-[12px] font-semibold text-on-surface-variant">Ruta Activa</p>
+<p class="text-body-sm font-medium">Bus #42 - Hacia la escuela</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[12px] font-semibold text-on-surface-variant">Ruta Activa</p>
+<p class="text-body-sm font-bold text-secondary">8 mins</p>
+</div>
+</div>
+<div class="h-32 w-full rounded-lg overflow-hidden bg-surface-container-high relative">
+<img alt="Map snippet" class="w-full h-full object-cover opacity-80" data-alt="A detailed, modern digital map visualization showing a school bus icon moving along a clean, simplified street layout in a bright daylight theme. The map features soft pastel colors and subtle elevation shadows for buildings. A pulsing teal dot indicates the current position, creating a sense of real-time monitoring and high-tech safety in a minimalist corporate UI style." data-location="Madrid" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD26rFJz2zTCsJmzRqrroK2gOXqdIZesank8iG1WNdVqJE6mijDsBxVNGcvycxPJfUG3ZDXfKwcwxJN2phtZndVyTVyLfdN8NoJySx2BgiefQ1gaeiGJdJuvPk258NRM94OWdCtN3GkiQAkFETcxv07gBA10EXH5j5gGIyvXuePrUmbnXyMtwpxkJmbuVd1FGYaCeNAI-R4uOe_aeA0fqOk3nhZ5fAg1DTT9uRUdJ2KRNPjpJ7FwnEKhU_mqkXx0-_c19YlgckPEVPx"/>
+<div class="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent"></div>
+<button class="absolute bottom-2 right-2 px-3 py-1 bg-white text-on-surface text-[12px] font-bold rounded-lg shadow-md border border-slate-100 flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="map">map</span> Ver Mapa</button>
+</div>
+</div>
+<!-- Santiago Garcia Card (En Casa) -->
+<div class="bg-white rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-outline-variant/30 flex flex-col gap-md opacity-90">
+<div class="flex justify-between items-start">
+<div class="flex gap-sm">
+<div class="w-14 h-14 rounded-2xl overflow-hidden">
+<img alt="Santiago Garcia" class="w-full h-full object-cover" data-alt="A portrait of a young boy with curly hair and a playful expression, wearing a simple blue t-shirt. The background is a soft-focus interior of a modern home with bright, natural lighting. The visual style is clean and professional, emphasizing a sense of comfort, home safety, and familial peace within a high-quality, modern photographic frame." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVcaUvUmYD5hpkp01CGWoPsQmUr156whV6UDnV7sn6waXR_QmoNcMPXABcNl3yEfSzN7LucKFdibHsvflETksAsdk9Padm_anVD2yCtb0-a7ZOJESkbeMp6VXY278K8761WS84TBQ7oQLBY0xFGsK88IY5X1hAzfag4wspsQZ4iFbZr1X9XVLxyfDQ7zWjhe6g3_GphEyuYg7O4M4rMHz8aUAZHR-i-6v_JSTB57OCO8q0VnZ8OjDXnVzvI-t1E_CoYqXsqQ5h-FLg"/>
+</div>
+<div>
+<h3 class="font-h3 text-on-surface">Santiago Garcia</h3>
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-surface-variant/50"></span>
+                                EN CASA
+                            </div>
+</div>
+</div>
+<button class="text-on-surface-variant p-1">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="flex-grow flex items-center justify-center py-base">
+<div class="text-center">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center mx-auto mb-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[32px]" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+</div>
+<p class="text-body-sm font-medium text-on-surface">Llegó a las 3:15 PM</p>
+<p class="text-[12px] text-on-surface-variant">Last activity detected 10m ago</p>
+</div>
+</div>
+<button class="w-full py-base border border-outline-variant rounded-lg font-label-caps text-on-surface-variant hover:bg-surface-container-low transition-colors">VER HISTORIAL</button>
+</div>
+</div>
+<!-- Recent Notifications -->
+<div class="mt-xl">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-h2 text-on-surface">Actividad Reciente</h3>
+<button class="text-secondary text-body-sm font-semibold">Marcar todo como leído</button>
+</div>
+<div class="space-y-base">
+<!-- Notification 1 -->
+<div class="bg-white rounded-xl p-gutter shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex items-center gap-md border-l-4 border-secondary">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[20px]" data-icon="directions_bus">directions_bus</span>
+</div>
+<div class="flex-grow">
+<p class="text-body-sm text-on-surface"><span class="font-bold">Maria</span> subio al bus</p>
+<p class="text-[12px] text-on-surface-variant">Hace 2 minutos • Route #42</p>
+</div>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+<!-- Notification 2 -->
+<div class="bg-white rounded-xl p-gutter shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex items-center gap-md">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="home">home</span>
+</div>
+<div class="flex-grow">
+<p class="text-body-sm text-on-surface"><span class="font-bold">Santiago</span> llego a casa</p>
+<p class="text-[12px] text-on-surface-variant">Hace 45 minutos • Safe Entrance</p>
+</div>
+</div>
+<!-- Notification 3 -->
+<div class="bg-white rounded-xl p-gutter shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex items-center gap-md">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="location_on">location_on</span>
+</div>
+<div class="flex-grow">
+<p class="text-body-sm text-on-surface"><span class="font-bold">Maria</span> salio de Colegio Americano</p>
+<p class="text-[12px] text-on-surface-variant">Hace 52 minutos • Checkpoint Alpha</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md fixed bottom-0 w-full z-50 border-t border-slate-200 dark:border-slate-800 shadow-[0_-4px_20px_rgba(0,0,0,0.04)] flex justify-around items-center h-20 px-2 pb-safe">
+<a class="flex flex-col items-center justify-center text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30 rounded-2xl px-4 py-1.5 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Inter'] text-[11px] font-semibold mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 hover:text-teal-500 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="near_me">near_me</span>
+<span class="font-['Inter'] text-[11px] font-semibold mt-1">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 hover:text-teal-500 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-['Inter'] text-[11px] font-semibold mt-1">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 hover:text-teal-500 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] text-[11px] font-semibold mt-1">Settings</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#191c1e",
+                    "on-secondary-container": "#006f66",
+                    "surface-container-high": "#e6e8ea",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c6c6cd",
+                    "on-secondary-fixed": "#00201d",
+                    "secondary-fixed": "#89f5e7",
+                    "secondary-container": "#86f2e4",
+                    "tertiary-container": "#0d1c2f",
+                    "tertiary": "#000000",
+                    "surface-container-low": "#f2f4f6",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#bec6e0",
+                    "surface-tint": "#565e74",
+                    "surface-bright": "#f7f9fb",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#45464d",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed": "#131b2e",
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "surface-dim": "#d8dadc",
+                    "surface-container": "#eceef0",
+                    "primary-fixed": "#dae2fd",
+                    "on-tertiary-container": "#76859b",
+                    "secondary": "#006a61",
+                    "inverse-on-surface": "#eff1f3",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-secondary-fixed-variant": "#005049",
+                    "primary-container": "#131b2e",
+                    "error-container": "#ffdad6",
+                    "background": "#f7f9fb",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#7c839b",
+                    "surface-variant": "#e0e3e5",
+                    "outline": "#76777d",
+                    "primary": "#000000",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "on-error": "#ffffff",
+                    "on-background": "#191c1e",
+                    "tertiary-fixed": "#d5e3fd",
+                    "surface": "#f7f9fb",
+                    "inverse-surface": "#2d3133",
+                    "inverse-primary": "#bec6e0",
+                    "secondary-fixed-dim": "#6bd8cb"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "gutter": "16px",
+                    "container-padding": "20px",
+                    "lg": "40px",
+                    "xl": "64px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "h3": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "h2": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "h1": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab-indicator {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #006a61;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-5 h-16 bg-white border-b border-slate-200 shadow-sm font-inter antialiased text-slate-900">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden">
+<img alt="Perfil del usuario" class="w-full h-full object-cover" data-alt="A professional headshot of a friendly bus driver in his 40s, wearing a clean corporate uniform. The lighting is soft and natural, emphasizing a trustworthy and reliable persona. The background is a blurred school bus interior with warm teal and cool slate grey tones, consistent with a modern corporate safety application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDV_e4ggjnOADEg1LMSp1kV3lJeBK8xBYyfxjudjCIBsPilNBeftU-IeewxcLSyJ3wwZF9NqSUDvKw_a7BlV0Z4RgWcZOQ6nEiUs3lO5QRgb7IBhHp2J5iywOn6W422eAcvCH_AExbBw6Mb2_ISueLEQxH_ZY8CRiRKOMRdzwOGByOub42tiSYGZ8SsbOOPd32g5l3d0dHPulAyOYEf3bcIolGRxUtflTcTRvemXNxQ3SoHUHHNICagjswk_kqcJaGiUxorHpOO5Oa"/>
+</div>
+<span class="text-xl font-bold tracking-tight text-slate-900">SafeRoute</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center text-teal-600 rounded-full hover:bg-slate-50 transition-colors active:scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="pt-20 pb-24 px-container-padding">
+<!-- Welcome Section -->
+<section class="mb-md">
+<h1 class="font-h1 text-h1 text-on-surface">Mis Rutas</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Gestiona tus trayectos asignados para hoy y mañana.</p>
+</section>
+<!-- Status Tabs (Segmented Control style) -->
+<nav class="flex gap-4 mb-md border-b border-slate-200 overflow-x-auto no-scrollbar">
+<button class="relative pb-3 px-1 font-label-caps text-label-caps text-secondary">
+                Activas
+                <div class="active-tab-indicator"></div>
+</button>
+<button class="pb-3 px-1 font-label-caps text-label-caps text-on-surface-variant hover:text-secondary transition-colors">
+                Próximas
+            </button>
+<button class="pb-3 px-1 font-label-caps text-label-caps text-on-surface-variant hover:text-secondary transition-colors">
+                Historial
+            </button>
+</nav>
+<!-- Active Routes - Bento Inspired Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Active Card (Primary Action) -->
+<div class="col-span-1 md:col-span-2 bg-white rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] border border-on-secondary-container/10 overflow-hidden">
+<div class="p-md">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-[10px] mb-2 uppercase">
+                                En curso
+                            </span>
+<h2 class="font-h2 text-h2 text-on-surface">Ruta Norte - Mañana</h2>
+</div>
+<div class="text-right">
+<span class="font-body-sm text-body-sm font-semibold text-secondary">ID: #SR-402</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-md">
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="group">group</span>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Estudiantes</p>
+<p class="font-h3 text-h3">24</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="location_on">location_on</span>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Paradas</p>
+<p class="font-h3 text-h3">12</p>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 mb-md">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="schedule">schedule</span>
+<p class="font-body-sm text-body-sm text-on-surface">Inicio: 07:00 AM • <span class="text-on-surface-variant">Fin estimado: 08:30 AM</span></p>
+</div>
+<button class="w-full h-[48px] bg-secondary text-on-secondary rounded-lg font-label-caps flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" data-icon="navigation">navigation</span>
+                        CONTINUAR RUTA
+                    </button>
+</div>
+<div class="h-32 w-full relative bg-slate-200">
+<img alt="Mapa de la ruta" class="w-full h-full object-cover opacity-60" data-alt="A clean, minimalist vector map representation of a suburban neighborhood. The map shows soft grey roads and green spaces with a vibrant teal route line winding through the streets. Small, friendly icons represent school bus stops. The style is professional, high-contrast, and optimized for quick driver readability in a safety-first mobile application." data-location="Madrid" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeaAVAVLlRKCFuWa1SkD6HPMhmHMxV7AVvQbeE_3oS1E9kG_mJbAPltYlH8pHHlPu6H1lDxdVHdCIgG3P1j91wt0tvX8socKt1iFnC9z_WrYvFrSusMSncYgtPb66d6F59DoFVYoqd12nMMrEs23p-rVXR2xAo3I8wl_z9P0yBt5S1_Xr2-weiWEmRAgFUA4VUxD3o3LMLE28RzeTVtEh4HkucvFguSjdIj4nZXaUGxYI-Ydbnzv8Za-sPd6n4PDOFQ62bqmGNYEeW"/>
+<div class="absolute inset-0 bg-gradient-to-t from-white to-transparent"></div>
+</div>
+</div>
+<!-- Upcoming/Summary Mini Cards -->
+<div class="flex flex-col gap-gutter">
+<div class="bg-white p-md rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] border border-slate-100">
+<div class="flex justify-between items-center mb-sm">
+<h3 class="font-h3 text-h3">Ruta Sur - Tarde</h3>
+<span class="material-symbols-outlined text-slate-400" data-icon="more_vert">more_vert</span>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Hora:</span>
+<span class="font-semibold">02:30 PM</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Estudiantes:</span>
+<span class="font-semibold">18</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Estado:</span>
+<span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-bold uppercase">Pendiente</span>
+</div>
+</div>
+</div>
+<div class="bg-white p-md rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] border border-slate-100 border-l-4 border-l-teal-500">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-teal-50 rounded-lg">
+<span class="material-symbols-outlined text-teal-600" data-icon="event_available">event_available</span>
+</div>
+<div>
+<p class="font-label-caps text-[10px] text-teal-600 uppercase">Resumen de hoy</p>
+<p class="font-body-lg text-body-lg font-bold">2 Rutas Programadas</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- History Preview -->
+<section class="mt-xl">
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-h2 text-h2 text-on-surface">Historial Reciente</h2>
+<button class="text-secondary font-label-caps text-label-caps hover:underline transition-all">Ver todo</button>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-gutter bg-white rounded-xl border border-slate-50 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center bg-slate-100 rounded-full">
+<span class="material-symbols-outlined text-slate-500" data-icon="history">history</span>
+</div>
+<div>
+<p class="font-body-lg text-body-lg font-semibold">Ruta Norte - Mañana</p>
+<p class="text-[12px] text-on-surface-variant">Ayer, 12 Oct • Completado con éxito</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-300" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-gutter bg-white rounded-xl border border-slate-50 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center bg-slate-100 rounded-full">
+<span class="material-symbols-outlined text-slate-500" data-icon="history">history</span>
+</div>
+<div>
+<p class="font-body-lg text-body-lg font-semibold">Ruta Especial - Evento</p>
+<p class="text-[12px] text-on-surface-variant">11 Oct • 42 estudiantes</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-300" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-white border-t border-slate-200 shadow-[0_-1px_3px_rgba(0,0,0,0.05)] font-inter text-[11px] font-medium">
+<button class="flex flex-col items-center justify-center bg-teal-50 text-teal-700 rounded-xl px-3 py-1 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1" data-icon="route" style="font-variation-settings: 'FILL' 1;">route</span>
+<span>Ruta</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 hover:text-teal-500 px-3 py-1 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1" data-icon="group">group</span>
+<span>Estudiantes</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 hover:text-teal-500 px-3 py-1 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1" data-icon="assignment">assignment</span>
+<span>Registro</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 hover:text-teal-500 px-3 py-1 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1" data-icon="settings">settings</span>
+<span>Ajustes</span>
+</button>
+</nav>
+<!-- Contextual FAB - Start New Route -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-on-surface text-on-primary rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</body></html>

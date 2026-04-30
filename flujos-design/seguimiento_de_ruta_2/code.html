@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SafeRoute - Real-time Route Tracking</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-primary-fixed-variant": "#3f465c",
+                "surface-tint": "#565e74",
+                "primary-fixed-dim": "#bec6e0",
+                "on-secondary-fixed": "#00201d",
+                "surface-bright": "#f7f9fb",
+                "tertiary-fixed": "#d5e3fd",
+                "primary": "#000000",
+                "secondary-fixed": "#89f5e7",
+                "error": "#ba1a1a",
+                "background": "#f7f9fb",
+                "on-secondary-fixed-variant": "#005049",
+                "secondary-container": "#86f2e4",
+                "inverse-surface": "#2d3133",
+                "inverse-primary": "#bec6e0",
+                "on-primary": "#ffffff",
+                "on-tertiary-fixed-variant": "#3a485c",
+                "on-tertiary-container": "#76859b",
+                "secondary": "#006a61",
+                "on-primary-container": "#7c839b",
+                "surface-container-high": "#e6e8ea",
+                "outline-variant": "#c6c6cd",
+                "on-secondary": "#ffffff",
+                "surface-variant": "#e0e3e5",
+                "surface": "#f7f9fb",
+                "secondary-fixed-dim": "#6bd8cb",
+                "on-tertiary-fixed": "#0d1c2f",
+                "on-secondary-container": "#006f66",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-low": "#f2f4f6",
+                "primary-container": "#131b2e",
+                "on-tertiary": "#ffffff",
+                "tertiary-container": "#0d1c2f",
+                "on-surface": "#191c1e",
+                "tertiary": "#000000",
+                "on-error": "#ffffff",
+                "surface-dim": "#d8dadc",
+                "on-background": "#191c1e",
+                "on-error-container": "#93000a",
+                "primary-fixed": "#dae2fd",
+                "surface-container-highest": "#e0e3e5",
+                "inverse-on-surface": "#eff1f3",
+                "tertiary-fixed-dim": "#b9c7e0",
+                "outline": "#76777d",
+                "surface-container": "#eceef0",
+                "on-surface-variant": "#45464d",
+                "error-container": "#ffdad6",
+                "on-primary-fixed": "#131b2e"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "xs": "4px",
+                "base": "8px",
+                "lg": "40px",
+                "gutter": "16px",
+                "xl": "64px",
+                "md": "24px",
+                "sm": "12px",
+                "container-padding": "20px"
+            },
+            "fontFamily": {
+                "body-lg": ["Inter"],
+                "h3": ["Inter"],
+                "h2": ["Inter"],
+                "label-caps": ["Inter"],
+                "h1": ["Inter"],
+                "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        .map-gradient-overlay {
+            background: linear-gradient(to bottom, rgba(247, 249, 251, 0.9) 0%, rgba(247, 249, 251, 0) 20%, rgba(247, 249, 251, 0) 80%, rgba(247, 249, 251, 0.9) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background font-body-lg text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-white dark:bg-slate-900 shadow-sm dark:shadow-none border-b border-slate-200 dark:border-slate-800 docked full-width top-0 sticky z-50 flex justify-between items-center h-16 px-6 w-full">
+<div class="flex items-center gap-3 active:opacity-80 transition-all duration-200 cursor-pointer">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-slate-200">
+<img alt="Parent Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged woman with a warm, reliable expression, captured in soft, natural morning light. The setting is a bright, modern interior with blurred architectural details in the background. The aesthetic is clean and corporate, featuring a palette of soft grays and muted blues to reflect the SafeRoute brand identity of vigilance and composure." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQd_91D6-FnBYDdcItH49pAlMwGYJ6Rr68lX6yFKpC-gC4Ezn9eAtgCLUq19zmRaSdvvnJ37Q1m-PFO3mpEHx6l8DFIbY8zqsMdHD7qfa4d6peLpkMhid6kfKrVT8q9IFZJrxhCz_O65pYftP5Wtexu-YlghZxLxgu9Dj5tVGdwX0g7RqE5g9eY6UgcgXM4STSStLdRm0ADIKT_fjaaUzX8eQGM73tA94jOn2JhEe8BbMNATWLGzFowd5QqvuNcAc4u8PkH9v3aIHK"/>
+</div>
+<span class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-50">SafeRoute</span>
+</div>
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 active:opacity-80 transition-all duration-200">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</header>
+<main class="flex-1 relative flex flex-col overflow-hidden">
+<!-- Floating Navigation Progress Header -->
+<div class="absolute top-md left-container-padding right-container-padding z-40">
+<div class="bg-white shadow-[0_4px_20px_rgba(0,0,0,0.04)] rounded-xl p-md flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-label-caps text-on-secondary-container font-label-caps uppercase tracking-wider mb-xs">Estado de la Ruta</span>
+<h2 class="text-h2 font-h2 text-primary-container">Route 42: Green Valley</h2>
+</div>
+<div class="flex items-center gap-base">
+<div class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="text-label-caps font-label-caps">EN VIVO</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Map Section -->
+<div class="flex-1 w-full bg-surface-container relative min-h-[400px]">
+<img alt="Interactive Route Map" class="w-full h-full object-cover grayscale-[0.2]" data-alt="A sophisticated, high-resolution digital map interface showing a modern city grid with clean, minimalist aesthetics. A vibrant teal route line snakes through the streets, punctuated by soft circular markers representing bus stops. A prominent 3D bus icon in deep navy blue indicates the current position with a subtle glow effect around it. The overall color palette is composed of light grays, whites, and the signature SafeRoute teal, creating a professional and clear visual information display." data-location="Seattle, WA" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJZah2R0pn3y-QISbsefDZFtJljHpSKtGJyuupODSWUj-42LTm1ziy2QOZSF9BklgNoEwU2t5QphKRGSoUh5jfFkpp1GBhV8Z8_DRx0V-RhGcWzVMZJGSMX3yKH1suOuiQwfYnmfUIUAef6GNNKZOn5DbSdfH1SBvKZ1wriBvB6xQXoarAJXnCjhsJ6fcCwPgxSgq_ivx_wya6m80OmJK9ScXUVZ7gulGcP1ofEOd3IeyWOJBJinva124WLZGs_-LkVehBtApvPwEM"/>
+<div class="absolute inset-0 map-gradient-overlay pointer-events-none"></div>
+<!-- Bus Marker (Simulation) -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<div class="bg-primary-container text-white p-xs rounded-lg shadow-lg flex items-center gap-xs mb-xs border border-on-primary-fixed-variant">
+<span class="material-symbols-outlined text-[18px]">directions_bus</span>
+<span class="text-label-caps font-label-caps">42 - ACTUAL</span>
+</div>
+<div class="w-6 h-6 bg-secondary rounded-full border-4 border-white shadow-md flex items-center justify-center"></div>
+</div>
+<!-- Stop Markers -->
+<div class="absolute top-[40%] left-[30%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center opacity-70">
+<div class="w-4 h-4 bg-white border-2 border-outline-variant rounded-full shadow-sm"></div>
+<span class="text-[10px] font-semibold text-on-surface-variant bg-white/80 px-1 rounded mt-1">Stop 08</span>
+</div>
+<div class="absolute top-[65%] left-[75%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<div class="w-5 h-5 bg-white border-2 border-secondary rounded-full shadow-sm flex items-center justify-center">
+<div class="w-2 h-2 bg-secondary rounded-full"></div>
+</div>
+<span class="text-[10px] font-bold text-secondary bg-white px-1 rounded mt-1">Stop 12</span>
+</div>
+</div>
+<!-- Dashboard Stats Section -->
+<section class="bg-background p-container-padding -mt-lg relative z-30 flex flex-col gap-gutter">
+<!-- Bento Grid Stats -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+<div class="bg-white rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-surface-container-high flex flex-col justify-center gap-xs">
+<div class="flex items-center gap-xs text-on-tertiary-container">
+<span class="material-symbols-outlined text-body-lg">schedule</span>
+<span class="text-label-caps font-label-caps">LLEGADA</span>
+</div>
+<span class="text-h2 font-h2 text-secondary">08 MIN</span>
+</div>
+<div class="bg-white rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-surface-container-high flex flex-col justify-center gap-xs">
+<div class="flex items-center gap-xs text-on-tertiary-container">
+<span class="material-symbols-outlined text-body-lg">near_me</span>
+<span class="text-label-caps font-label-caps">DISTANCIA</span>
+</div>
+<span class="text-h2 font-h2 text-primary-container">1.2 KM</span>
+</div>
+<div class="bg-white rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-surface-container-high flex flex-col justify-center gap-xs">
+<div class="flex items-center gap-xs text-on-tertiary-container">
+<span class="material-symbols-outlined text-body-lg">location_on</span>
+<span class="text-label-caps font-label-caps">RESTANTE</span>
+</div>
+<span class="text-h2 font-h2 text-primary-container">3 PARADAS</span>
+</div>
+<div class="bg-secondary-container rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col justify-center gap-xs">
+<div class="flex items-center gap-xs text-on-secondary-container">
+<span class="material-symbols-outlined text-body-lg">group</span>
+<span class="text-label-caps font-label-caps">CAPACIDAD</span>
+</div>
+<span class="text-h2 font-h2 text-on-secondary-container">BAJA</span>
+</div>
+</div>
+<!-- Detailed Stops Drawer Handle-style UI -->
+<div class="bg-white rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-surface-container-high">
+<div class="flex justify-between items-center mb-md">
+<h3 class="text-h3 font-h3 text-primary-container">Próximas Paradas Programadas</h3>
+<button class="text-secondary font-label-caps uppercase tracking-tight text-label-caps flex items-center gap-xs">Ver Todo <span class="material-symbols-outlined text-[16px]">chevron_right</span></button>
+</div>
+<div class="space-y-md relative">
+<!-- Progress Line -->
+<div class="absolute left-[11px] top-xs bottom-xs w-[2px] bg-slate-200"></div>
+<div class="absolute left-[11px] top-xs h-[24px] w-[2px] bg-secondary"></div>
+<!-- Stop 1 (Current) -->
+<div class="flex items-start gap-md relative">
+<div class="z-10 w-6 h-6 rounded-full bg-secondary flex items-center justify-center border-4 border-white">
+<span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center">
+<span class="text-body-sm font-semibold text-secondary">Pasando ahora</span>
+<span class="text-label-caps font-label-caps text-slate-400">AHORA</span>
+</div>
+<p class="text-body-lg font-h3 text-primary-container">Elm Street Junction</p>
+</div>
+</div>
+<!-- Stop 2 -->
+<div class="flex items-start gap-md relative">
+<div class="z-10 w-6 h-6 rounded-full bg-white flex items-center justify-center border-2 border-slate-300">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center">
+<span class="text-body-sm font-medium text-on-surface-variant">Próxima parada</span>
+<span class="text-label-caps font-label-caps text-on-secondary-container">Estado de la Ruta</span>
+</div>
+<p class="text-body-lg font-h3 text-on-surface-variant">Central Park West</p>
+</div>
+</div>
+<!-- Stop 3 -->
+<div class="flex items-start gap-md relative">
+<div class="z-10 w-6 h-6 rounded-full bg-white flex items-center justify-center border-2 border-slate-300">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+</div>
+<div class="flex-1 opacity-50">
+<div class="flex justify-between items-center">
+<span class="text-body-sm font-medium text-on-surface-variant">Destino final</span>
+<span class="text-label-caps font-label-caps text-slate-400">8 MIN</span>
+</div>
+<p class="text-body-lg font-h3 text-on-surface-variant">Brightwood Elementary</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="h-24"></div> <!-- Padding for Bottom Bar -->
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md fixed bottom-0 w-full z-50 border-t border-slate-200 dark:border-slate-800 shadow-[0_-4px_20px_rgba(0,0,0,0.04)] flex justify-around items-center h-20 px-2 pb-safe">
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 hover:text-teal-500 dark:hover:text-teal-300 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Inter'] text-[11px] font-semibold mt-1">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30 rounded-2xl px-4 py-1.5 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">near_me</span>
+<span class="font-['Inter'] text-[11px] font-semibold mt-1">Mapa</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 hover:text-teal-500 dark:hover:text-teal-300 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-['Inter'] text-[11px] font-semibold mt-1">Alertas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1.5 hover:text-teal-500 dark:hover:text-teal-300 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Inter'] text-[11px] font-semibold mt-1">Ajustes</span>
+</a>
+</nav>
+</body></html>

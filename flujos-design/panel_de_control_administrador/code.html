@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SafeRoute - Dashboard de Administración</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#86f2e4",
+                    "on-secondary-container": "#006f66",
+                    "outline-variant": "#c6c6cd",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "error": "#ba1a1a",
+                    "background": "#f7f9fb",
+                    "surface-variant": "#e0e3e5",
+                    "surface-container-highest": "#e0e3e5",
+                    "primary-container": "#131b2e",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#d5e3fd",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#89f5e7",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "primary-fixed": "#dae2fd",
+                    "surface": "#f7f9fb",
+                    "surface-bright": "#f7f9fb",
+                    "primary": "#000000",
+                    "on-secondary-fixed-variant": "#005049",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#e6e8ea",
+                    "on-secondary-fixed": "#00201d",
+                    "tertiary-container": "#0d1c2f",
+                    "on-tertiary-container": "#76859b",
+                    "on-primary-container": "#7c839b",
+                    "on-primary-fixed": "#131b2e",
+                    "secondary": "#006a61",
+                    "outline": "#76777d",
+                    "on-background": "#191c1e",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#eceef0",
+                    "inverse-surface": "#2d3133",
+                    "inverse-primary": "#bec6e0",
+                    "surface-dim": "#d8dadc",
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "surface-tint": "#565e74",
+                    "on-surface-variant": "#45464d",
+                    "surface-container-low": "#f2f4f6",
+                    "primary-fixed-dim": "#bec6e0",
+                    "on-error": "#ffffff",
+                    "on-surface": "#191c1e",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#000000"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "24px",
+                    "base": "8px",
+                    "sm": "12px",
+                    "gutter": "16px",
+                    "container-padding": "20px",
+                    "xs": "4px",
+                    "xl": "64px",
+                    "lg": "40px"
+            },
+            "fontFamily": {
+                    "h1": ["Inter"],
+                    "h3": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "h2": ["Inter"]
+            },
+            "fontSize": {
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #f7f9fb;
+        }
+    </style>
+</head>
+<body class="font-body-lg text-on-surface">
+<!-- Sidebar Navigation Shell -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-4 bg-slate-50 dark:bg-slate-950 h-screen w-64 border-r border-slate-200 dark:border-slate-800 z-50">
+<div class="px-6 mb-8">
+<h1 class="text-lg font-black text-slate-900 dark:text-white">SafeRoute</h1>
+<p class="text-xs text-slate-500 font-medium uppercase tracking-wider">Administración</p>
+</div>
+<nav class="flex-1 flex flex-col space-y-1">
+<!-- Active State Navigation -->
+<a class="flex items-center px-6 py-3 text-teal-600 dark:text-teal-400 border-r-4 border-teal-600 dark:border-teal-400 bg-teal-50/50 dark:bg-teal-900/20 font-['Inter'] text-sm font-medium duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+                Panel de Control
+            </a>
+<a class="flex items-center px-6 py-3 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 font-['Inter'] text-sm font-medium duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="directions_bus">directions_bus</span>
+                Gestión de Flota
+            </a>
+<a class="flex items-center px-6 py-3 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 font-['Inter'] text-sm font-medium duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="person_apron">person_apron</span>
+                Conductores
+            </a>
+<a class="flex items-center px-6 py-3 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 font-['Inter'] text-sm font-medium duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="group">group</span>
+                Estudiantes
+            </a>
+<a class="flex items-center px-6 py-3 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 font-['Inter'] text-sm font-medium duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="map">map</span>
+                Rutas
+            </a>
+</nav>
+<div class="px-6 mt-auto">
+<button class="w-full bg-secondary text-white py-3 rounded-lg font-semibold shadow-md hover:opacity-90 transition-all flex items-center justify-center gap-2 mb-6">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Nuevo Reporte
+            </button>
+<a class="flex items-center py-3 text-slate-600 dark:text-slate-400 hover:text-error transition-colors font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="logout">logout</span>
+                Cerrar Sesión
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen bg-surface">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-40 flex items-center justify-between px-6 h-16 w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none">
+<div class="flex items-center">
+<span class="font-h2 text-slate-900 dark:text-white mr-4">Resumen General</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-full text-sm focus:ring-2 focus:ring-secondary w-64" placeholder="Buscar ruta o conductor..." type="text"/>
+</div>
+<button class="p-2 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors rounded-full relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors rounded-full">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden ml-2 border border-slate-200">
+<img alt="Foto de perfil del administrador" data-alt="A professional headshot of a mature administrative manager in a clean corporate office environment. Soft, diffused daylight illuminates the scene, emphasizing a calm and reliable atmosphere. The image is crisp with a shallow depth of field, focusing on the friendly yet authoritative expression. The color palette is composed of soft blues, whites, and neutral tones consistent with a modern corporate identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOH-FHjJ0sEEiVozfm7Cx-3ykMl30yEhNMNBE2oTenl8AbQpdQ8jgGsbRrxLGC9Lvhezjv6f1EusvtOhk3IfiWzgS5g46tqi3PfKo7aaJRCZiipo8Um-Rz8fyeCekXFYwsBNAAAUdnvOXiLwK0XPkI8LU76c5eZ_Dr5Fnn5PnDE8Tfvkx3iRpFGqMOfaG6MH8k26gCA0AWCdkEnWTBGE6qLlu4ljMogknDpCr85Qk3R88mTARNW88cyWTDkwTd9RzuWy0vJYe4s5wa"/>
+</div>
+</div>
+</header>
+<div class="p-container-padding space-y-md">
+<!-- Metric Summary Section (Cards) -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] flex items-center justify-between">
+<div>
+<p class="text-label-caps text-on-tertiary-container uppercase mb-1">Rutas Activas</p>
+<h2 class="text-h1 font-h1 text-primary">12</h2>
+<p class="text-body-sm text-secondary flex items-center mt-1">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="trending_up">trending_up</span>
+                            +2 hoy
+                        </p>
+</div>
+<div class="bg-secondary-container/20 p-sm rounded-lg">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="route">route</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] flex items-center justify-between">
+<div>
+<p class="text-label-caps text-on-tertiary-container uppercase mb-1">Conductores</p>
+<h2 class="text-h1 font-h1 text-primary">10</h2>
+<p class="text-body-sm text-on-surface-variant mt-1">En servicio</p>
+</div>
+<div class="bg-primary-container/10 p-sm rounded-lg">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="steering_wheel">steering_wheel_heat</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] flex items-center justify-between">
+<div>
+<p class="text-label-caps text-on-tertiary-container uppercase mb-1">Estudiantes</p>
+<h2 class="text-h1 font-h1 text-primary">450</h2>
+<p class="text-body-sm text-on-surface-variant mt-1">En trayecto</p>
+</div>
+<div class="bg-secondary-container/20 p-sm rounded-lg">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="school">school</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] flex items-center justify-between border-l-4 border-error">
+<div>
+<p class="text-label-caps text-on-tertiary-container uppercase mb-1">Alertas</p>
+<h2 class="text-h1 font-h1 text-error">02</h2>
+<p class="text-body-sm text-error mt-1 font-semibold">Requiere atención</p>
+</div>
+<div class="bg-error-container p-sm rounded-lg">
+<span class="material-symbols-outlined text-error text-3xl" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+</div>
+</section>
+<!-- Main Interactive Section: Map and Tracking -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Central Tracking Panel (Map Placeholder/Status) -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col">
+<div class="p-gutter border-b border-surface-container-high flex justify-between items-center">
+<div>
+<h3 class="text-h3 font-h3 text-primary">Seguimiento en Tiempo Real</h3>
+<p class="text-body-sm text-on-surface-variant">Estado actual de todas las rutas escolares activas</p>
+</div>
+<div class="flex gap-2">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-bold">
+<span class="w-2 h-2 rounded-full bg-secondary mr-2 animate-pulse"></span>
+                                EN VIVO
+                            </span>
+</div>
+</div>
+<div class="relative flex-1 min-h-[400px] bg-slate-200">
+<img alt="Mapa de seguimiento de rutas" class="absolute inset-0 w-full h-full object-cover opacity-80" data-alt="A high-tech digital mapping interface showing a city grid with stylized school bus icons moving along highlighted teal routes. The visual style is clean and minimal, featuring a cool blue and slate color palette with vibrant teal markers indicating active transport. Information overlays display real-time telemetry data in a crisp, legible font, conveying a sense of vigilance, safety, and modern logistics management." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5MxRBnY1ooeTVNqp76ycWFg8d60KyL--9G9Lq5vuhBCsDQ7BimdATqloCzivkVO9q10ZkCdHCVkkhv7SSbsu3IKQWBo2YZnvMWCFnceqt_cyMlYkA6Yte8JDChXjNrJlZnCBGsvUT9PzwAt68_lW8Yu_sC0SBg9qKETim4AkNLoTcRzcqbuXqBs6Cyi9vL5uetUH5TSxjHJeXiO6duUXgMP0ZXpZLBTRIdi4pi8d9_am_V3ASDVe8YZm1ySFvJ2qGavF_RIsI0YPo"/>
+<!-- Overlay Legend -->
+<div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md p-4 rounded-lg shadow-lg border border-slate-200 max-w-xs">
+<h4 class="text-xs font-bold text-slate-900 mb-3 uppercase tracking-widest">Estado de Flota</h4>
+<div class="space-y-2">
+<div class="flex items-center justify-between text-xs">
+<span class="flex items-center text-slate-600"><span class="w-3 h-3 rounded-full bg-secondary mr-2"></span> Ruta Normal</span>
+<span class="font-bold">10</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="flex items-center text-slate-600"><span class="w-3 h-3 rounded-full bg-amber-400 mr-2"></span> Retraso Leve</span>
+<span class="font-bold">2</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="flex items-center text-slate-600"><span class="w-3 h-3 rounded-full bg-error mr-2"></span> Detenido</span>
+<span class="font-bold">0</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Alerts Table/Sidebar -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] flex flex-col">
+<div class="p-gutter border-b border-surface-container-high">
+<h3 class="text-h3 font-h3 text-primary">Alertas Recientes</h3>
+<p class="text-body-sm text-on-surface-variant">Últimas incidencias reportadas</p>
+</div>
+<div class="flex-1 overflow-y-auto max-h-[500px]">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-white z-10">
+<tr class="text-label-caps text-on-surface-variant border-b border-surface-container-high">
+<th class="px-gutter py-3 font-semibold">Hora</th>
+<th class="px-gutter py-3 font-semibold">Evento</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-gutter py-4 align-top">
+<span class="text-xs font-bold text-on-surface">08:14</span>
+</td>
+<td class="px-gutter py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-error flex items-center">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="traffic">traffic</span>
+                                                Congestión Severa
+                                            </span>
+<p class="text-xs text-on-surface-variant mt-1">Ruta 04: Retraso estimado de 15 min en Av. Central.</p>
+<span class="mt-2 text-[10px] px-2 py-0.5 bg-error-container text-error rounded-full w-fit font-bold">CRÍTICO</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-gutter py-4 align-top">
+<span class="text-xs font-bold text-on-surface">07:55</span>
+</td>
+<td class="px-gutter py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-amber-600 flex items-center">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="person_off">person_off</span>
+                                                Estudiante Ausente
+                                            </span>
+<p class="text-xs text-on-surface-variant mt-1">Ruta 08: Sofia Martí no abordó en parada #12.</p>
+<span class="mt-2 text-[10px] px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full w-fit font-bold">INFO</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-gutter py-4 align-top">
+<span class="text-xs font-bold text-on-surface">07:42</span>
+</td>
+<td class="px-gutter py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-secondary flex items-center">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="check_circle">check_circle</span>
+                                                Ruta Iniciada
+                                            </span>
+<p class="text-xs text-on-surface-variant mt-1">Ruta 12 ha comenzado su recorrido matutino.</p>
+<span class="mt-2 text-[10px] px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded-full w-fit font-bold">SISTEMA</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-gutter py-4 align-top">
+<span class="text-xs font-bold text-on-surface">07:30</span>
+</td>
+<td class="px-gutter py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="build">build</span>
+                                                Mantenimiento
+                                            </span>
+<p class="text-xs text-on-surface-variant mt-1">Bus SR-402 reporta revisión de neumáticos completada.</p>
+<span class="mt-2 text-[10px] px-2 py-0.5 bg-surface-container-high text-on-surface-variant rounded-full w-fit font-bold">PREVENTIVO</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-surface-container-high text-center">
+<button class="text-sm font-bold text-secondary hover:underline">Ver todo el historial</button>
+</div>
+</div>
+</section>
+<!-- Bottom Section: Detailed Fleet Table -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] overflow-hidden">
+<div class="p-gutter flex flex-col md:flex-row md:items-center justify-between border-b border-surface-container-high gap-4">
+<h3 class="text-h3 font-h3 text-primary">Estado Detallado de Flota</h3>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-on-surface text-sm font-semibold rounded-lg transition-colors flex items-center">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="filter_list">filter_list</span>
+                            Filtrar
+                        </button>
+<button class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-on-surface text-sm font-semibold rounded-lg transition-colors flex items-center">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="download">download</span>
+                            Exportar CSV
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container text-label-caps text-on-surface-variant">
+<th class="px-gutter py-4 font-semibold">Identificador</th>
+<th class="px-gutter py-4 font-semibold">Conductor</th>
+<th class="px-gutter py-4 font-semibold">Ruta</th>
+<th class="px-gutter py-4 font-semibold">Pasajeros</th>
+<th class="px-gutter py-4 font-semibold">Estado</th>
+<th class="px-gutter py-4 font-semibold">Acción</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high">
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-gutter py-4">
+<div class="font-bold text-on-surface">SR-102</div>
+<div class="text-[10px] text-on-surface-variant">Placas: ABC-1234</div>
+</td>
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-xs">RM</div>
+<div class="text-sm font-medium">Ricardo Mendoza</div>
+</div>
+</td>
+<td class="px-gutter py-4">
+<div class="text-sm">Norte - Villa Flores</div>
+</td>
+<td class="px-gutter py-4">
+<div class="flex items-center gap-2">
+<div class="w-24 h-2 bg-slate-200 rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[85%]"></div>
+</div>
+<span class="text-xs font-bold text-on-surface">34/40</span>
+</div>
+</td>
+<td class="px-gutter py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200">
+                                        En Ruta
+                                    </span>
+</td>
+<td class="px-gutter py-4">
+<button class="p-2 text-on-surface-variant hover:text-secondary hover:bg-secondary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-gutter py-4">
+<div class="font-bold text-on-surface">SR-405</div>
+<div class="text-[10px] text-on-surface-variant">Placas: XYZ-9876</div>
+</td>
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white font-bold text-xs">ES</div>
+<div class="text-sm font-medium">Elena Suárez</div>
+</div>
+</td>
+<td class="px-gutter py-4">
+<div class="text-sm">Sur - Residencial Olmos</div>
+</td>
+<td class="px-gutter py-4">
+<div class="flex items-center gap-2">
+<div class="w-24 h-2 bg-slate-200 rounded-full overflow-hidden">
+<div class="h-full bg-amber-500 w-[100%]"></div>
+</div>
+<span class="text-xs font-bold text-on-surface">25/25</span>
+</div>
+</td>
+<td class="px-gutter py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 border border-amber-200">
+                                        Retraso 5m
+                                    </span>
+</td>
+<td class="px-gutter py-4">
+<button class="p-2 text-on-surface-variant hover:text-secondary hover:bg-secondary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-gutter py-4">
+<div class="font-bold text-on-surface">SR-088</div>
+<div class="text-[10px] text-on-surface-variant">Placas: LMN-5566</div>
+</td>
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 font-bold text-xs">JL</div>
+<div class="text-sm font-medium">Juan López</div>
+</div>
+</td>
+<td class="px-gutter py-4">
+<div class="text-sm">Oeste - Santa Fe</div>
+</td>
+<td class="px-gutter py-4">
+<div class="flex items-center gap-2">
+<div class="w-24 h-2 bg-slate-200 rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[20%]"></div>
+</div>
+<span class="text-xs font-bold text-on-surface">12/60</span>
+</div>
+</td>
+<td class="px-gutter py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200">
+                                        Iniciando
+                                    </span>
+</td>
+<td class="px-gutter py-4">
+<button class="p-2 text-on-surface-variant hover:text-secondary hover:bg-secondary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-gutter border-t border-surface-container-high flex items-center justify-between">
+<p class="text-body-sm text-on-surface-variant">Mostrando 3 de 12 rutas activas</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-slate-200 rounded text-on-surface-variant hover:bg-slate-50 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="px-3 py-1 border border-slate-200 rounded text-on-surface-variant hover:bg-slate-50">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

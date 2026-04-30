@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SafeRoute - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e6e8ea",
+                    "primary-fixed": "#dae2fd",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "surface-container-highest": "#e0e3e5",
+                    "tertiary-fixed": "#d5e3fd",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#eceef0",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#565e74",
+                    "outline": "#76777d",
+                    "on-background": "#191c1e",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed": "#00201d",
+                    "primary": "#000000",
+                    "on-secondary-fixed-variant": "#005049",
+                    "outline-variant": "#c6c6cd",
+                    "on-tertiary-container": "#76859b",
+                    "on-primary-container": "#7c839b",
+                    "inverse-primary": "#bec6e0",
+                    "secondary": "#006a61",
+                    "surface": "#f7f9fb",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "secondary-fixed": "#89f5e7",
+                    "tertiary-container": "#0d1c2f",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#bec6e0",
+                    "on-surface": "#191c1e",
+                    "tertiary": "#000000",
+                    "on-primary-fixed": "#131b2e",
+                    "background": "#f7f9fb",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-dim": "#d8dadc",
+                    "surface-variant": "#e0e3e5",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "surface-bright": "#f7f9fb",
+                    "on-surface-variant": "#45464d",
+                    "surface-container-low": "#f2f4f6",
+                    "on-secondary-container": "#006f66",
+                    "inverse-on-surface": "#eff1f3",
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "secondary-container": "#86f2e4",
+                    "primary-container": "#131b2e",
+                    "inverse-surface": "#2d3133"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "xl": "64px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "sm": "12px",
+                    "container-padding": "20px",
+                    "lg": "40px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "h2": ["Inter"],
+                    "h1": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "h3": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col items-center">
+<main class="w-full max-w-[440px] px-container-padding pt-xl pb-lg flex flex-col flex-grow items-center">
+<header class="flex flex-col items-center mb-lg text-center">
+<div class="mb-sm bg-secondary-container p-sm rounded-xl text-on-secondary-container">
+<span class="material-symbols-outlined text-[32px]" data-icon="security">security</span>
+</div>
+<h1 class="font-h1 text-h1 text-on-surface mb-xs">SafeRoute</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Bienvenido de nuevo</p>
+</header>
+<section class="w-full bg-surface-container-lowest p-md rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] border border-slate-100/50">
+<form class="space-y-md">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant block uppercase" for="email">Correo Electrónico</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-sm text-outline" data-icon="email">email</span>
+<input class="w-full h-[48px] pl-lg pr-md border border-outline-variant rounded-lg bg-surface text-body-sm focus:ring-2 focus:ring-secondary focus:border-secondary transition-all outline-none" id="email" placeholder="correo@ejemplo.com" type="email"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant block uppercase" for="password">Contraseña</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-sm text-outline" data-icon="lock">lock</span>
+<input class="w-full h-[48px] pl-lg pr-[48px] border border-outline-variant rounded-lg bg-surface text-body-sm focus:ring-2 focus:ring-secondary focus:border-secondary transition-all outline-none" id="password" placeholder="Ingresa tu contraseña" type="password"/>
+<button class="absolute right-sm text-outline hover:text-on-surface-variant" type="button">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex justify-end pt-xs">
+<a class="font-body-sm text-body-sm text-secondary font-medium hover:underline transition-all" href="#">¿Olvidaste tu contraseña?</a>
+</div>
+<button class="w-full h-[48px] bg-secondary text-on-secondary font-h3 text-h3 rounded-lg hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-sm shadow-md" type="submit">
+                    Iniciar Sesión
+                </button>
+</form>
+</section>
+<footer class="mt-lg text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                ¿No tienes cuenta? 
+                <a class="text-secondary font-semibold hover:underline" href="#">Regístrate</a>
+</p>
+</footer>
+</main>
+<div class="fixed bottom-lg left-1/2 -translate-x-1/2 w-full max-w-[800px] hidden lg:block opacity-10 pointer-events-none select-none">
+<img alt="Safety Concept" class="w-full rounded-2xl" data-alt="A sophisticated digital visualization of a safe urban driving environment, featuring soft teal and navy blue glowing path lines overlaid on a minimalist city map. The scene is illuminated by gentle ambient light, evoking a sense of calm and technological reliability. High-key lighting creates a clean, corporate atmosphere consistent with a modern light-mode interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxnIXfFcTPg2gTOZGgewFYtE9JY_HsK0CT2wBqIn4R6iVz4KWCtALxLdCwqhq_LNPfZkjxzROzCceRD7dBQ0jLLmrBMxd-AqBD1xMiibewR-cucRBVJujK3R9wLqs8Ip_PPTnO71f__AQD4jCjzdwLVGEW2bFa_52F-1sCp_Vm9gypGWCaasH0nluow-yinyFBZvN5bYvdrLvSBcD_Q4VlnB3XoUC49JroNkATc9JtXWcU0aN4_ISgc2vsPmx-GKTyqIJxvezWGwPM"/>
+</div>
+</body></html>

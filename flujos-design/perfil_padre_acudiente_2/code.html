@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "surface-container-high": "#e6e8ea",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d8dadc",
+                        "on-surface-variant": "#45464d",
+                        "surface": "#f7f9fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-surface": "#191c1e",
+                        "tertiary-fixed": "#d5e3fd",
+                        "on-tertiary-container": "#76859b",
+                        "secondary": "#006a61",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c6c6cd",
+                        "surface-tint": "#565e74",
+                        "primary-container": "#131b2e",
+                        "tertiary-container": "#0d1c2f",
+                        "surface-container-highest": "#e0e3e5",
+                        "inverse-primary": "#bec6e0",
+                        "surface-bright": "#f7f9fb",
+                        "secondary-fixed": "#89f5e7",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-container": "#006f66",
+                        "on-background": "#191c1e",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#00201d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#7c839b",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "tertiary": "#000000",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "primary": "#000000",
+                        "on-primary-fixed": "#131b2e",
+                        "surface-container-low": "#f2f4f6",
+                        "secondary-container": "#86f2e4",
+                        "primary-fixed": "#dae2fd",
+                        "outline": "#76777d",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "background": "#f7f9fb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "sm": "12px",
+                        "container-padding": "20px",
+                        "base": "8px",
+                        "lg": "40px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Inter"],
+                        "h3": ["Inter"],
+                        "h1": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f7f9fb;
+            color: #191c1e;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-5 h-16 w-full fixed top-0 z-50">
+<div class="flex items-center gap-4">
+<button class="transition-colors duration-200 ease-in-out hover:bg-slate-100 dark:hover:bg-slate-800 p-2 rounded-full">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">arrow_back</span>
+</button>
+<h1 class="font-sans text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100">Completar Perfil</h1>
+</div>
+<div class="w-10"></div> <!-- Spacer for balance -->
+</header>
+<!-- Content Canvas -->
+<main class="flex-grow pt-20 pb-28 px-container-padding max-w-lg mx-auto w-full">
+<!-- Hero Visual Section (Bento Style) -->
+<div class="mb-md">
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex items-center gap-md">
+<div class="w-20 h-20 rounded-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged woman looking confident and calm, set against a soft-focus minimalist architectural background. The lighting is bright and natural, reflecting a light-mode aesthetic. The composition is clean with a focus on her friendly expression, using a palette of soft grays and warm skin tones to convey reliability and parental vigilance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnrxeUW7h_-hdjB4M4V2BJMw8K_RiSakyB_vXdtrZVFjDl2Pq6FKUi_-a_BETTpZAb5HqaSN4nJGEMED5q_dpCFaNsJHhiZgTIdCNvj3hbb_LwzhqBfVkD_GIgA8thVRJR1fCq0lmzPDJOD17EUbsXFEQ-yhCrclfRgZY_9dA7h1n4uycRlnWSl76x1zAMcu05LSa6gdK3j5fxTnhATSJO5mRIuiVu8s7qHoLAapl1JAqUsRyLf3kIPqhMolj-QkkIlDQ64NUq8kAs"/>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-tertiary-container mb-xs uppercase">Cuenta de Guardián</p>
+<h2 class="font-h2 text-h2 text-on-surface">Información Personal</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Completa los datos para mejorar la seguridad.</p>
+</div>
+</div>
+</div>
+<!-- Form Section -->
+<section class="space-y-gutter">
+<!-- Document & Birth Date (2-column layout) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant px-xs">Número de Documento</label>
+<div class="relative group">
+<input class="w-full h-12 bg-surface-container-lowest border border-outline-variant rounded-lg px-md font-body-lg text-on-surface focus:ring-1 focus:ring-secondary focus:border-secondary transition-all outline-none" placeholder="Ej. 12345678" type="text"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant px-xs">Fecha de Nacimiento</label>
+<div class="relative">
+<input class="w-full h-12 bg-surface-container-lowest border border-outline-variant rounded-lg px-md font-body-lg text-on-surface focus:ring-1 focus:ring-secondary focus:border-secondary transition-all outline-none" type="date"/>
+</div>
+</div>
+</div>
+<!-- Address -->
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant px-xs">Dirección de Residencia</label>
+<div class="relative">
+<input class="w-full h-12 bg-surface-container-lowest border border-outline-variant rounded-lg px-md font-body-lg text-on-surface focus:ring-1 focus:ring-secondary focus:border-secondary transition-all outline-none" placeholder="Calle, Número, Ciudad" type="text"/>
+</div>
+</div>
+<!-- Work Info Cluster -->
+<div class="bg-surface-container-low p-md rounded-xl space-y-gutter border border-surface-container-high">
+<h3 class="font-h3 text-h3 text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-md">work</span> Laboral
+                </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant px-xs">Ocupación</label>
+<input class="w-full h-12 bg-surface-container-lowest border border-outline-variant rounded-lg px-md font-body-lg text-on-surface focus:ring-1 focus:ring-secondary focus:border-secondary transition-all outline-none" placeholder="Puesto o profesión" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant px-xs">Teléfono Laboral</label>
+<input class="w-full h-12 bg-surface-container-lowest border border-outline-variant rounded-lg px-md font-body-lg text-on-surface focus:ring-1 focus:ring-secondary focus:border-secondary transition-all outline-none" placeholder="+54 000 0000" type="tel"/>
+</div>
+</div>
+</div>
+<!-- Emergency Contact Cluster -->
+<div class="bg-error-container/10 p-md rounded-xl space-y-gutter border border-error-container/30">
+<h3 class="font-h3 text-h3 text-error flex items-center gap-xs">
+<span class="material-symbols-outlined text-md">emergency</span> Contacto de Emergencia
+                </h3>
+<div class="space-y-gutter">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant px-xs">Nombre Completo</label>
+<input class="w-full h-12 bg-surface-container-lowest border border-outline-variant rounded-lg px-md font-body-lg text-on-surface focus:ring-1 focus:ring-secondary focus:border-secondary transition-all outline-none" placeholder="Nombre del contacto" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant px-xs">Teléfono de Emergencia</label>
+<input class="w-full h-12 bg-surface-container-lowest border border-outline-variant rounded-lg px-md font-body-lg text-on-surface focus:ring-1 focus:ring-secondary focus:border-secondary transition-all outline-none" placeholder="+54 000 0000" type="tel"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Informational Footer -->
+<div class="mt-md text-center">
+<p class="font-body-sm text-body-sm text-on-tertiary-container italic px-md">
+                Toda la información es opcional y se utilizará únicamente para protocolos de respuesta ante incidentes.
+            </p>
+</div>
+</main>
+<!-- Bottom Action Area -->
+<div class="fixed bottom-0 left-0 right-0 p-container-padding bg-white/80 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 flex justify-center z-50">
+<button class="w-full max-w-md h-12 bg-secondary text-on-secondary rounded-full font-h3 flex items-center justify-center gap-sm active:scale-95 transition-transform duration-150 shadow-lg shadow-secondary/20">
+<span class="material-symbols-outlined">save</span>
+            Guardar cambios
+        </button>
+</div>
+</body></html>

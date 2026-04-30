@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#f7f9fb",
+                    "on-tertiary-container": "#76859b",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#006f66",
+                    "surface-tint": "#565e74",
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "primary-fixed-dim": "#bec6e0",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "secondary-container": "#86f2e4",
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "primary-fixed": "#dae2fd",
+                    "surface-variant": "#e0e3e5",
+                    "primary": "#000000",
+                    "outline-variant": "#c6c6cd",
+                    "on-secondary-fixed": "#00201d",
+                    "primary-container": "#131b2e",
+                    "on-surface": "#191c1e",
+                    "surface-container": "#eceef0",
+                    "on-background": "#191c1e",
+                    "surface-container-low": "#f2f4f6",
+                    "on-primary": "#ffffff",
+                    "background": "#f7f9fb",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "outline": "#76777d",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#0d1c2f",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-dim": "#d8dadc",
+                    "on-primary-container": "#7c839b",
+                    "inverse-on-surface": "#eff1f3",
+                    "tertiary-fixed": "#d5e3fd",
+                    "secondary-fixed": "#89f5e7",
+                    "on-secondary-fixed-variant": "#005049",
+                    "on-primary-fixed": "#131b2e",
+                    "inverse-primary": "#bec6e0",
+                    "on-surface-variant": "#45464d",
+                    "tertiary": "#000000",
+                    "surface-container-high": "#e6e8ea",
+                    "surface-bright": "#f7f9fb",
+                    "secondary": "#006a61",
+                    "inverse-surface": "#2d3133"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "sm": "12px",
+                    "lg": "40px",
+                    "xl": "64px",
+                    "gutter": "16px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "h3": ["Inter"],
+                    "h1": ["Inter"],
+                    "h2": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                    "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex">
+<!-- SideNavBar Component -->
+<aside class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-slate-200 flex flex-col p-4 gap-2 z-50">
+<div class="flex items-center gap-3 px-2 py-4 mb-4">
+<div class="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="directions_bus">directions_bus</span>
+</div>
+<div>
+<h1 class="text-lg font-bold text-slate-900 leading-tight">SafeRoute</h1>
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Panel de Control</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 text-slate-600 hover:bg-slate-100 transition-colors rounded-lg font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 bg-teal-50 text-teal-700 rounded-lg font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="directions_bus">directions_bus</span>
+                Gestión de Flota
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-slate-600 hover:bg-slate-100 transition-colors rounded-lg font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="person_pin_circle">person_pin_circle</span>
+                Conductores
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-slate-600 hover:bg-slate-100 transition-colors rounded-lg font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+                Estudiantes
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-slate-600 hover:bg-slate-100 transition-colors rounded-lg font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="route">route</span>
+                Rutas
+            </a>
+</nav>
+<div class="pt-4 border-t border-slate-100 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 text-slate-600 hover:bg-slate-100 transition-colors rounded-lg font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Soporte
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-error hover:bg-red-50 transition-colors rounded-lg font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Cerrar Sesión
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar Component -->
+<header class="sticky top-0 z-40 bg-white border-b border-slate-200 flex justify-between items-center w-full px-6 py-4 shadow-sm">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder="Buscar por ID, placa o conductor..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-600 transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-600 transition-all">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-xs font-bold text-slate-900">Admin SafeRoute</p>
+<p class="text-[10px] text-slate-500">Super Administrador</p>
+</div>
+<img alt="Avatar del Administrador" class="w-9 h-9 rounded-full object-cover ring-2 ring-slate-100" data-alt="A professional headshot of a middle-aged male administrator with a confident expression, wearing a clean white shirt. The lighting is soft and even, typical of a corporate studio environment. The background is a blurred, modern office space with subtle teal accents, maintaining a high-key and clean aesthetic consistent with a premium management software interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAe2sJxrlPJ3jYJJvLLwHaoDEsfgLSdWOZgwiepD_0bd-M7qiVVfdJcewaKpsflduVrPVoiFENsCFHiuCeVgbxYvGT-BQ70jNAV4Kg2ZNyF8B17wXI9Qk4EzU3XSYBihD1L9U2pAQQmOkbQNZM-whLgoHUn0_d6GipWd75YUFYM89qWnuLQo0Pnc8TGkWcyK4lV43F-t3NU7xaHS42t6KXiROAV5EX-3Vs0iedKCzI8199n6GmEIVFcZvBm6nRjuXrnFh8jes_fGeo_"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-8 max-w-7xl mx-auto w-full">
+<!-- Hero Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+<div>
+<h2 class="font-h1 text-h1 text-slate-900">Gestión de Flota</h2>
+<p class="text-slate-500 mt-1">Supervisa y administra el estado de todos los vehículos de transporte escolar.</p>
+</div>
+<button class="bg-secondary text-white px-6 py-3 rounded-xl font-semibold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-secondary/20">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    Añadir Vehículo
+                </button>
+</div>
+<!-- Dashboard Stats Bar (Contextual) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm flex items-center gap-4">
+<div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="directions_bus">directions_bus</span>
+</div>
+<div>
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">Total Flota</p>
+<p class="text-2xl font-bold text-slate-900">42</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm flex items-center gap-4">
+<div class="w-12 h-12 bg-green-50 text-green-600 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="route">route</span>
+</div>
+<div>
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">En Ruta</p>
+<p class="text-2xl font-bold text-slate-900">28</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm flex items-center gap-4">
+<div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="build">build</span>
+</div>
+<div>
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">Mantenimiento</p>
+<p class="text-2xl font-bold text-slate-900">4</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm flex items-center gap-4">
+<div class="w-12 h-12 bg-slate-50 text-slate-600 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</div>
+<div>
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">Disponibles</p>
+<p class="text-2xl font-bold text-slate-900">10</p>
+</div>
+</div>
+</div>
+<!-- Main Data Table Container -->
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+<!-- Table Filters & Search -->
+<div class="p-6 border-b border-slate-100 flex flex-col md:flex-row gap-4 justify-between items-center bg-slate-50/50">
+<div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
+<span class="text-sm font-medium text-slate-500 mr-2 whitespace-nowrap">Filtrar por:</span>
+<button class="px-4 py-1.5 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700 hover:border-secondary transition-colors">Todos</button>
+<button class="px-4 py-1.5 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700 hover:border-secondary transition-colors flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-green-500"></span> En Ruta
+                        </button>
+<button class="px-4 py-1.5 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700 hover:border-secondary transition-colors flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span> Mantenimiento
+                        </button>
+<button class="px-4 py-1.5 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700 hover:border-secondary transition-colors flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-slate-400"></span> Disponible
+                        </button>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-xl text-sm font-medium text-slate-600 bg-white hover:bg-slate-50 transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="file_download">file_download</span>
+                            Exportar
+                        </button>
+</div>
+</div>
+<!-- Table Content -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-white border-b border-slate-100">
+<th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">ID Vehículo</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Placa</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Conductor Asignado</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Ruta Actual</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Estado</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-50">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-5">
+<span class="text-sm font-bold text-slate-900">SR-102</span>
+</td>
+<td class="px-6 py-5">
+<span class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded font-mono text-xs font-bold border border-slate-200">BXC-9042</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<img alt="Conductor" class="w-8 h-8 rounded-full border border-slate-200" data-alt="A portrait of a male bus driver in a professional light-blue uniform, smiling warmly at the camera. He is in front of a modern yellow school bus during the daytime under clear blue skies. The style is sharp and commercial, with vibrant colors emphasizing safety and friendliness in a transport environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZErjx4P_XU3j9dnWLQ0-OS-m98s-J8Sgz3zkQnw1sFDRwrL8jgbe4ArJo2awGZchj8wWZqEpxXhcSwAaLNA7GZfd1M6vPxPvPLdYpPwcoMih1dIGliknKBWwXgLgBfyzByqPgA_7lXudOJaX27O6XDSZ_19rAvGQ2UL7FRmkh0u9vjNZgUL3IJ8HI4SxFfZqte7HzWLQw31-AH22medFPsw29LJxOcONNV0by1cyIKu8E5cnRhs04Yj3aoOcJCYhuaw7guwpAHdB5"/>
+<span class="text-sm font-medium text-slate-700">Carlos Mendoza</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900">Norte - Colegio San José</span>
+<span class="text-xs text-slate-400">12 Paradas Restantes</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-bold border border-green-100">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                                        En Ruta
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-secondary hover:bg-teal-50 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="edit">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error hover:bg-red-50 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-5">
+<span class="text-sm font-bold text-slate-900">SR-105</span>
+</td>
+<td class="px-6 py-5">
+<span class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded font-mono text-xs font-bold border border-slate-200">KLD-2188</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<img alt="Conductor" class="w-8 h-8 rounded-full border border-slate-200" data-alt="A portrait of an experienced male driver with glasses, wearing a dark navy uniform. He is standing next to a vehicle window, with bright natural light creating high contrast. The image represents professionalism and vigilance, set against a clean, modern transportation facility background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQk5QIC_70TzP1XRFFd58ji_72V2afP2v1e8zDbs86PMNAh8xY2ePw5EUyfm5eXAxtqUX5CkzQhuOXAjw2KCfMXFjWA9TMe-i8cgkrAgeUpU-k2TqB7iOM0x8r66OwNBTL8-P5y3t2CdH_dv0J2F0FWbe2-vfKKwMS4bHmU2JhBjaqTm7g5F-enWB1oQezbnj7doNvxtpSn_cTetyaL7PPF9fNFHsQ9hnwr6YTTd-pitkJvwum3uPP8F5uO7835DYqZ4gRCqV7_nP8"/>
+<span class="text-sm font-medium text-slate-700">Roberto Gómez</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="text-sm text-slate-400 italic">No asignada</span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 text-amber-700 rounded-full text-xs font-bold border border-amber-100">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                                        Mantenimiento
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-secondary hover:bg-teal-50 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="edit">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error hover:bg-red-50 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-5">
+<span class="text-sm font-bold text-slate-900">SR-201</span>
+</td>
+<td class="px-6 py-5">
+<span class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded font-mono text-xs font-bold border border-slate-200">JMN-1122</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<img alt="Conductora" class="w-8 h-8 rounded-full border border-slate-200" data-alt="A portrait of a professional female driver in her late 30s, wearing a smart grey polo shirt with a company logo. She is standing outdoors with a soft-focus fleet of transport vans in the background. The scene is bright and airy, conveying trust and reliability through clear, high-quality photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8PcyArbnM5Y7jR-p8O2GgxLy5K4VTP_q_t1bVmW8V0bzWuH-jpS9NhyLQYhp8eqpAwQhbRrNvEf1QU7U7RRZvVaKRdTlsuROIStf1SFoZHiq5jjk4SDmHi7jiQDSyA1G4QfR05us83_4g8W0mh9NkOOepp74CSiUXSQueB_xwgFcAKPAn0fOqag2JL_ixIa7wW0KmHrAcPlYgN7AE-8WU1yb_U1-jR2E6KoTyV_WEGCkV3x2whucbe4ylHQ7wKDZ1OwtZtbVgYER3"/>
+<span class="text-sm font-medium text-slate-700">Elena Ruiz</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="text-sm text-slate-400">Sin ruta activa</span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-50 text-slate-600 rounded-full text-xs font-bold border border-slate-200">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                        Disponible
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-secondary hover:bg-teal-50 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="edit">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error hover:bg-red-50 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-5">
+<span class="text-sm font-bold text-slate-900">SR-098</span>
+</td>
+<td class="px-6 py-5">
+<span class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded font-mono text-xs font-bold border border-slate-200">PPP-7733</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<img alt="Conductor" class="w-8 h-8 rounded-full border border-slate-200" data-alt="A close-up portrait of a smiling male bus driver in a professional uniform. The background shows the interior of a modern, well-lit bus with clean blue seats. The lighting is natural and bright, creating a positive and safe atmosphere. High quality, sharp focus, clean corporate photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUi79rbVHDy2vgLErYNwjsTZJrd4KEXvG84b2m2iubjWCig2sgZDxXk9yybyunKZ7eC6slJmNVqwYsKFjCJMtBa9mvB4njmbCR3oJVwqYiv2Hyunc5e5lH9wbV1Ta3XAq-RWY3KjPfbVpNqyFZTWxjNM5GyjznfHhBU2Zd1LRiz23ABJQGvS_CrcGQnZ5a6_3ptFmkEDLsRVSyfQ7eCzAuTlL-4tz2vg9TM2ihPKfXSovTF6-LRXTg5U5zjKDH0BLy4IeLmtceVMwR"/>
+<span class="text-sm font-medium text-slate-700">Andrés Castillo</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900">Sur - Institución Educativa B</span>
+<span class="text-xs text-slate-400">Finalizada hace 10 min</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-50 text-slate-600 rounded-full text-xs font-bold border border-slate-200">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                        Disponible
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-secondary hover:bg-teal-50 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="edit">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error hover:bg-red-50 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Component -->
+<div class="p-6 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 bg-white">
+<p class="text-sm text-slate-500">Mostrando <span class="font-bold text-slate-900">1</span> a <span class="font-bold text-slate-900">4</span> de <span class="font-bold text-slate-900">42</span> vehículos</p>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-400 hover:bg-slate-50 transition-all disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-secondary text-white font-bold text-sm shadow-md shadow-secondary/20">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all font-bold text-sm">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all font-bold text-sm">3</button>
+<span class="px-2 text-slate-300">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all font-bold text-sm">11</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Contextual Notification Card -->
+<div class="mt-8 bg-teal-50 border border-teal-100 rounded-2xl p-6 flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+</div>
+<div>
+<h3 class="text-sm font-bold text-teal-900 mb-1">Mantenimiento Preventivo Pendiente</h3>
+<p class="text-sm text-teal-700 leading-relaxed">Hay 2 vehículos que han superado los 10,000 km desde su último servicio. Se recomienda programar mantenimiento para las unidades SR-105 y SR-202 esta semana para garantizar la seguridad de las rutas.</p>
+</div>
+</div>
+</div>
+</main>
+</body></html>

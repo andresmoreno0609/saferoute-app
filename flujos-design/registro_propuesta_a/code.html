@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SafeRoute - Create Account</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#131b2e",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "background": "#f7f9fb",
+                        "secondary-fixed": "#89f5e7",
+                        "inverse-primary": "#bec6e0",
+                        "tertiary-fixed": "#d5e3fd",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-tint": "#565e74",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "tertiary-container": "#0d1c2f",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "surface-variant": "#e0e3e5",
+                        "primary-fixed-dim": "#bec6e0",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e6e8ea",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "surface-container": "#eceef0",
+                        "tertiary": "#000000",
+                        "surface-bright": "#f7f9fb",
+                        "on-surface": "#191c1e",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-error-container": "#93000a",
+                        "on-background": "#191c1e",
+                        "primary-container": "#131b2e",
+                        "on-tertiary-container": "#76859b",
+                        "on-surface-variant": "#45464d",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "inverse-on-surface": "#eff1f3",
+                        "secondary-container": "#86f2e4",
+                        "primary": "#000000",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#dae2fd",
+                        "outline": "#76777d",
+                        "on-secondary-container": "#006f66",
+                        "secondary": "#006a61",
+                        "on-primary-container": "#7c839b",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface": "#f7f9fb",
+                        "outline-variant": "#c6c6cd",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#00201d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "container-padding": "20px",
+                        "lg": "40px",
+                        "gutter": "16px",
+                        "xl": "64px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Inter"],
+                        "h2": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h3": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f7f9fb;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-lg text-on-surface">
+<!-- TopAppBar Shell (Suppressed Nav logic: This is a Transactional page, so we only use the header component style) -->
+<header class="bg-white dark:bg-slate-900 shadow-sm border-b border-slate-200 dark:border-slate-800 fixed top-0 left-0 w-full z-50 flex items-center justify-between px-5 h-16">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-teal-600">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold text-slate-900 dark:text-white font-sans antialiased font-semibold">Create Account</h1>
+</div>
+<div class="hidden md:flex items-center space-x-6 text-slate-500 font-medium">
+<span class="text-teal-600">Registration</span>
+<span>Help</span>
+</div>
+</header>
+<main class="pt-24 pb-12 px-container-padding flex flex-col items-center min-h-screen">
+<div class="max-w-xl w-full">
+<!-- Brand Identity Hero -->
+<div class="mb-md text-center">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-secondary-container mb-sm">
+<span class="material-symbols-outlined text-on-secondary-container text-3xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<h2 class="font-h1 text-h1 text-on-primary-fixed mb-xs">Join SafeRoute</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Your silent co-pilot for family safety and vehicle vigilance.</p>
+</div>
+<!-- Registration Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] p-md border border-outline-variant">
+<form class="space-y-md">
+<!-- Account Type Selector -->
+<div>
+<label class="block font-label-caps text-label-caps text-outline mb-sm uppercase">Select Account Type</label>
+<div class="grid grid-cols-2 gap-gutter">
+<label class="relative group cursor-pointer">
+<input checked="" class="peer sr-only" name="account_type" type="radio" value="parent"/>
+<div class="flex flex-col items-center justify-center p-md border border-outline-variant rounded-lg transition-all peer-checked:border-secondary peer-checked:bg-secondary-container/10 group-hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-3xl mb-xs text-outline peer-checked:text-secondary group-[.peer-checked]:text-secondary">family_restroom</span>
+<span class="font-h3 text-body-sm font-semibold">Parent</span>
+</div>
+</label>
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="account_type" type="radio" value="driver"/>
+<div class="flex flex-col items-center justify-center p-md border border-outline-variant rounded-lg transition-all peer-checked:border-secondary peer-checked:bg-secondary-container/10 group-hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-3xl mb-xs text-outline peer-checked:text-secondary group-[.peer-checked]:text-secondary">directions_car</span>
+<span class="font-h3 text-body-sm font-semibold">Driver</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Personal Details -->
+<div class="space-y-sm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+<div class="space-y-xs">
+<label class="block font-body-sm font-medium text-on-surface" for="first_name">First Name</label>
+<input class="w-full h-12 px-sm rounded border border-outline focus:border-secondary focus:ring-1 focus:ring-secondary bg-surface-bright outline-none transition-all placeholder:text-outline-variant" id="first_name" placeholder="John" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="block font-body-sm font-medium text-on-surface" for="last_name">Last Name</label>
+<input class="w-full h-12 px-sm rounded border border-outline focus:border-secondary focus:ring-1 focus:ring-secondary bg-surface-bright outline-none transition-all placeholder:text-outline-variant" id="last_name" placeholder="Doe" type="text"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="block font-body-sm font-medium text-on-surface" for="email">Email Address</label>
+<input class="w-full h-12 px-sm rounded border border-outline focus:border-secondary focus:ring-1 focus:ring-secondary bg-surface-bright outline-none transition-all placeholder:text-outline-variant" id="email" placeholder="john.doe@example.com" type="email"/>
+</div>
+<div class="space-y-xs">
+<label class="block font-body-sm font-medium text-on-surface" for="password">Password</label>
+<div class="relative">
+<input class="w-full h-12 px-sm rounded border border-outline focus:border-secondary focus:ring-1 focus:ring-secondary bg-surface-bright outline-none transition-all" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 top-3 text-outline" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+<p class="text-xs text-outline">Must be at least 8 characters long.</p>
+</div>
+</div>
+<!-- Terms & Conditions -->
+<div class="flex items-start gap-sm pt-xs">
+<input class="mt-1 w-5 h-5 rounded border-outline text-secondary focus:ring-secondary" id="terms" type="checkbox"/>
+<label class="font-body-sm text-on-surface-variant leading-tight" for="terms">
+                            I agree to the <a class="text-secondary font-semibold hover:underline" href="#">Terms of Service</a> and <a class="text-secondary font-semibold hover:underline" href="#">Privacy Policy</a>, and consent to SafeRoute processing my vehicle and location data.
+                        </label>
+</div>
+<!-- Action Button -->
+<button class="w-full h-12 bg-secondary text-on-secondary font-semibold rounded-lg hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-md" type="submit">
+<span>Create Account</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</form>
+</div>
+<!-- Login Link -->
+<p class="mt-md text-center font-body-sm text-on-surface-variant">
+                Already have an account? <a class="text-secondary font-bold hover:underline" href="#">Sign in</a>
+</p>
+</div>
+</main>
+<!-- Side Graphic (Web Only) -->
+<div class="hidden lg:block fixed right-0 top-0 h-full w-1/3 bg-primary-container">
+<div class="relative w-full h-full flex items-center justify-center p-xl">
+<img alt="Safety Visual" class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay" data-alt="A cinematic, high-angle shot of a sleek modern car driving safely along a winding coastal highway during the golden hour. The lighting is warm and diffused, casting a serene glow over the vehicle and the surrounding landscape. The atmosphere is calm and focused, evoking a sense of reliability and composure. The composition is clean and minimalist, utilizing a sophisticated palette of deep navy and vibrant teal accents to match the modern corporate brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6aLLsWQP3__-3lL7teGK6ugVPZUFzHMThasCAD-Xhd4eyy6T4vrVHJHUbpDmfGq_9AoxjHwIKVIXkEkE_nh-eUfdeFRhyZL6xGCCK8iGhaIcAlPtqEsiHCEPkCHk2KGFMCl6UHaszL1fm_v8rJnMTtiEbaajl85Lxfn8ML3Ta6qjw1uASl0hLI-7mkrrmwRCZVHLIBgMcMH0n6JBmSO4nUAzja72YYaLib2qB39ErGsh3Pqzl8gxwbbkbnkZCG0ZdoO5VDJ-eO9GO"/>
+<div class="relative z-10 text-white max-w-sm">
+<div class="mb-md">
+<span class="material-symbols-outlined text-secondary-fixed text-5xl mb-sm" data-weight="fill" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+<h3 class="font-h2 text-h2 mb-sm text-secondary-fixed">Vigilant Protection</h3>
+<p class="font-body-lg text-on-primary-container text-lg">Experience peace of mind with real-time driver behavior monitoring and emergency response coordination designed for the modern family.</p>
+</div>
+<ul class="space-y-sm">
+<li class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary-fixed">check_circle</span>
+<span class="font-body-sm">Real-time status alerts</span>
+</li>
+<li class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary-fixed">check_circle</span>
+<span class="font-body-sm">Comprehensive trip history</span>
+</li>
+<li class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary-fixed">check_circle</span>
+<span class="font-body-sm">Multi-driver management</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</body></html>

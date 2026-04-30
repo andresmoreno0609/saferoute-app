@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f7f9fb",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-secondary-fixed": "#00201d",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "surface-container-high": "#e6e8ea",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#131b2e",
+                    "error-container": "#ffdad6",
+                    "surface-tint": "#565e74",
+                    "primary-fixed-dim": "#bec6e0",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#d5e3fd",
+                    "tertiary": "#000000",
+                    "surface-variant": "#e0e3e5",
+                    "primary": "#000000",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "outline-variant": "#c6c6cd",
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "inverse-primary": "#bec6e0",
+                    "secondary-container": "#86f2e4",
+                    "surface-dim": "#d8dadc",
+                    "on-surface": "#191c1e",
+                    "on-secondary-fixed-variant": "#005049",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#2d3133",
+                    "background": "#f7f9fb",
+                    "surface-container": "#eceef0",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#89f5e7",
+                    "on-tertiary-container": "#76859b",
+                    "secondary": "#006a61",
+                    "tertiary-container": "#0d1c2f",
+                    "error": "#ba1a1a",
+                    "surface": "#f7f9fb",
+                    "primary-container": "#131b2e",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "on-secondary-container": "#006f66",
+                    "on-primary": "#ffffff",
+                    "on-background": "#191c1e",
+                    "surface-container-low": "#f2f4f6",
+                    "primary-fixed": "#dae2fd",
+                    "outline": "#76777d",
+                    "on-surface-variant": "#45464d",
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "on-primary-container": "#7c839b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "lg": "40px",
+                    "container-padding": "20px",
+                    "xs": "4px",
+                    "sm": "12px",
+                    "md": "24px",
+                    "gutter": "16px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "h3": ["Inter"],
+                    "h2": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "h1": ["Inter"]
+            },
+            "fontSize": {
+                    "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                    "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-bright text-on-surface">
+<header class="bg-slate-50 border-b border-slate-200 shadow-sm flex justify-between items-center w-full px-5 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-slate-100 transition-colors duration-200 rounded-full">
+<span class="material-symbols-outlined text-teal-600">menu</span>
+</button>
+<h1 class="font-['Inter'] font-semibold tracking-tight text-lg text-slate-900">SafeRoute Admin</h1>
+</div>
+<div class="flex items-center gap-3">
+<div class="hidden md:block text-right">
+<p class="font-label-caps text-on-surface-variant">Administrador</p>
+<p class="text-[10px] text-teal-600">admin@saferoute.com</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center border-2 border-white shadow-sm overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate male administrator in a brightly lit, modern office setting. He is wearing a clean white shirt and has a composed, friendly expression. The background is softly blurred with hints of teal and grey office decor, maintaining a high-key, professional light-mode aesthetic aligned with a safety-first corporate brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABn37yh-ygqqnbUgDETfAug1tSchtL04NZmIuyN-b8e4lvz808TGH-7Y3DlKqVe8qM-hDjA8lDrzDXoZsBngeH9X6QTFi1MAXEM7kNkhKUSPeITYA6-M4X7oXlgA_B5_M81n_0t9MXZVn6j0hZKmtYdT5s56t_MzCDeh_3InZBjY07qaB00Ww9sQqCcu0Z3eRWKRcVlm3PybGEV_MBzp8JvqHBe1aoBYTwnJuxKqKiOkc_v09_Jysz1kLOu9y0AWSjg-R_SPbUIpfb"/>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-container-padding py-md pb-32">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-lg gap-md">
+<div>
+<h2 class="font-h1 text-h1 text-on-surface">Verificación de Conductores</h2>
+<p class="font-body-lg text-on-surface-variant mt-2">Gestiona las solicitudes pendientes y valida la documentación de seguridad.</p>
+</div>
+<div class="flex gap-sm">
+<div class="bg-secondary-container px-md py-sm rounded-xl flex items-center gap-sm shadow-sm border border-secondary/10">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">pending_actions</span>
+<div>
+<p class="text-label-caps text-on-secondary-container uppercase">Pendientes</p>
+<p class="text-h3 font-h3 text-on-secondary-container">12</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest px-md py-sm rounded-xl flex items-center gap-sm shadow-sm border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant">check_circle</span>
+<div>
+<p class="text-label-caps text-on-surface-variant uppercase">Hoy</p>
+<p class="text-h3 font-h3 text-on-surface">08</p>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-md items-start">
+<section class="lg:col-span-4 flex flex-col gap-sm">
+<div class="flex items-center justify-between mb-base">
+<h3 class="font-h3 text-h3">Solicitudes Pendientes</h3>
+<span class="bg-teal-100 text-teal-800 text-[10px] font-bold px-2 py-0.5 rounded-full">EN COLA</span>
+</div>
+<div class="flex flex-col gap-sm overflow-y-auto max-h-[618px] pr-1">
+<button class="bg-teal-50 border-2 border-teal-500 rounded-xl p-md flex flex-col gap-sm shadow-sm transition-all duration-300 text-left relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-2 opacity-20">
+<span class="material-symbols-outlined text-teal-600 scale-[2]">verified_user</span>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img data-alt="A portrait of a male driver candidate in a high-quality studio setting with warm, neutral lighting. The man has a welcoming smile and is wearing a casual navy blue shirt. The image reflects a reliable and trustworthy individual, consistent with a safety-oriented family service platform. The colors are crisp and clear, emphasizing a modern corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRgYxiHIUPlG7LNiHRNrwz08yIA9VRoHR7sYybH7dtin5Ze6vHVMx2AAc4-dS_AM4CviJGMilXZ_NH5dY-v6YqILjqcvpP8YzdPwvtQSZdg5KdMxQNei-FZ_ywYcdEDX06wRj08qPbNYWGVTLiTu9Ft-kKVeLB2cniv8xGiu7WEkZtj-cFj14tg-LDX8t0TEfOWq676vj6pKsCFtGnau8y4q3GME1txrOq6HmUfW9zVg2qH9Ganxu1vjugwp9TtNjt6rKaW7hIIn-T"/>
+</div>
+<div>
+<p class="font-h3 text-on-surface">Ricardo Mendoza</p>
+<p class="text-label-caps text-teal-700">Registrado: 14 Oct 2023</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-base">
+<span class="flex items-center gap-xs text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-body-sm">description</span>
+                                3 Documentos
+                            </span>
+<span class="text-teal-700 font-bold text-body-sm flex items-center">
+                                Revisar <span class="material-symbols-outlined ml-1">chevron_right</span>
+</span>
+</div>
+</button>
+<button class="bg-white hover:bg-slate-50 border border-outline-variant rounded-xl p-md flex flex-col gap-sm shadow-[0_4px_20px_rgba(0,0,0,0.04)] transition-all duration-200 text-left">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-slate-100">
+<img data-alt="A professional headshot of a female driver candidate with a friendly and capable look. She is positioned against a clean, minimal light grey background. Her professional attire and the soft, natural lighting convey a sense of vigilance and composure, perfectly aligned with the brand's 'silent co-pilot' identity. High resolution with realistic textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAk6EnOk5ZKH6Oo21CDIWvOUCvDUD4yTue6LIdE4MKc674vqjM2hs89ZCQ-tPJ8EhImSMoZKWkQUkgfWOn5rEZjQwezEgyf4HfNP6YoL3m03MDauaWtYjbzjUN-1iTmibqzJEruCx47BXgVczzqTozUMUb4DS1GqV6RsdR4t7ySBn1mx4wXOMN1DfSFwE8bzAkxNJI0u4hv1xYag-uldsb8cCv4xq9pQ6FDHDWJPe7IYD3-RiPJrrfZ593Lm7TEpKtTDfooPrHTya2P"/>
+</div>
+<div>
+<p class="font-h3 text-on-surface">Elena Garc\u00eda</p>
+<p class="text-label-caps text-on-surface-variant">Registrado: 13 Oct 2023</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-base">
+<span class="flex items-center gap-xs text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-body-sm">description</span>
+                                2 Documentos
+                            </span>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+</button>
+<button class="bg-white hover:bg-slate-50 border border-outline-variant rounded-xl p-md flex flex-col gap-sm shadow-[0_4px_20px_rgba(0,0,0,0.04)] transition-all duration-200 text-left opacity-80">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-slate-100">
+<img data-alt="A portrait of a male driver applicant showing a responsible and professional demeanor. He is wearing a clean polo shirt in a bright, modern studio. The lighting is balanced and soft, avoiding harsh shadows to maintain the approachable corporate vibe of the service. The background is a very light grey to emphasize clarity and information density." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMU2050K6Wv0ATP7l_YYsEeZHBEWteLZ3UbwVS0j1Zo9TrvW3fcd9--KRn2bmk8v870aTN--mhIFZxits7IQssG2POmK-SanRM_PBRbk2QoForqlB9UtGJcu5l7dXQYZZDcQi89vvTvEYYU3O-FgL50bhR_IRnYuMxamGMr_3XxgAvaB746X6dLP6RwNgBgg3ak4tPCpnjkWglAs6wSEp1VAeEkND1ujVmxi2hOc2-tVPPmjZCslV-gbTxLk1hloCJ00uo6aGD9QMO"/>
+</div>
+<div>
+<p class="font-h3 text-on-surface">Carlos Ruiz</p>
+<p class="text-label-caps text-on-surface-variant">Registrado: 12 Oct 2023</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-base">
+<span class="flex items-center gap-xs text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-body-sm">description</span>
+                                4 Documentos
+                            </span>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+</button>
+</div>
+</section>
+<section class="lg:col-span-8">
+<div class="bg-white rounded-xl border border-outline-variant shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden">
+<div class="p-md bg-surface-container-low border-b border-outline-variant flex justify-between items-center">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-teal-600 bg-teal-100 p-2 rounded-lg">person_search</span>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">Detalle de Verificación</h3>
+<p class="text-body-sm text-on-surface-variant">Ricardo Mendoza • ID: DRV-9921</p>
+</div>
+</div>
+<div class="flex gap-sm">
+<button class="bg-error text-on-error px-md py-sm rounded-lg font-h3 text-body-sm hover:opacity-90 transition-opacity flex items-center gap-sm">
+<span class="material-symbols-outlined text-body-sm">cancel</span>
+                                Rechazar Todo
+                            </button>
+<button class="bg-secondary text-on-secondary px-md py-sm rounded-lg font-h3 text-body-sm hover:opacity-90 transition-opacity flex items-center gap-sm">
+<span class="material-symbols-outlined text-body-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                Aprobar Todo
+                            </button>
+</div>
+</div>
+<div class="p-md grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="flex flex-col gap-md">
+<div class="bg-surface-bright rounded-xl p-md border border-outline-variant">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-teal-600">badge</span>
+<p class="font-h3 text-body-lg">Licencia de Conducir</p>
+</div>
+<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Pendiente</span>
+</div>
+<div class="relative w-full aspect-[16/10] bg-slate-200 rounded-lg overflow-hidden group cursor-zoom-in">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A crisp, high-detail photograph of a official driving license document resting on a minimalist grey surface. The lighting is bright and even, ensuring all text and identifiers are visible for a security review process. The aesthetic is clean and modern, following the reliable and vigilant brand identity with a focus on data clarity and information density." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3ay85RN80Jgm50iTgiYqaWR-O9w76GR1RY_9SqwAJT8yiuw8fW04lWSfgacNAuSwpUTf3IbpfEmo--uHnKC6-DRSlC0VSjV6eS1eC8AC7Edmup4aVXBowuo0KvZ3hTwKR2vAC55L3imr6tAZICvmbZ6SUUGf0Y3PK69QQJYfd6swlZs-vebtJ-rOnrMHtqanmHN7DS9LE4aQGCRhWoxsRth7P5SMHCCM8erJb841De4X0OdCD05oULS7ZE4hG1uUw1xLENomJsuKI"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+</div>
+</div>
+<div class="flex gap-sm mt-md">
+<button class="flex-1 border border-error text-error py-base rounded-lg font-bold text-body-sm hover:bg-error/5 transition-colors">Rechazar</button>
+<button class="flex-1 bg-secondary text-on-secondary py-base rounded-lg font-bold text-body-sm hover:bg-secondary/90 transition-colors">Aprobar</button>
+</div>
+</div>
+<div class="bg-surface-bright rounded-xl p-md border border-outline-variant">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-teal-600">car_repair</span>
+<p class="font-h3 text-body-lg">Seguro del Vehículo</p>
+</div>
+<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Pendiente</span>
+</div>
+<div class="relative w-full aspect-[16/10] bg-slate-200 rounded-lg overflow-hidden group cursor-zoom-in">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A high-quality image of a car insurance policy document. The layout is professional with a clear header and organized text blocks. Soft shadows and a neutral color palette of greys and whites maintain the modern corporate aesthetic. The focus is sharp, emphasizing the reliability and attention to detail required for driver verification." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByQx7DTGHkEvkEm5TWxldGOdi699wQYFtwTrcjX1q6MMpw50aDkyunKoaGXt9j18mlnIGJSezJalOVxj31MwpTkPfsGm8moAkTLhLYz9Kj98tVjkKnZbBSyAwsX7X6Kx7Oe49S1tKieFFw3Nfb5dmGm149Owxxv4Ach8yonQjQ2SpgFVUf5aP9Gks-jGg8-6Yw7IlcoUjfjLrCiCt6cgEvVzCzcy8wlcskseB29EC2CWkTumstxq3u36C3sBGxeSgWl-yKX-67ULGd"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+</div>
+</div>
+<div class="flex gap-sm mt-md">
+<button class="flex-1 border border-error text-error py-base rounded-lg font-bold text-body-sm hover:bg-error/5 transition-colors">Rechazar</button>
+<button class="flex-1 bg-secondary text-on-secondary py-base rounded-lg font-bold text-body-sm hover:bg-secondary/90 transition-colors">Aprobar</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-md">
+<div class="bg-surface-bright rounded-xl p-md border border-outline-variant">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-teal-600">policy</span>
+<p class="font-h3 text-body-lg">Antecedentes Penales</p>
+</div>
+<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Pendiente</span>
+</div>
+<div class="relative w-full aspect-[16/10] bg-slate-200 rounded-lg overflow-hidden group cursor-zoom-in">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A clean and professional digital view of a background check document. The style is strictly corporate, using deep navy accents and a pristine white background. The image conveys security and composure, with ample white space around the document to focus the viewer's attention on the verification status and details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqMcjLGRCcz-oqKW2eUrrblMXQi8E9PKaL29t07favv6_w7BVVCoYjGeRG2_yY_DEber8v2T1xbxEJl7cYDdDvX-zh4QAqVWZnFyhC4Yd3qhjtoJoK4dO7KeVgHwGGC21SxK5jwxq4HXTH0OBI-3D1jxqbgwV-MzvMm4sW9c0xb3iZl3JEabbUpoXUFjPli3bGjsEBdkwFn6O4BcchXvkEmG27CEGeKB9drWulmwj0yMShY5atSmdUOKNVGnS9ygyamv1-A8od1dKS"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+</div>
+</div>
+<div class="flex gap-sm mt-md">
+<button class="flex-1 border border-error text-error py-base rounded-lg font-bold text-body-sm hover:bg-error/5 transition-colors">Rechazar</button>
+<button class="flex-1 bg-secondary text-on-secondary py-base rounded-lg font-bold text-body-sm hover:bg-secondary/90 transition-colors">Aprobar</button>
+</div>
+</div>
+<div class="bg-surface-container-high rounded-xl p-md border border-dashed border-outline flex flex-col items-center justify-center text-center gap-sm min-h-[200px]">
+<span class="material-symbols-outlined text-outline text-4xl">add_circle</span>
+<p class="text-body-sm text-on-surface-variant font-medium">No se requieren más documentos para este perfil.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe pt-2 bg-white border-t border-slate-200 shadow-[0_-4px_20px_rgba(0,0,0,0.04)] md:hidden">
+<div class="flex flex-col items-center justify-center text-slate-500 px-3 py-1.5 transition-transform active:scale-95">
+<span class="material-symbols-outlined">group</span>
+<span class="font-['Inter'] text-[11px] font-medium">Usuarios</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 px-3 py-1.5 transition-transform active:scale-95">
+<span class="material-symbols-outlined">route</span>
+<span class="font-['Inter'] text-[11px] font-medium">Rutas</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 px-3 py-1.5 transition-transform active:scale-95">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="font-['Inter'] text-[11px] font-medium">Vehículos</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-teal-50 text-teal-700 rounded-xl px-3 py-1.5 transition-transform active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-['Inter'] text-[11px] font-medium">Verificar</span>
+</div>
+</nav>
+<div class="hidden md:flex fixed inset-y-0 left-0 z-[60] flex flex-col p-6 w-80 bg-white shadow-2xl rounded-r-2xl transform -translate-x-full lg:translate-x-0 transition-all duration-300 ease-in-out border-r border-slate-100">
+<div class="flex items-center gap-3 mb-xl">
+<span class="material-symbols-outlined text-teal-600 text-3xl font-black">shield_with_heart</span>
+<span class="text-teal-600 font-black text-xl">SafeRoute</span>
+</div>
+<div class="flex flex-col gap-base flex-1">
+<div class="px-3 py-2 flex items-center gap-md text-slate-600 hover:bg-slate-50 transition-colors rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Inter'] text-sm">Panel General</span>
+</div>
+<div class="px-3 py-2 flex items-center gap-md bg-teal-50 text-teal-700 font-bold rounded-xl cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-['Inter'] text-sm">Verificar Conductores</span>
+</div>
+<div class="px-3 py-2 flex items-center gap-md text-slate-600 hover:bg-slate-50 transition-colors rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-['Inter'] text-sm">Reportes</span>
+</div>
+<div class="px-3 py-2 flex items-center gap-md text-slate-600 hover:bg-slate-50 transition-colors rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Inter'] text-sm">Configuración</span>
+</div>
+</div>
+<div class="mt-auto pt-lg border-t border-slate-100">
+<div class="flex items-center gap-md p-md hover:bg-slate-50 rounded-xl transition-colors cursor-pointer text-slate-600">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-['Inter'] text-sm">Cerrar Sesión</span>
+</div>
+</div>
+</div>
+</body></html>

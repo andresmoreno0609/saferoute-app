@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SafeRoute - Iniciar Sesión</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#86f2e4",
+                        "inverse-surface": "#2d3133",
+                        "inverse-primary": "#bec6e0",
+                        "on-secondary-fixed-variant": "#005049",
+                        "surface-container-high": "#e6e8ea",
+                        "outline-variant": "#c6c6cd",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "surface": "#f7f9fb",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "on-secondary-container": "#006f66",
+                        "on-tertiary-container": "#76859b",
+                        "surface-bright": "#f7f9fb",
+                        "tertiary-fixed": "#d5e3fd",
+                        "primary": "#000000",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-secondary-fixed": "#00201d",
+                        "surface-tint": "#565e74",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "background": "#f7f9fb",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#89f5e7",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#dae2fd",
+                        "surface-dim": "#d8dadc",
+                        "on-background": "#191c1e",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#131b2e",
+                        "surface-container": "#eceef0",
+                        "on-surface-variant": "#45464d",
+                        "surface-container-highest": "#e0e3e5",
+                        "inverse-on-surface": "#eff1f3",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "outline": "#76777d",
+                        "primary-container": "#131b2e",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#000000",
+                        "tertiary-container": "#0d1c2f",
+                        "on-surface": "#191c1e",
+                        "brand-teal": "#006a61"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "container-padding": "20px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "gutter": "16px",
+                        "lg": "40px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h3": ["Inter"],
+                        "h2": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                        "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f7f9fb;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased text-on-surface">
+<main class="min-h-screen flex flex-col items-center justify-center px-container-padding py-xl">
+<!-- Login Card Container -->
+<div class="w-full max-w-[440px] bg-surface-container-lowest rounded-xl p-md md:p-lg shadow-[0px_4px_20px_rgba(0,0,0,0.04)]">
+<!-- Logo Section -->
+<div class="flex flex-col items-center mb-xl">
+<div class="w-12 h-12 bg-secondary-container rounded-xl flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="shield">shield</span>
+</div>
+<h1 class="font-h2 text-h2 text-on-background tracking-tight">SafeRoute</h1>
+</div>
+<!-- Header Text -->
+<div class="space-y-xs mb-lg">
+<h2 class="font-h2 text-h2 text-on-surface">Bienvenido de nuevo</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Ingresa a tu cuenta de SafeRoute</p>
+</div>
+<!-- Login Form -->
+<form class="space-y-gutter" onsubmit="event.preventDefault()">
+<!-- Email Field -->
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant ml-1" for="email">Email</label>
+<input class="w-full h-12 px-4 rounded-lg border border-outline bg-transparent focus:ring-2 focus:ring-brand-teal focus:border-brand-teal transition-all outline-none font-body-lg text-body-lg" id="email" placeholder="correo@ejemplo.com" type="email"/>
+</div>
+<!-- Password Field -->
+<div class="space-y-xs">
+<div class="flex justify-between items-center px-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="password">Contraseña</label>
+<a class="font-body-sm text-body-sm text-brand-teal hover:underline" href="#">Olvidaste tu contraseña?</a>
+</div>
+<input class="w-full h-12 px-4 rounded-lg border border-outline bg-transparent focus:ring-2 focus:ring-brand-teal focus:border-brand-teal transition-all outline-none font-body-lg text-body-lg" id="password" placeholder="Ingresa tu contraseña" type="password"/>
+</div>
+<!-- Primary Action -->
+<button class="w-full h-[48px] bg-brand-teal text-on-primary font-h3 text-h3 rounded-lg shadow-sm hover:opacity-90 active:scale-[0.98] transition-all mt-4" type="submit">
+                    Iniciar Sesión
+                </button>
+</form>
+<!-- Divider -->
+<div class="relative my-xl flex items-center">
+<div class="flex-grow border-t border-outline-variant"></div>
+<span class="flex-shrink mx-4 font-label-caps text-label-caps text-outline">O ACCEDE CON</span>
+<div class="flex-grow border-t border-outline-variant"></div>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-gutter">
+<button class="flex items-center justify-center h-12 border border-outline rounded-lg hover:bg-surface-variant transition-colors group">
+<img alt="Google" class="w-5 h-5 mr-2" data-alt="A clean, minimalist close-up of a high-resolution Google logo on a white circular background. The lighting is soft and professional, emphasizing a modern corporate aesthetic. The overall mood is reliable and technologically advanced, fitting a high-end safe-driving application ecosystem. Colors are vibrant and primary against a pristine white surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU2sMEaRvzFFaN4e9H9P-4dxB1VrkbVhFNMj1XkpNtVTuJ3jN8k-Ri-GNYCMmY6YBIrsIShdbixCg8NucxH8rctESVzeZF4uKUq24IMVCxh3vpY6xOQn92T0oq1njKFuMUxwxiG1CsIRViLh-NmVUvrEb8YtvrCiU6pv2YygeUZIXVMThqto5jRUTnnQWcy6quDcbzzyDEJ9JpJt20ebEBLRiBuPkyebSA1_fZu28k5C-AobFBSDIrloCSfBZiomh745cNkQA9D5Fc"/>
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">Google</span>
+</button>
+<button class="flex items-center justify-center h-12 border border-outline rounded-lg hover:bg-surface-variant transition-colors group">
+<span class="material-symbols-outlined text-on-surface mr-2" data-icon="apple" style="font-variation-settings: 'FILL' 1;">ios</span>
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">Apple</span>
+</button>
+</div>
+<!-- Footer Link -->
+<div class="mt-xl text-center">
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                    ¿No tienes cuenta? 
+                    <a class="text-brand-teal font-semibold hover:underline" href="#">Regístrate</a>
+</p>
+</div>
+</div>
+<!-- Decorative Background Element -->
+<div class="fixed -bottom-32 -right-32 w-96 h-96 bg-secondary-container/20 blur-[100px] rounded-full -z-10"></div>
+<div class="fixed -top-32 -left-32 w-96 h-96 bg-tertiary-fixed/20 blur-[100px] rounded-full -z-10"></div>
+</main>
+<!-- Side Content / Hero Image for Web Layout (Asymmetric approach) -->
+<div class="hidden lg:flex fixed inset-y-0 right-0 w-[40%] bg-on-primary-fixed overflow-hidden">
+<div class="relative w-full h-full flex flex-col justify-center p-xl text-white">
+<div class="absolute inset-0 opacity-40">
+<div class="absolute inset-0 bg-gradient-to-br from-brand-teal/40 to-transparent"></div>
+<img class="w-full h-full object-cover" data-alt="A highly detailed and modern digital visualization of a glowing navigation route winding through a dark, abstract cityscape. The scene is illuminated by neon teal and soft white light particles that suggest data flow and connectivity. The style is sleek and professional, conveying a sense of safety and advanced technological vigilance. The atmosphere is calm, composed, and futuristic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSWGtrk7-xrYUUpFf1dX8dQ1aT6xNYQkBi-nn73YQUwDxIvCvpi0AP7oKDhTTbb6q12cKZl6jUkMQFE1NAlmmNkOgacmj57-BcMO8sKSLyMfwe1qhD7N7gb9vuQaY7CJad8lMUryxA7xIbNLRHxLaHBU3H7EraGVXLn_f_AtndmsAefYyEmurDqEn41jtwKVwGb_Jv3Tn1mvhVx7RDAcYxcyUYWqJLHF_c1PiG6ueqnHhk6tN_hr9iFY0w2tSAin_cGomj1Re-19c4"/>
+</div>
+<div class="relative z-10 space-y-md">
+<span class="font-label-caps text-label-caps px-3 py-1 bg-brand-teal/20 border border-brand-teal/30 rounded-full text-secondary-fixed">Vigilancia Inteligente</span>
+<h3 class="font-h1 text-[40px] leading-tight">Tu seguridad es nuestra prioridad en el camino.</h3>
+<p class="font-body-lg text-body-lg text-slate-300 max-w-md">SafeRoute utiliza inteligencia predictiva para asegurar que cada trayecto, ya sea familiar o profesional, sea monitoreado con la máxima precisión.</p>
+</div>
+</div>
+</div>
+</body></html>

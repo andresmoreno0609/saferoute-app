@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#eceef0",
+                    "on-surface-variant": "#45464d",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "outline": "#76777d",
+                    "surface-container-highest": "#e0e3e5",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-primary-fixed": "#131b2e",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#dae2fd",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d8dadc",
+                    "on-background": "#191c1e",
+                    "tertiary": "#000000",
+                    "tertiary-container": "#0d1c2f",
+                    "on-surface": "#191c1e",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#131b2e",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f2f4f6",
+                    "secondary": "#006a61",
+                    "on-tertiary-container": "#76859b",
+                    "surface-variant": "#e0e3e5",
+                    "surface": "#f7f9fb",
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "on-secondary-container": "#006f66",
+                    "surface-container-high": "#e6e8ea",
+                    "outline-variant": "#c6c6cd",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#7c839b",
+                    "inverse-primary": "#bec6e0",
+                    "secondary-container": "#86f2e4",
+                    "inverse-surface": "#2d3133",
+                    "on-secondary-fixed-variant": "#005049",
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#89f5e7",
+                    "background": "#f7f9fb",
+                    "surface-tint": "#565e74",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "tertiary-fixed": "#d5e3fd",
+                    "primary": "#000000",
+                    "surface-bright": "#f7f9fb",
+                    "primary-fixed-dim": "#bec6e0",
+                    "on-secondary-fixed": "#00201d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "container-padding": "20px",
+                    "xl": "64px",
+                    "md": "24px",
+                    "lg": "40px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "h1": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "h3": ["Inter"],
+                    "h2": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                    "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-pulse {
+            position: relative;
+        }
+        .active-pulse::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            top: 0;
+            right: -2px;
+            box-shadow: 0 0 0 2px white;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-lg text-on-surface antialiased">
+<!-- TopAppBar -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm fixed top-0 left-0 w-full z-50 flex justify-between items-center px-5 h-16">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden">
+<img alt="Perfil del conductor" class="w-full h-full object-cover" data-alt="A professional headshot of a friendly bus driver wearing a neat blue uniform. The background is a softly blurred modern school bus interior with warm, natural sunlight filtering through the windows. The lighting is bright and clean, reflecting a high-quality, modern corporate UI aesthetic with a focus on safety and reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYONx1yBw8y-dLltR4-XZOegEPKxn5rw7IOUmZEy0lkZxxBT42aSBZ0y01vU-_XXTMQvEAN69fQT7ROXzXOehtIPAC8I8K5-vbdnVppK8k8o4__HNBqVEBOKImFl_2tnQ6VwW5EUr9lscA781Rgc1ZoHghEBNP14Rka9THtxY-ib0xtCLGGl3AxXaLhTqhB0hiWkz-FWP9qYoNVl2lbcoXlGfmvD5sFjeKnELGOFc0DpswlcG0T-Y1boPlhPTGrYQnOFbf5Gf4nCb6"/>
+</div>
+<h1 class="text-xl font-black text-teal-600 dark:text-teal-400 font-inter tracking-tight">Ruta Escolar</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors active:opacity-80">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400">notifications</span>
+</button>
+</header>
+<!-- Main Map Canvas -->
+<main class="relative h-screen w-full pt-16 pb-20 overflow-hidden">
+<!-- Interactive Map Mockup -->
+<div class="absolute inset-0 bg-surface-container-highest z-0">
+<img class="w-full h-full object-cover opacity-60" data-alt="A high-angle, minimalist satellite view of an urban street layout with clean, simplified geometric lines representing roads and blocks. A vibrant teal line traces a specific route through the city. The map features a soft, high-key lighting style with a palette of pale grays and whites, punctuated by a single primary teal marker representing a vehicle's current location. The atmosphere is professional, technical, and serene." data-location="Madrid, Spain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDNV17gDDXwJ6cLKEj6KYb3f3XRsOiOSHQfWCXxyuRMPzc7HYzp_IZ_f8yCeUMsj_dxS8smZE3pasn3Y0h85mb7mrfcylHFC9eBHuLCnkiELmq3O050m1-CUYjT8zQ334kIo0dZfk9cGs9uxSGHqu9KC3fiEIE1FUG_4pOBp4rU20RxDN-vcI2O1xQeMoj86vo1Qovf50Um1BsN8UduN7bywXOriIYZQzcQlw9d0iN9VRxGbrJaBRFGf9Uwt2_OCrrOn8k-fI79J31"/>
+<!-- Map Overlay UI Elements -->
+<div class="absolute top-24 left-5 right-5 flex justify-between items-start pointer-events-none">
+<!-- Status Badge -->
+<div class="pointer-events-auto bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg flex items-center gap-2 border border-teal-100">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-teal-500"></span>
+</span>
+<span class="font-label-caps text-teal-700">TRACKING ACTIVO</span>
+</div>
+<!-- Map Controls -->
+<div class="pointer-events-auto flex flex-col gap-2">
+<button class="w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+<button class="w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">layers</span>
+</button>
+</div>
+</div>
+<!-- Vehicle Marker Simulation -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+<div class="w-12 h-12 bg-teal-600 rounded-full border-4 border-white shadow-xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">directions_bus</span>
+</div>
+<div class="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-teal-900 text-white text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap uppercase tracking-wider">
+                    Placas: XYZ-789
+                </div>
+</div>
+</div>
+<!-- Float Info Cards -->
+<div class="absolute bottom-24 left-0 w-full px-5 z-10">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+<!-- Trip Summary Card -->
+<div class="bg-white p-6 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-slate-100 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-on-surface-variant mb-1">PRÓXIMA PARADA</p>
+<h2 class="font-h2 text-teal-600">Parada 5/12</h2>
+<p class="font-body-sm text-slate-500 mt-1">Av. Central con Calle 45</p>
+</div>
+<div class="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center text-teal-600">
+<span class="material-symbols-outlined text-[32px]">location_on</span>
+</div>
+</div>
+<div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-teal-500 rounded-full w-[41%]"></div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400">schedule</span>
+<span class="font-h3 text-on-surface">12 min</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400">distance</span>
+<span class="font-h3 text-on-surface">3.4 km</span>
+</div>
+</div>
+</div>
+<!-- Students & Status Quick View (Asymmetric Layout) -->
+<div class="hidden md:flex bg-white p-6 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-slate-100 flex-col gap-4">
+<p class="text-label-caps text-on-surface-variant">ESTADO DE RUTA</p>
+<div class="flex items-center gap-4 flex-1">
+<div class="flex-1 bg-surface-container-low rounded-xl p-4 flex flex-col justify-center border border-slate-50">
+<span class="text-2xl font-bold text-teal-600">18/24</span>
+<span class="text-xs text-slate-500">Estudiantes a bordo</span>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-xl p-4 flex flex-col justify-center border border-slate-50">
+<span class="text-2xl font-bold text-teal-600">65 km/h</span>
+<span class="text-xs text-slate-500">Velocidad actual</span>
+</div>
+</div>
+<button class="w-full bg-teal-600 text-white font-semibold py-3 rounded-xl active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">call</span>
+                        Contactar Centro
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-[0_-4px_20px_rgba(0,0,0,0.04)] flex justify-around items-center px-4 h-20 pb-safe">
+<a class="flex flex-col items-center justify-center text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/20 rounded-lg py-1 px-3 active:scale-95 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">directions_bus</span>
+<span class="font-inter text-[11px] font-bold">Ruta</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 py-1 px-3 hover:text-teal-500 dark:hover:text-teal-300 active:scale-95 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-inter text-[11px] font-medium">Estudiantes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 py-1 px-3 hover:text-teal-500 dark:hover:text-teal-300 active:scale-95 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-inter text-[11px] font-medium">Registro</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 py-1 px-3 hover:text-teal-500 dark:hover:text-teal-300 active:scale-95 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-inter text-[11px] font-medium">Ajustes</span>
+</a>
+</nav>
+</body></html>

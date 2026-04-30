@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "surface-dim": "#d8dadc",
+                        "surface-variant": "#e0e3e5",
+                        "surface-tint": "#565e74",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container": "#eceef0",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-secondary-fixed": "#00201d",
+                        "tertiary-fixed": "#d5e3fd",
+                        "on-primary-fixed": "#131b2e",
+                        "tertiary-container": "#0d1c2f",
+                        "outline": "#76777d",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#bec6e0",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "primary": "#000000",
+                        "on-surface": "#191c1e",
+                        "tertiary": "#000000",
+                        "on-secondary-container": "#006f66",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#89f5e7",
+                        "secondary-container": "#86f2e4",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#dae2fd",
+                        "on-surface-variant": "#45464d",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "on-primary-container": "#7c839b",
+                        "on-secondary-fixed-variant": "#005049",
+                        "surface": "#f7f9fb",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c6c6cd",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "on-tertiary-container": "#76859b",
+                        "surface-container-low": "#f2f4f6",
+                        "background": "#f7f9fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-container-high": "#e6e8ea",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "primary-container": "#131b2e",
+                        "secondary": "#006a61",
+                        "on-background": "#191c1e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "gutter": "16px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "container-padding": "20px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h3": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "h2": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                        "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #f7f9fb;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-lg text-on-background min-h-screen flex items-center justify-center p-container-padding">
+<main class="w-full max-w-md bg-white rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] p-md md:p-lg">
+<!-- Header / Logo -->
+<div class="flex flex-col items-center mb-lg">
+<div class="w-16 h-16 bg-secondary-container flex items-center justify-center rounded-xl mb-md shadow-sm">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="shield">shield</span>
+</div>
+<h1 class="font-h1 text-h1 text-primary text-center mb-xs">Bienvenido de nuevo</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-center">Ingresa a tu cuenta de SafeRoute</p>
+</div>
+<!-- Form -->
+<form class="space-y-md">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase" for="email">Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-xl">mail</span>
+<input class="w-full h-12 pl-12 pr-4 bg-surface-container-low border border-outline-variant rounded-lg focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all font-body-sm" id="email" placeholder="correo@ejemplo.com" type="email"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase" for="password">Contraseña</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-xl">lock</span>
+<input class="w-full h-12 pl-12 pr-4 bg-surface-container-low border border-outline-variant rounded-lg focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all font-body-sm" id="password" placeholder="Ingresa tu contraseña" type="password"/>
+</div>
+</div>
+<div class="flex justify-end">
+<a class="font-body-sm text-body-sm text-secondary font-medium hover:underline transition-all" href="#">¿Olvidaste tu contraseña?</a>
+</div>
+<button class="w-full h-12 bg-secondary text-white font-h3 text-h3 rounded-lg hover:brightness-110 active:scale-[0.98] transition-all shadow-md" type="submit">
+                Iniciar Sesión
+            </button>
+</form>
+<!-- Divider -->
+<div class="relative my-lg flex items-center">
+<div class="flex-grow border-t border-outline-variant"></div>
+<span class="flex-shrink mx-4 font-label-caps text-label-caps text-outline">O ACCEDE CON</span>
+<div class="flex-grow border-t border-outline-variant"></div>
+</div>
+<!-- Social Login -->
+<div class="grid grid-cols-2 gap-gutter">
+<button class="flex items-center justify-center gap-base h-12 border border-outline-variant rounded-lg font-body-sm text-on-surface hover:bg-surface-container transition-all active:scale-[0.98]">
+<img alt="Google Logo" class="w-5 h-5" data-alt="The official Google 'G' icon rendered in its classic four colors: blue, red, yellow, and green. The logo is isolated against a clean, white minimalist background, maintaining a high-end corporate digital aesthetic with crisp edges and professional lighting typical of modern software interfaces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7WocvLFtW67RmVUg2aCKH7Fzvp5oVY4LlHtXdgik9sf8XvKglU57yJwAkr1iprLyb7j13bWFvBc-WUhu8puc3lfTF-leToouMO4g3tIqMl1GukxSViD9rd3-zL9HW2fc9TjpRiOCr6K8peq88Eb-LOi71Oo89k2tRdSvN6fKcgi-oBXG_sCZ7mDyYyZTbvSuTklGG9DEZwi9V0xXsZef-1LIqw_2WBqPFJFuO1Mcud9yEODHWTo4GAUE7G__XRgwBvbbS_ElNFH2g"/>
+<span>Google</span>
+</button>
+<button class="flex items-center justify-center gap-base h-12 border border-outline-variant rounded-lg font-body-sm text-on-surface hover:bg-surface-container transition-all active:scale-[0.98]">
+<img alt="Apple Logo" class="w-5 h-5" data-alt="A sleek, minimalist Apple brand logo rendered in a deep matte black finish. The iconic bitten apple silhouette is presented centrally on a light grey, high-key studio background that emphasizes the modern corporate identity. The lighting is soft and directional, creating a premium, sophisticated tech aesthetic consistent with luxury hardware design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIJKbb309601fKtE6wJTEx27i-AQmmlLKWiS76jwSMUwy61q1Bv0h2rYc1rXXWk0U8r90Y0-85neoQ2Yc-td7P9zBk1JOwdqITra01YuZYxbmnVaKIstLR-GfAIBZfLQ1Do74vMIQD5ed3AmmaJl9sqrmMcFqk44XygsDNavnBM2aXZBoknqN01A6OvTwFxQlaFFD642MwTrDJfDKTvqi69SdJuD7HMmvWL8bJ_dDMdnPiqxGF8Yn8BDWNhpaIq5EknqtM1qWkHmef"/>
+<span>Apple</span>
+</button>
+</div>
+<!-- Footer -->
+<div class="mt-lg text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                ¿No tienes cuenta? 
+                <a class="text-secondary font-semibold hover:underline ml-1 transition-all" href="#">Regístrate</a>
+</p>
+</div>
+</main>
+<!-- Background Illustration for Desktop -->
+<div class="hidden lg:block fixed right-0 top-0 bottom-0 w-1/2 z-[-1] overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-secondary/5 to-secondary/10"></div>
+<img alt="SafeRoute abstract concept" class="w-full h-full object-cover opacity-60" data-alt="A cinematic, high-resolution digital rendering of a stylized city map at dusk, showing glowing teal and emerald route lines pulsing across a grid of slate-colored streets. The atmosphere is calm and secure, featuring soft bokeh lights from distant skyscrapers and a clean, wide-angle perspective. The visual style is modern, corporate, and focuses on safety and technological precision, utilizing a palette of cool blues and vibrant teals." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXRKsON6GVTgfEUB0eWydx8fB078EKjMmmy341RbeSuj6Gx6K0iW6kz2XhYxMkvw_7FpoWzz5cq0fc4dCTC7ZlgUDsuy5cWkH53b0bDK4B4Y0r_6FDGGo9UlLrl9aACPmDGOJSQXm5FcBv7RzKJu0MFq9Hu4ShsjumrNFwwzD3nXKcUrM5Uv9Z-1j6pPsO6YmJcw4GOKnHRXB9NDy2FHgqbOYV9QslzFs83pNhYZxGk3bgirRxB4Xs1LNOmGk_hsyN439NhA3VeC1A"/>
+</div>
+</body></html>
