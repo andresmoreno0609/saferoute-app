@@ -26,24 +26,17 @@
 4. Usuario ingresa email
 5. Usuario ingresa contrasena
 6. Usuario confirma contrasena
-7. Usuario acepta terminos y condiciones
+7. (Opcional) Usuario ingresa telefono
 8. Usuario toca "Crear Cuenta"
 9. Sistema muestra estado de carga
 10. Sistema valida datos en frontend
 11. Sistema envia al backend
-12. Sistema crea usuario
+12. Backend crea usuario con rol GUARDIAN por defecto
 13. Redirecciona a Login
-14. Mostrar mensaje "Cuenta creada. inicia sesion"
+14. Mostrar mensaje "Cuenta creada. Inicia sesion"
 ```
 
-## 4. Componentes UI
-
-### 4.1 Header
-- Logo (opcional)
-- Titulo: "Crear Cuenta"
-- Subtitulo: "Unete a SafeRoute" o similar
-
-### 4.2 Formulario
+## 4.2 Formulario - Actualizado segun API Backend
 - Campo: Nombre Completo
   - Tipo: `text`
   - Placeholder: "Juan Perez"
@@ -72,13 +65,11 @@
   - SecureTextEntry: true
   - Required: true
 
-### 4.3 Checkbox
-- Terminos y Condiciones
-  - Checkbox personalizado
-  - Texto: "Acepto los terminos y condiciones"
-  - Link: "Ver terminos" (Pressable)
-
-### 4.4 Botones
+- Campo: Telefono (OPCIONAL)
+  - Tipo: `tel`
+  - Placeholder: "+57 300 123 4567"
+  - Autocomplete: `tel`
+  - Required: false
 - Principal: "Crear Cuenta"
   - Disabled si: campos vacios o terminos no aceptados
   - Loading: "Creando cuenta..."
@@ -132,7 +123,6 @@
 | Campo | Regla | Feedback |
 |------|-------|----------|
 | nombre | Required | Boton disabled |
-| nombre | Minimo 2 palabras | Help text opcional |
 | email | Required | Boton disabled |
 | email | Formato valido | Placeholder con ejemplo |
 | email | Unico en sistema | Error del backend |
@@ -140,7 +130,7 @@
 | contrasena | Minimo 6 chars | Helper text |
 | confirmContrasena | Required | Boton disabled |
 | confirmContrasena | Igual a contrasena | Error "no coinciden" |
-| terminos | Aceptado | Boton disabled si false |
+| telefono | Opcional | - |
 
 ## 7. Accesibilidad
 
@@ -184,9 +174,12 @@ interface RegisterState {
 {
   "name": "Juan Perez",
   "email": "juan@example.com",
-  "password": "password123"
+  "password": "password123",
+  "phone": "+573001234567"
 }
 ```
+
+*Nota: phone es opcional
 
 ### Response Exito (201)
 ```json
@@ -216,9 +209,8 @@ interface RegisterState {
 
 - Validacion en tiempo real para contrasena
 - Placeholder con ejemplo muestra patron
-- Checkbox visible y facil de tocar
+- telefono es opcional
 - Colores de error claros
 - Focus en primer campo al abrir
-- Teclado numerico para telefono (si aplica)
 - Loading durante peticion
 - Success feedback claro

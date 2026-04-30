@@ -173,8 +173,10 @@ interface LoginState {
     "name": "Juan Perez",
     "roles": ["DRIVER"]
   },
-  "accessToken": "jwt-token",
-  "refreshToken": "refresh-token"
+  "accessToken": "eyJhbGc...",
+  "refreshToken": "eyJhbGc...",
+  "tokenType": "Bearer",
+  "expiresIn": 3600
 }
 ```
 
