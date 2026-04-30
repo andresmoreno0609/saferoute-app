@@ -4,80 +4,104 @@
 | Campo | Valor |
 |-------|-------|
 | ID | 08 |
-| Nombre | ADMIN: Verificar Conductor |
+| nombre | ADMIN: Verificar Conductor |
 | Actor | ADMIN |
 | Objetivo | Verificar conductor |
 | Prioridad | Alta |
 
-## 2. API - Segun Postman
+## 2. Flujo Principal
+1. ADMIN toca "Conductores pendientes" en menu
+2. Ver lista de conductors sin verificar (PENDING_VERIFY)
+3. Tocar conductor
+4. Ver documentos subidos
+5. Descargar y revisar documentos
+6. Aprobar o Rechazar
+7. Notificar al conductor
 
-### Driver Endpoints
+## 3. Estados conductor en sistema
+| Estado | Descripcion | origen |
+|--------|-------------|--------|
+| PENDING_COMPLETE | Registro nuevo | usuario creo driver profile |
+| PENDING_VERIFY | Docs subidos | usuario submitio documentos |
+| ACTIVE | Aprobado por admin | admin aprobo |
+| REJECTED | Rechazado | admin rechazo |
+
+## 4. Estados de Documentos
+| Estado | Color | Descripcion |
+|--------|-------|-------------|
+| PENDING | Amarillo | Esperando revision |
+| VERIFIED | Verde | Aprobado por admin |
+| REJECTED | Rojo | Rechazado |
+
+## 5. API - Endpoints
+
+### Driver Management
 | Operacion | Metodo | Endpoint |
 |-----------|-------|----------|
-| List drivers | GET | /api/v1/drivers |
-| Get driver | GET | /api/v1/drivers/{id} |
-| Create driver | POST | /api/v1/drivers |
-| Update driver | PUT | /api/v1/drivers/{id} |
-| Delete driver | DELETE | /api/v1/drivers/{id} |
-| Availability | GET | /api/v1/drivers/{id}/availability |
-| From user | POST | /api/v1/drivers/from-user/{userId} |
+| List pending | GET | `/api/v1/drivers?is_verified=false` |
+| Get driver | GET | `/api/v1/drivers/{id}` |
 
-### Driver Documents
+### Documents
 | Operacion | Metodo | Endpoint |
 |-----------|-------|----------|
-| List documents | GET | /api/v1/drivers/{id}/documents |
-| Add document | POST | /api/v1/drivers/{id}/documents |
-| Verify document | POST | /api/v1/drivers/{id}/documents/{docId}/verify |
-| Reject document | POST | /api/v1/drivers/{id}/documents/{docId}/reject |
+| List documents | GET | `/api/v1/drivers/{id}/documents` |
+| Verify document | POST | `/api/v1/drivers/{id}/documents/{docId}/verify` |
+| Reject document | POST | `/api/v1/drivers/{id}/documents/{docId}/reject` |
 
-## 3. Documentos Conductor
-| Campo | Descripcion |
-|----------|------------|
-| name | Nombre |
-| phone | Telefono |
-| documentNumber | Numero de identificacion |
-| birthDate | Fecha de nacimiento |
-| address | Direccion |
-| licenseNumber | Numero de licencia |
-| licenseCategory | Categoria (A, B, C, etc) |
-| licenseExpirationDate | Vencimiento licencia |
-| emergencyContact | Contacto emergencia |
-| emergencyPhone | Telefono emergencia |
-| yearsExperience | Anos de experiencia |
-| photoUrl | URL foto |
-| bankName | Banco (NEQUI, BANCOLOMBIA, etc) |
-| bankAccount | Cuenta banco |
-| vehicleId | Vehiculo asignado |
-| userId | Usuario asociado |
-
-## 4. Acciones
-| Accion | Resultado |
-|--------|----------|
-| Aprobar | Conductor puede iniciar rutas |
-| Rechazar | Notificar motivo al conductor |
-
-## 5. Request Create Driver
+### Request Verify
 ```json
 {
-  "name": "Juan Perez",
-  "phone": "+573001234567",
-  "documentNumber": "1234567890",
-  "birthDate": "1990-05-15",
-  "address": "Calle 123, Bogota",
-  "licenseNumber": "12345678",
-  "licenseCategory": "B",
-  "licenseExpirationDate": "2028-05-15",
-  "emergencyContact": "Maria Perez",
-  "emergencyPhone": "+573001234568",
-  "yearsExperience": 5,
-  "photoUrl": "https://...",
-  "bankName": "NEQUI",
-  "bankAccount": "3101234567",
-  "vehicleId": "UUID_VEHICULO",
-  "userId": "UUID_USUARIO"
+  "verifiedBy": "UUID_ADMIN"
 }
 ```
 
-## 6. Notas UX
-- Badge con cantidad pendiente
-- Campo para motivo de rechazo
+### Request Reject
+```json
+{
+  "verifiedBy": "UUID_ADMIN",
+  "reason": "Documento ilegible, legible"
+}
+```
+
+## 6. Documentos Requeridos
+| Tipo | Descripcion |
+|------|-------------|
+| LICENCIA | Licencia de conducir |
+| CEDULA | Identificacion |
+
+## 7. UI - Lista Pendientes
+- Card conductor:
+  - Nombre
+  - Fecha de registro
+  - Numero documentos subidos
+  - Badge "X documentos pendientes"
+- Filtro: por fecha
+- Bulk actions: aprobar/rechazar
+
+## 8. UI - Detalle Conductor
+- Informacion personal
+- Documents list:
+  - Tipo documento
+  - Estado (PENDING/VERIFIED/REJECTED)
+  - Descargar
+- Botones: Aprobar todo | Rechazar todo
+
+## 9. Approval Logic
+```
+1. ADMIN revisa cada documento
+2. Si todos OK → "Aprobar"
+3. Si alguno問題 → "Rechazar" con motivo
+4. Sistema cambia driver.is_verified = true (si aprobar)
+5. Notificar al conductor
+```
+
+## 10. Notification al conductor
+```
+- APROVED: "Tu cuenta ha sido verificada. Puedes iniciar rutas"
+- REJECTED: "Tu verificacion fue rechazada. Razon: {reason}. Por favor corrige y reenvia"
+```
+
+## 11. Notas UX
+- Ver documentos en modal o nueva pantalla
+- Descarga para revisar detalle
+- Historial de verificaciones

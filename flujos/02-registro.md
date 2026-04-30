@@ -15,160 +15,70 @@
 | Pantalla | Componente |
 |---------|------------|
 | Register Screen | `src/screens/auth/RegisterScreen.tsx` |
-| Confirmacion | (opcional) |
+| Completar Informacion (conductor) | `src/screens/auth/CompleteDriverProfileScreen.tsx` |
 
 ## 3. Flujo Principal
 
 ```
-1. Usuario toca "Registrarse" en Login Screen
-2. Navegar a Register Screen
-3. Usuario ingresa nombre completo
-4. Usuario ingresa email
-5. Usuario ingresa contrasena
-6. Usuario confirma contrasena
-7. (Opcional) Usuario ingresa telefono
-8. (Solo ADMIN) Selecciona rol (DRIVER, GUARDIAN, o ADMIN)
-9. Usuario toca "Crear Cuenta"
-10. Sistema muestra estado de carga
-11. Sistema valida datos en frontend
-12. Sistema envia al backend
-13. Backend crea usuario (rol GUARDIAN por defecto si no se especifica)
-14. Redirecciona a Login
-15. Mostrar mensaje "Cuenta creada. Inicia sesion"
+1. Usuario abre app
+2. Toca "Registrarse"
+3. Selecciona tipo de cuenta:
+   - "Soy Padre/Acudiente" → rol GUARDIAN
+   - "Soy Conductor" → rol DRIVER
+4. Completa formulario
+5. Crea cuenta
+6. Redirect a Home
+
+7. SI ES CONDUCTOR:
+8. Home muestra banner "Completa tu cuenta"
+9. Toca "Completar"
+10. Completa perfil conductor
+11. Sube documentos requeridos
+12. Submit para verificacion
+13. Espera verificacion de ADMIN
 ```
 
-## 4.2 Formulario - Segun API Backend
-- Campo: Nombre Completo
-  - Tipo: `text`
-  - Placeholder: "Juan Perez"
-  - Autocomplete: `name`
-  - capitalize: `words`
-  - Required: true
+## 4. Select - Tipo de Cuenta
 
-- Campo: Email
-  - Tipo: `email`
-  - Placeholder: "correo@ejemplo.com"
-  - Autocomplete: `email`
-  - InputMode: `email`
-  - Required: true
-
-- Campo: Contrasena
-  - Tipo: `password`
-  - Placeholder: "Minimo 6 caracteres..."
-  - Autocomplete: `new-password`
-  - SecureTextEntry: true
-  - Required: true
-  - Helper text: "Minimo 6 caracteres"
-
-- Campo: Confirmar Contrasena
-  - Tipo: `password`
-  - Placeholder: "Repite tu contrasena"
-  - SecureTextEntry: true
-  - Required: true
-
-- Campo: Telefono (OPCIONAL)
-  - Tipo: `tel`
-  - Placeholder: "+57 300 123 4567"
-  - Autocomplete: `tel`
-
-- Campo: Rol (SOLO ADMIN, OPCIONAL)
-  - Tipo: `dropdown`
-  - Opciones: DRIVER, GUARDIAN, ADMIN
-  - Default: GUARDIAN
-- Principal: "Crear Cuenta"
-  - Disabled si: campos vacios o terminos no aceptados
-  - Loading: "Creando cuenta..."
-
-- Secundario: "Ya tienes cuenta? Inicia sesion"
-  - Navega a Login
-
-### 4.5 Errores
-- Email ya existe: "Este email ya esta registrado"
-- Contrasenas no coinciden: "Las contrasenas no coinciden"
-- Contrasena muy corta: "Minimo 6 caracteres"
-- Terminos no aceptados: "Debes aceptar los terminos"
-
-## 5. Flujos Alternativos
-
-### 5.1 Email Ya Existe
 ```
-1. Backend retorna 400
-2. Mostrar error en campo email
-3. Suggestion: "Olvidaste tu contrasena?"
+Label: "Tipo de cuenta"
+Opciones:
+  - "Soy Padre/Acudiente" (default, rol: GUARDIAN)
+  - "Soy Conductor" (rol: DRIVER)
 ```
 
-### 5.2 Contrasenas No Coinciden
-```
-1. Validar al tocar boton crear
-2. Mostrar error en campo confirmacion
-3. Enfocar campo confirmacion
-```
+## 5. Formulario - Datos Comunes
 
-### 5.3 Contrasena Muy Corta
-```
-1. Validar en tiempo real (onChange)
-2. Mostrar helper text en rojo
-```
+| Campo | Tipo | Requerido |
+|------|------|----------|
+| Nombre completo | text | SI |
+| Email | email | SI |
+| Contrasena | password | SI |
+| Confirmar contrasena | password | SI |
+| Telefono | tel | NO |
 
-### 5.4 Sin Aceptar Terminos
-```
-1. Boton deshabilitado hasta aceptar
-2. Checkbox requiere aceptar
-```
+## 6. Formulario - Conductor (solo muestra si selecciono conductor)
 
-### 5.5 Registro Exitoso
-```
-1. Mostrar exito
-2. Redireccionar a Login
-3. Mostrar toast "Cuenta creada"
-```
+| Campo | Tipo | Requerido |
+|------|------|----------|
+| Numero documento | text | SI |
+| Numero licencia | text | SI |
+| Categoria licencia | dropdown | SI |
+| Vencimiento licencia | date | SI |
+| Banco (pago) | text | SI |
+| Cuenta banco | text | SI |
+| Foto licencia | file | SI |
 
-## 6. Validacion
+## 7. Estados de Cuenta conductor
 
-| Campo | Regla | Feedback |
-|------|-------|----------|
-| nombre | Required | Boton disabled |
-| email | Required | Boton disabled |
-| email | Formato valido | Placeholder con ejemplo |
-| email | Unico en sistema | Error del backend |
-| contrasena | Required | Boton disabled |
-| contrasena | Minimo 6 chars | Helper text |
-| confirmContrasena | Required | Boton disabled |
-| confirmContrasena | Igual a contrasena | Error "no coinciden" |
-| telefono | Opcional | - |
+| Estado | Descripcion | Accion |
+|--------|-------------|-------|
+| PENDING_COMPLETE | Registrado, falta completar | Completa tu cuenta |
+| PENDING_VERIFY | Docs subidos, esperandverificacion | Espera verificacion |
+| ACTIVE | Verificado por ADMIN | Puede iniciar rutas |
+| REJECTED | Verificacion rechazada | Editar y reenviar |
 
-## 7. Accesibilidad
-
-| Regla | Implementacion |
-|-------|--------------|
-| Labels | htmlFor en label, nativeID en input |
-| Autocomplete | Atributos completos |
-| Focus visible | Borde/color al enfocar |
-| Inputs tipo Pressable | Checkbox como Pressable |
-| Errores en campos | aria-describedby |
-| Boton deshabilitado | accessibilityState={{ disabled }} |
-| Loading en boton | accessibilityLabel con estado |
-
-## 8. Estado
-
-```typescript
-interface RegisterState {
-  nombre: string;
-  email: string;
-  contrasena: string;
-  confirmContrasena: string;
-  aceptaTerminos: boolean;
-  isLoading: boolean;
-  errors: {
-    nombre?: string;
-    email?: string;
-    contrasena?: string;
-    confirmContrasena?: string;
-  };
-}
-```
-
-## 9. API
+## 8. API - Registro
 
 | Operacion | Metodo | Endpoint |
 |-----------|-------|----------|
@@ -181,42 +91,88 @@ interface RegisterState {
   "email": "juan@example.com",
   "password": "password123",
   "phone": "+573001234567",
-  "role": "DRIVER"
+  "role": "DRIVER"  // o "GUARDIAN"
 }
 ```
 
-*Nota: phone y role son opcionales. Default role: GUARDIAN*
+## 9. API - Completar Perfil Conductor
 
-### Response Exito (201)
+| Operacion | Metodo | Endpoint |
+|-----------|-------|----------|
+| Create driver | POST | `/api/v1/drivers` |
+| Upload document | POST | `/api/v1/drivers/{id}/documents` |
+
+### Request Create Driver
 ```json
 {
-  "user": { ... },
-  "accessToken": "jwt",
-  "refreshToken": "refresh"
+  "name": "Juan Perez",
+  "phone": "+573001234567",
+  "documentNumber": "12345678",
+  "licenseNumber": "12345678",
+  "licenseCategory": "B",
+  "licenseExpirationDate": "2028-05-15",
+  "bankName": "NEQUI",
+  "bankAccount": "3101234567",
+  "vehicleId": "UUID"  // opcional
 }
 ```
 
-### Response Error (400)
+### Request Upload Document
 ```json
 {
-  "message": "Email ya existe"
+  "documentType": "LICENCIA",
+  "documentNumber": "12345678",
+  "licenseCategory": "B",
+  "fileUrl": "https://...",
+  "startDate": "2026-01-01",
+  "endDate": "2028-01-01"
 }
 ```
 
-## 10. Navigation
+## 10. Home - Banner conductor
 
-| Desde | Hacia | Accion |
-|-------|------|-------|
-| Login | Register | Tocar "Registrarse" |
-| Register | Login | Tocar "Inicia sesion" |
-| Register | Dashboard | Registro exitoso |
+```
+Si driver.state != ACTIVE:
+Mostrar banner "Completa tu cuenta para comenzar"
+  - PENDING_COMPLETE: "Completa tu informacion"
+  - PENDING_VERIFY: "Verificacion en proceso"
+  - REJECTED: "Verificacion rechazada. Edita y renvial"
+```
 
-## 11. Notas UX
+## 11. Validacion Registro
 
-- Validacion en tiempo real para contrasena
-- Placeholder con ejemplo muestra patron
-- telefono es opcional
-- Colores de error claros
-- Focus en primer campo al abrir
-- Loading durante peticion
-- Success feedback claro
+| Campo | Regla | Feedback |
+|------|-------|----------|
+| nombre | Required | Boton disabled |
+| email | Required, formato valido | Placeholder |
+| email | Unico | Error backend |
+| contrasena | Minimo 6 chars | Helper text |
+| confirmContrasena | Igual a contrasena | Error |
+| tipo cuenta | Required | Selector |
+
+## 12. Validacion Perfil Conductor
+
+| Campo | Requerido |
+|------|----------|
+| documentNumber | SI |
+| licenseNumber | SI |
+| licenseCategory | SI |
+| licenseExpirationDate | SI |
+| bankName | SI |
+| bankAccount | SI |
+
+## 13. Navigation
+
+|Desde|Hacia|Condicion|
+|-----|-----|--------|
+|Login|Register|Tocar Registrarse|
+|Register|Home|Registro exitoso|
+|Home|CompleteDriverProfile|Es conductor + no verificado|
+
+## 14. Notas UX
+
+- Selector claro "Tipo de cuenta"
+- Campos requeridos marcados con *
+- Progress indicator al subir documentos
+- Estados claros del banner
+- Tiempo estimado de verificacion (24-48h)
