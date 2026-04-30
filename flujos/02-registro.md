@@ -13,8 +13,7 @@
 ## 2. Descripcion
 
 Registro unificado para padres y conductores.
-Solo datos basicos de autenticacion.
-Despues del registro, deben completar su perfil desde el Dashboard.
+Selector para elegir tipo de cuenta.
 
 ## 3. Pantallas
 
@@ -27,14 +26,33 @@ Despues del registro, deben completar su perfil desde el Dashboard.
 ```
 1. Usuario abre app
 2. Toca "Registrarse"
-3. Completa datos basicos
-4. Crea cuenta
-5. Redirect a Dashboard
-6. Dashboard muestra "Completa tu perfil"
-7. Usuario completa perfil
+3. Selecciona tipo de cuenta:
+   - "Soy Padre/Acudiente"
+   - "Soy Conductor"
+4. Completa formulario
+5. Crea cuenta
+6. Redirect a Dashboard
+7. Driver: Nota "Completa tu cuenta"
+8. Guardian: Nota "Completa tu perfil"
 ```
 
-## 5. Formulario - Solo datos basicos
+## 5. Selector - Tipo de Cuenta
+
+```
+Label: "¿Cómo te vas a registrar?"
+
+Opciones (radio buttons o cards):
+┌─────────────────────┐  ┌─────────────────────┐
+│   👤 PADRE         │  │   🚛 CONDUCTOR     │
+│                     │  │                     │
+│   Tengo hijos que   │  │   Transporte        │
+│   usan ruta escolar│  │   escolares         │
+│                     │  │                     │
+│   [Seleccionar]    │  │   [Seleccionar]    │
+└─────────────────────┘  └─────────────────────┘
+```
+
+## 6. Formulario - Datos Comunes
 
 | Campo | Tipo | Requerido |
 |------|------|----------|
@@ -42,68 +60,67 @@ Despues del registro, deben completar su perfil desde el Dashboard.
 | Email | email | SI |
 | Contrasena | password | SI |
 | Confirmar contrasena | password | SI |
-| Telefono | tel | NO |
 
-*Nota: No hay selector de rol aquiv
+## 7. Formulario - Si selecciona Conductor
 
-## 6. API - Registro
+Despues del registro, redirect a Dashboard,
+luego toca "Completa tu cuenta" (Flujo 02B)
+
+## 8. API - Registro
 
 | Operacion | Metodo | Endpoint |
 |-----------|-------|----------|
 | Register | POST | `/api/v1/auth/register` |
 
-### Request
+### Request - Padre
 ```json
 {
   "name": "Juan Perez",
   "email": "juan@example.com",
   "password": "password123",
-  "phone": "+573001234567"
+  "role": "GUARDIAN"
 }
 ```
 
-*Rol siempre: GUARDIAN por defecto
-
-### Response (201)
+### Request - Conductor
 ```json
 {
-  "user": {
-    "id": "uuid",
-    "email": "juan@example.com",
-    "name": "Juan Perez",
-    "roles": ["GUARDIAN"]
-  },
-  "accessToken": "jwt",
-  "refreshToken": "refresh"
+  "name": "Juan Perez",
+  "email": "juan@example.com",
+  "password": "password123",
+  "role": "DRIVER"
 }
 ```
 
-## 7. Post-Registro
+*Nota: role se envia en el registro*
+
+## 9. Post-Registro
 
 | Rol | Accion en Dashboard |
 |-----|---------------------|
-| DRIVER | Banner "Completa tu cuenta" → Flujo 02B |
-| GUARDIAN | Banner "Completa tu perfil" → Flujo 02C (opcional) |
+| DRIVER | Nota "Completa tu cuenta" → Flujo 02B |
+| GUARDIAN | Nota "Completa tu perfil" → Flujo 02C (opcional) |
 
-## 8. Validacion
+## 10. Validacion
 
 | Campo | Regla | Feedback |
 |------|-------|----------|
+| tipo cuenta | Required | Debe seleccionar uno |
 | nombre | Required | Boton disabled |
 | email | Required, formato valido | Placeholder |
 | contrasena | Minimo 6 chars | Helper text |
 | confirmContrasena | Igual a contrasena | Error |
 
-## 9. Navigation
+## 11. Navigation
 
 | Desde | Hacia | Accion |
 |-------|------|-------|
 | Login | Register | Tocar Registrarse |
-| Register | Home | Registro exitoso |
+| Register | Dashboard | Registro exitoso |
 
-## 10. Notas UX
+## 12. Notas UX
 
-- Formulario simple, solo datos de cuenta
-- No asking for role
-- Redireccion a Dashboard
-- Perfil se completa desde Dashboard
+- Selector con iconos claros
+- Descripcion breve de cada tipo
+- Preview de seleccionar
+- Rol se guarda en la cuenta
