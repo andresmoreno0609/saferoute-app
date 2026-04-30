@@ -10,67 +10,31 @@
 | **Objetivo** | Ver overview del sistema |
 | **Prioridad** | Alta |
 
-## 2. Pantallas
+## 2. API - Segun Postman
 
-| Pantalla | Componente |
-|---------|------------|
-| Dashboard ADMIN | `src/screens/admin/DashboardScreen.tsx` |
+| Endpoint | Descripcion |
+|----------|-------------|
+| GET /api/v1/users | Total usuarios |
+| GET /api/v1/routes | Rutas (filtrar por estado) |
+| GET /api/v1/drivers | Conductores (filtrar is_verified) |
+| GET /api/v1/vehicles/{id}/documents | Documentos por vencer |
 
-## 3. Flujo Principal
+## 3. Dashboard Metrics
+- Total usuarios ativos
+- Rutas en curso (status=IN_PROGRESS)
+- Conductores pendientes (is_verified=false)
+- Documentos por vencer
 
-```
-1. ADMIN hace login
-2. Redireccionar a Dashboard ADMIN
-3. Cargar datos del dashboard
-4. Mostrar loading mientras carga
-5. Mostrar metricas y acciones
-```
-
-## 4. Componentes UI
-
-### 4.1 Header
-- Titulo: "SafeRoute - Admin"
-- Badge con notificaciones
-
-### 4.2 Metricas (Cards)
-- Total usuarios activos (numero grande)
-- Rutas en curso
-- Conductores verificados vs pendientes
-- Vehiculos con documentos vigentes
-
-### 4.3 Alertas/Vencimientos
-- Documentos por vencer (amarillo)
-- Documentos vencidos (rojo)
-- Conductores pendientes de verificacion
-
-### 4.4 Acciones Rapidas
-- Crear usuario
-- Crear ruta
-- Agregar vehiculo
-- Verificar conductor
-
-## 5. datos a Mostrar
-
-| Metrica | Fuente API |
-|--------|----------|
-| Total usuarios | GET /api/v1/users/count |
-| Rutas activas | GET /api/v1/routes?status=IN_PROGRESS |
-| Conductores pendientes | GET /api/v1/drivers?verified=false |
-| Documentos por vencer | GET /api/v1/vehicles/documents/expiring |
-
-## 6. Navigation
+## 4. Navigation
 
 | Desde | Hacia | Accion |
 |-------|------|-------|
-| Dashboard | Gestionar Usuarios | Menu |
-| Dashboard | Gestionar Rutas | Menu |
-| Dashboard | Gestionar Vehiculos | Menu |
-| Dashboard | Verificar Conductores | Menu |
+| Dashboard | /users | Menu |
+| Dashboard | /routes | Menu |
+| Dashboard | /drivers | Menu |
+| Dashboard | /vehicles | Menu |
 
-## 7. Notas UX
-
+## 5. Notas UX
 - Cards con numeros grandes
-- Iconos por seccion
 - pull-to-refresh
 - Loading skeleton
-- Alertas destacadas con color

@@ -27,16 +27,17 @@
 5. Usuario ingresa contrasena
 6. Usuario confirma contrasena
 7. (Opcional) Usuario ingresa telefono
-8. Usuario toca "Crear Cuenta"
-9. Sistema muestra estado de carga
-10. Sistema valida datos en frontend
-11. Sistema envia al backend
-12. Backend crea usuario con rol GUARDIAN por defecto
-13. Redirecciona a Login
-14. Mostrar mensaje "Cuenta creada. Inicia sesion"
+8. (Solo ADMIN) Selecciona rol (DRIVER, GUARDIAN, o ADMIN)
+9. Usuario toca "Crear Cuenta"
+10. Sistema muestra estado de carga
+11. Sistema valida datos en frontend
+12. Sistema envia al backend
+13. Backend crea usuario (rol GUARDIAN por defecto si no se especifica)
+14. Redirecciona a Login
+15. Mostrar mensaje "Cuenta creada. Inicia sesion"
 ```
 
-## 4.2 Formulario - Actualizado segun API Backend
+## 4.2 Formulario - Segun API Backend
 - Campo: Nombre Completo
   - Tipo: `text`
   - Placeholder: "Juan Perez"
@@ -69,7 +70,11 @@
   - Tipo: `tel`
   - Placeholder: "+57 300 123 4567"
   - Autocomplete: `tel`
-  - Required: false
+
+- Campo: Rol (SOLO ADMIN, OPCIONAL)
+  - Tipo: `dropdown`
+  - Opciones: DRIVER, GUARDIAN, ADMIN
+  - Default: GUARDIAN
 - Principal: "Crear Cuenta"
   - Disabled si: campos vacios o terminos no aceptados
   - Loading: "Creando cuenta..."
@@ -175,11 +180,12 @@ interface RegisterState {
   "name": "Juan Perez",
   "email": "juan@example.com",
   "password": "password123",
-  "phone": "+573001234567"
+  "phone": "+573001234567",
+  "role": "DRIVER"
 }
 ```
 
-*Nota: phone es opcional
+*Nota: phone y role son opcionales. Default role: GUARDIAN*
 
 ### Response Exito (201)
 ```json

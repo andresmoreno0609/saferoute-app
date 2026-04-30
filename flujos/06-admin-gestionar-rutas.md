@@ -82,15 +82,25 @@
 | Eliminar | Swipe o boton |
 | Editar | Tocar para detalles |
 
-## 7. API
+## 7. API - Segun Postman
 
 | Operacion | Metodo | Endpoint |
 |-----------|-------|----------|
 | List routes | GET | `/api/v1/routes` |
 | Get route | GET | `/api/v1/routes/{id}` |
 | Create route | POST | `/api/v1/routes` |
-| Update route | PUT | `/api/v1/routes/{id}` |
-| Delete route | DELETE | `/api/v1/routes/{id}` |
+| Start route | POST | `/api/v1/routes/{id}/start` |
+| Complete route | POST | `/api/v1/routes/{id}/complete` |
+| Cancel route | POST | `/api/v1/routes/{id}/cancel` |
+
+### Request Create
+```json
+{
+  "name": "Ruta Norte - Manana",
+  "driverId": "UUID_DEL_CONDUCTOR",
+  "scheduledDate": "2026-04-01"
+}
+```
 
 ## 8. Validation
 

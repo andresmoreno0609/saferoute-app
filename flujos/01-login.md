@@ -167,16 +167,16 @@ interface LoginState {
 ### Response Exito (200)
 ```json
 {
+  "accessToken": "eyJhbGc...",
+  "refreshToken": "eyJhbGc...",
+  "tokenType": "Bearer",
+  "expiresIn": 3600,
   "user": {
     "id": "uuid",
     "email": "user@example.com",
     "name": "Juan Perez",
     "roles": ["DRIVER"]
-  },
-  "accessToken": "eyJhbGc...",
-  "refreshToken": "eyJhbGc...",
-  "tokenType": "Bearer",
-  "expiresIn": 3600
+  }
 }
 ```
 

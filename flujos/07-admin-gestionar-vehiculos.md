@@ -10,7 +10,7 @@
 | Prioridad | Alta |
 
 ## 2. Pantallas
--Lista vehiculos: `src/screens/admin/VehiclesScreen.tsx`
+- Lista vehiculos: `src/screens/admin/VehiclesScreen.tsx`
 - Detalle vehiculo: `src/screens/admin/VehicleDetailScreen.tsx`
 - Formulario vehiculo: `src/screens/admin/VehicleFormScreen.tsx`
 
@@ -41,16 +41,51 @@
 - Modelo
 - Ano
 - Color
-- capacidad
+- Capacidad
 
-## 7. API
+## 7. API - Segun Postman
 | Operacion | Metodo | Endpoint |
 |-----------|-------|----------|
 | List | GET | /api/v1/vehicles |
 | Get | GET | /api/v1/vehicles/{id} |
 | Create | POST | /api/v1/vehicles |
 | Update | PUT | /api/v1/vehicles/{id} |
-| Documents | CRUD | /api/v1/vehicles/{id}/documents |
+| Delete | DELETE | /api/v1/vehicles/{id} |
+| List documents | GET | /api/v1/vehicles/{id}/documents |
+| Add document | POST | /api/v1/vehicles/{id}/documents |
+| Update document | PUT | /api/v1/vehicles/{id}/documents/{docId} |
+| Verify document | POST | /api/v1/vehicles/{id}/documents/{docId}/verify |
+| Reject document | POST | /api/v1/vehicles/{id}/documents/{docId}/reject |
+| Delete document | DELETE | /api/v1/vehicles/{id}/documents/{docId} |
+
+### Request Create Vehicle
+```json
+{
+  "plate": "ABC123",
+  "model": "Toyota Hiace",
+  "brand": "Toyota",
+  "color": "Blanco",
+  "capacity": 15
+}
+```
+
+### Request Add Document
+```json
+{
+  "documentType": "SOAP",
+  "fileUrl": "https://...",
+  "startDate": "2026-01-01",
+  "endDate": "2027-01-01"
+}
+```
+
+### Request Verify/Reject Document
+```json
+{
+  "verifiedBy": "UUID_DEL_ADMIN",
+  "reason": "motivo (solo reject)"
+}
+```
 
 ## 8. Notas UX
 - Indicador visual de estado documentos

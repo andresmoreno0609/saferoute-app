@@ -61,22 +61,26 @@
 - Rol(es): checkbox multiple (ADMIN, DRIVER, GUARDIAN)
 - Estado: dropdown (ACTIVE, INACTIVE)
 
-## 7. Validacion
-
-| Campo | Regla |
-|------|-------|
-| nombre | Required, min 2 caracteres |
-| email | Required, formato valido |
-| rol | Required, minimo 1 |
-
-## 8. API
-
+### 6.3 API - Segun Postman
 | Operacion | Metodo | Endpoint |
 |-----------|-------|----------|
 | List users | GET | `/api/v1/users` |
 | Get user | GET | `/api/v1/users/{id}` |
 | Create user | POST | `/api/v1/users` |
 | Update user | PUT | `/api/v1/users/{id}` |
+| Delete user | DELETE | `/api/v1/users/{id}` |
+
+### Request Create
+```json
+{
+  "email": "conductor@test.com",
+  "password": "password123",
+  "name": "Juan Perez",
+  "roles": ["DRIVER"]
+}
+```
+
+*Nota: roles es un array*
 
 ## 9. Navigation
 

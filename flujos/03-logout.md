@@ -59,7 +59,7 @@
 |-----------|-------|----------|
 | Logout | POST | `/api/v1/auth/logout` |
 
-- Optional: notificar al backend para invalidar token
+*Notifica al backend para invalidar token*
 
 ## 8. Estado Post-Logout
 

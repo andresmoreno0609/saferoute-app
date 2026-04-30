@@ -9,47 +9,33 @@
 | Objetivo | Ver/editar perfil |
 | Prioridad | Media |
 
-## 2. Pantallas
-- Perfil: `src/screens/profile/ProfileScreen.tsx`
+## 2. API - Segun Postman
 
-## 3. Flujo Principal
-1. Tocar icono perfil
-2. Ver datos:
-   - Nombre
-   - Email
-   - Roles
-   - Foto (si tiene)
-3. Editar datos
-4. Cambiar contrasena
-5. Cerrar sesion
-
-## 4. Campos Editables
-| Campo | editable |
-|--------|----------|
-| Nombre | Si |
-| Telefono | Si |
-| Foto | Si |
-| Contrasena | Si (separado) |
-
-## 5. Campos Solo Lectura
-| Campo |
-|-------|
-| Email |
-| Roles |
-
-## 6. Secciones
-- Datos personales
-- Seguridad (cambiar contrasena)
-- Cerrar sesion
-
-## 7. API
+### Auth Endpoints
 | Operacion | Metodo | Endpoint |
 |-----------|-------|----------|
-| Get profile | GET | /api/v1/users/me |
-| Update profile | PUT | /api/v1/users/me |
-| Change password | POST | /api/v1/users/me/password |
+| My user | GET | /api/v1/auth/me |
+| Refresh token | POST | /api/v1/auth/refresh |
 
-## 8. Notas UX
+### User Endpoints (ADMIN)
+| Operacion | Metodo | Endpoint |
+|-----------|-------|----------|
+| Update user | PUT | /api/v1/users/{id} |
+
+## 3. Campos Editables
+| Campo | Editable |
+|--------|----------|
+| Nombre | Si |
+| Email | No (readonly) |
+| Telefono | Si |
+| Contrasena | Si (separado) |
+| Roles | No (admin) |
+
+## 4. Secciones
+- Datos personales
+- Seguridad (cambiar contrasena)
+- Cerrar sesion (/auth/logout)
+
+## 5. Notas UX
 - Campos editables segun permisos
-- Foto opcional
 - Seccion de contrasena separada

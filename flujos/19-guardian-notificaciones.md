@@ -4,44 +4,53 @@
 | Campo | Valor |
 |-------|-------|
 | ID | 19 |
-| Nombre | GUARDIAN: Notificaciones |
+| nombre | GUARDIAN: Notificaciones |
 | Actor | GUARDIAN |
 | Objetivo | Ver notificaciones |
 | Prioridad | Alta |
 
-## 2. Pantallas
-- Lista: `src/screens/guardian/NotificationsScreen.tsx`
+## 2. API - Segun Postman
+
+### Notifications Endpoints
+| Operacion | Metodo | Endpoint |
+|-----------|-------|----------|
+| Create notification | POST | /api/v1/notifications |
+| By guardian | GET | /api/v1/notifications/guardian/{guardianId} |
+| Unread | GET | /api/v1/notifications/guardian/{guardianId}/unread |
+| Mark read | PUT | /api/v1/notifications/{id}/read |
+| Mark all read | PUT | /api/v1/notifications/guardian/{guardianId}/read-all |
 
 ## 3. Flujo Principal
 1. Tocar icono notificaciones
-2. Ver lista cronologica
-3. Tocar para detalle
+2. GET /notifications/guardian/{id}
+3. Ver lista cronologica
+4. Tocar para detalle
 
 ## 4. Tipos de Notificacion
 | Tipo | Descripcion | Icono |
 |------|-------------|-------|
 | BOARD | Estudiante subio al bus | Bus |
-| ARRIVAL | Llego al colegio | School |
 | DROP | Llego a casa | Home |
+| ARRIVAL | Llego al colegio | School |
 | ADVERTENCIA | Ruta atrasada | Warning |
 
-## 5. Estados
+## 5. Request Create Notification
+```json
+{
+  "guardianId": "UUID_ACUDIENTE",
+  "title": "Estudiante subido al bus",
+  "body": "Maria Garcia ha subido al autobus",
+  "type": "BOARD"
+}
+```
+
+## 6. Estados
 | Estado | Visual |
 |--------|--------|
 | No leida | Negrita, background |
 | Leida | Normal |
 
-## 6. Acciones
-- Tocar: ver detalle
-- Swipe: eliminar
-
-## 7. API
-| Operacion | Metodo | Endpoint |
-|-----------|-------|----------|
-| Get notifications | GET | /api/v1/notifications |
-| Mark read | PUT | /api/v1/notifications/{id}/read |
-
-## 8. Notas UX
-- No leidas destacadas
+## 7. Notas UX
+- No leidas destacadas con badge
 - pull-to-refresh
-- Eliminar alSwipe
+- Eliminar al swipe
