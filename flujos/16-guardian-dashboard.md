@@ -9,11 +9,11 @@
 | Objetivo | Ver overview de hijos |
 | Prioridad | Alta |
 
-## 2. Nota: Completar Perfil (opcional)
+## 2. Nota: Completar Perfil
 
-Al inicio, mostrar recordatorio si perfil incompleto.
+Al inicio, mostrar recordatorio si perfil incompleto (infoValidate = false).
 
-**Si guardian profile no esta creado:**
+**Si perfil incompleto:**
 ```
 ┌─────────────────────────────────────┐
 │ 💡 Completa tu perfil              │
@@ -21,7 +21,6 @@ Al inicio, mostrar recordatorio si perfil incompleto.
 │ [Completar perfil] → Flujo 02C    │
 └─────────────────────────────────────┘
 ```
-*Nota: Es opcional, puede cerrar*
 
 ## 3. Dashboard Layout
 
@@ -73,8 +72,19 @@ Al inicio, mostrar recordatorio si perfil incompleto.
 |-----------|-------|----------|
 | My user | GET | /api/v1/auth/me |
 | My guardian | GET | /api/v1/guardians/user/{userId} |
+| Update infoValidate | PUT | /api/v1/guardians/{id}/info-validate |
 | My children | GET | `/api/v1/student-guardians/guardian/{id}` |
 | Children details | GET | /api/v1/students/{id} |
+
+**My guardian response:**
+```json
+{
+  "id": "...",
+  "userId": "...",
+  "infoValidate": false,
+  ...
+}
+```
 
 ## 6. Navigation
 
@@ -86,5 +96,5 @@ Al inicio, mostrar recordatorio si perfil incompleto.
 
 ## 7. Notas UX
 - Tarjetas con color segun estado
-- Nota de completar perfil es opcional (puede cerrar)
+- Banner "Completa tu perfil" si infoValidate = false
 - pull-to-refresh para actualizar

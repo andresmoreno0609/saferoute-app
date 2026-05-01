@@ -63,6 +63,7 @@ desde el Dashboard. Requiere cargar documentos.
 | Operacion | Metodo | Endpoint |
 |-----------|-------|----------|
 | Create driver profile | POST | `/api/v1/drivers` |
+| Update infoValidate | PUT | `/api/v1/drivers/{id}/info-validate` |
 | Upload document | POST | `/api/v1/drivers/{id}/documents` |
 
 ## 9. Request Create Driver

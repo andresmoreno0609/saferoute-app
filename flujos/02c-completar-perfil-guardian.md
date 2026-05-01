@@ -30,19 +30,20 @@ desde el Dashboard. Es opcional pero recomendado.
 
 | Campo | Tipo | Requerido |
 |------|------|----------|
-| Numero documento | text | NO |
-| Fecha nacimiento | date | NO |
-| Direccion | text | NO |
-| Ocupacion | text | NO |
-| Telefono trabajo | tel | NO |
-| Contacto emergencia | text | NO |
-| Telefono emergencia | tel | NO |
+| Numero documento | text | **SI** |
+| Fecha nacimiento | date | **SI** |
+| Direccion | text | **SI** |
+| Ocupacion | text | **SI** |
+| Telefono trabajo | tel | **SI** |
+| Contacto emergencia | text | **SI** |
+| Telefono emergencia | tel | **SI** |
 
 ## 6. API - Endpoints
 
 | Operacion | Metodo | Endpoint |
 |-----------|-------|----------|
 | Create/update guardian | POST / PUT | `/api/v1/guardians` |
+| Update infoValidate | PUT | `/api/v1/guardians/{id}/info-validate` |
 | Upload FCM token | PUT | `/api/v1/guardians/{id}/fcm-token` |
 
 ## 7. Request Create Guardian
@@ -80,6 +81,7 @@ desde el Dashboard. Es opcional pero recomendado.
 
 ## 10. Notas UX
 
-- Es opcional: puede cerrar y usar la app
-- Todos los campos son opcionales
+- REQUIRED: Todos los campos son obligatorios para mostrar en dashboard
+- Campo `infoValidate` en guardian: false = incomplete, true = completo
+- El banner "Completa tu perfil" aparece si infoValidate = false
 - Boton "Guardar" activo siempre
