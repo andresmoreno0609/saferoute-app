@@ -86,18 +86,32 @@ export default function ProfileScreen({ navigation }: Props) {
 
         // Extraer userId - puede estar en diferentes lugares
         const userId = userData.user?.id || userData.id;
-        console.log('UserId:', userId);
+        const role = userData.roles?.[0];
+        
+        console.log('=== PROFILE DEBUG ===');
+        console.log('userData:', JSON.stringify(userData));
+        console.log('userId:', userId);
+        console.log('role:', role);
 
         // Solo cargar perfil si es guardian
-        if (userData.roles?.[0] === 'GUARDIAN' && userId) {
+        if (role === 'GUARDIAN' && userId) {
+          console.log('Haciendo request a:', `${API_URL}/guardians/user/${userId}`);
+          
           const gRes = await fetch(`${API_URL}/guardians/user/${userId}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           
+          console.log('Guardian status:', gRes.status);
+          
           if (gRes.ok) {
             const gData = await gRes.json();
+            console.log('Guardian data:', JSON.stringify(gData));
             setGuardianProfile(gData);
+          } else {
+            console.log('Guardian NO OK');
           }
+        } else {
+          console.log('NO SE CARGO: role=', role, 'userId=', userId);
         }
       }
     } catch (err) {
