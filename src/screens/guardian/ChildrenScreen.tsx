@@ -57,6 +57,7 @@ export default function GuardianChildrenScreen({ navigation }: { navigation?: an
       // Load children
       await loadStudents(guardianData.id, token);
     } catch (err: any) {
+      console.error('Error cargando hijos:', err);
       setError(err.message || 'Error al cargar');
     } finally {
       setLoading(false);

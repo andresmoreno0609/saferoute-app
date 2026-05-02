@@ -28,6 +28,7 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+  const [guardianData, setGuardianData] = useState<any>(null);
 
   // Form fields
   const [name, setName] = useState('');
@@ -47,10 +48,103 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
   const [notifyEvents, setNotifyEvents] = useState(true);
 
   useEffect(() => {
-    if (mode === 'edit' && studentId) {
-      loadStudent();
-    }
+    initForm();
   }, [mode, studentId]);
+
+  const initForm = async () => {
+    // Cargar datos del guardian para precargar
+    try {
+      const token = await AsyncStorage.getItem('accessToken');
+      if (!token) {
+        console.error('No token found');
+        return;
+      }
+
+      // Get user info
+      const userRes = await fetch(`${API_URL}/auth/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const userData = await userRes.json();
+      
+      // Get guardian profile
+      const guardianRes = await fetch(`${API_URL}/guardians/user/${userData.user.id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      
+      if (guardianRes.ok) {
+        const gData = await guardianRes.json();
+        setGuardianData(gData);
+        
+        // Pre-cargar contacto de emergencia si está seleccionado
+        if (isEmergencyContact) {
+          setEmergencyContact(gData.emergencyContact || userData.user.name || '');
+          setEmergencyPhone(gData.emergencyPhone || '');
+        }
+      }
+    } catch (err) {
+      console.error('Error cargando datos del guardian:', err);
+    }
+
+    // Cargar estudiante si es modo edición
+    if (mode === 'edit' && studentId && guardianId) {
+      await loadStudent();
+    }
+  };
+
+  // Manejar cambio del checkbox - precargar datos del guardian
+  const handleEmergencyContactChange = async (value: boolean) => {
+    setIsEmergencyContact(value);
+    
+    if (value && guardianData) {
+      // Pre-cargar datos del guardian
+      try {
+        const token = await AsyncStorage.getItem('accessToken');
+        const userRes = await fetch(`${API_URL}/auth/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const userData = await userRes.json();
+        
+        setEmergencyContact(guardianData?.emergencyContact || userData.user.name || '');
+        setEmergencyPhone(guardianData?.emergencyPhone || '');
+      } catch (err) {
+        console.error('Error precargando:', err);
+      }
+    } else {
+      // Limpiar campos si se deselecciona
+      setEmergencyContact('');
+      setEmergencyPhone('');
+    }
+  };
+
+  // Geocodificar dirección (usando Nominatim - servicio gratuito)
+  const geocodeAddress = async (addressText: string, type: 'home' | 'school') => {
+    if (!addressText) return;
+    
+    try {
+      const encodedAddress = encodeURIComponent(addressText);
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodedAddress}&limit=1`,
+        { headers: { 'User-Agent': 'SafeRouteApp/1.0' } }
+      );
+      const data = await res.json();
+      
+      if (data && data.length > 0) {
+        const lat = data[0].lat;
+        const lon = data[0].lon;
+        
+        if (type === 'home') {
+          setHomeLatitude(lat);
+          setHomeLongitude(lon);
+        } else {
+          setSchoolLatitude(lat);
+          setSchoolLongitude(lon);
+        }
+      }
+    } catch (err) {
+      console.error('Error geocodificando:', err);
+      // No bloquea el proceso si falla
+    }
+  };
 
   const loadStudent = async () => {
     if (!studentId || !guardianId) return;
@@ -63,16 +157,21 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
       });
 
       if (!res.ok) {
-        throw new Error('Error al cargar');
+        const errData = await res.json().catch(() => ({}));
+        console.error('Error cargando estudiante:', errData);
+        throw new Error(errData.message || 'Error al cargar');
       }
 
       const data = await res.json();
       
-      // Fill form (data structure depends on API response)
       setName(data.name || '');
       setGrade(data.grade || '');
       setAddress(data.address || '');
+      setHomeLatitude(data.homeLatitude?.toString() || '');
+      setHomeLongitude(data.homeLongitude?.toString() || '');
       setSchoolName(data.schoolName || '');
+      setSchoolLatitude(data.schoolLatitude?.toString() || '');
+      setSchoolLongitude(data.schoolLongitude?.toString() || '');
       setEmergencyContact(data.emergencyContact || '');
       setEmergencyPhone(data.emergencyPhone || '');
       setMedicalInfo(data.medicalInfo || '');
@@ -81,13 +180,16 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
       setNotifyEvents(data.notifyEvents ?? true);
       
     } catch (err: any) {
-      setError(err.message);
+      console.error('Error loadStudent:', err);
+      setError(err.message || 'Error al cargar');
     } finally {
       setLoading(false);
     }
   };
 
   const validate = (): boolean => {
+    setError('');
+    
     if (!name.trim()) {
       setError('El nombre es obligatorio');
       return false;
@@ -120,10 +222,11 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
     try {
       const token = await AsyncStorage.getItem('accessToken');
       if (!token) {
+        console.error('No token');
         throw new Error('Sesión expirada');
       }
 
-      // Get guardian ID if not provided
+      // Obtener guardian ID si no se proporcionó
       let gId = guardianId;
       if (!gId) {
         const userRes = await fetch(`${API_URL}/auth/me`, {
@@ -138,11 +241,20 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
         gId = guardianData.id;
       }
 
+      // Geocodificar dirección si no hay coordenadas
+      if (address && !homeLatitude && !homeLongitude) {
+        await geocodeAddress(address, 'home');
+      }
+      
+      if (schoolName && !schoolLatitude && !schoolLongitude) {
+        await geocodeAddress(schoolName, 'school');
+      }
+
       const body = {
         name: name.trim(),
         address: address.trim(),
-        homeLatitude: homeLatitude ? parseFloat(homeLatitude) : 0,
-        homeLongitude: homeLongitude ? parseFloat(homeLongitude) : 0,
+        homeLatitude: parseFloat(homeLatitude) || 0,
+        homeLongitude: parseFloat(homeLongitude) || 0,
         schoolName: schoolName.trim() || null,
         schoolLatitude: schoolLatitude ? parseFloat(schoolLatitude) : null,
         schoolLongitude: schoolLongitude ? parseFloat(schoolLongitude) : null,
@@ -173,6 +285,7 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
 
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
+        console.error('Error guardando:', errData);
         throw new Error(errData.message || 'Error al guardar');
       }
 
@@ -181,6 +294,7 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
       ]);
 
     } catch (err: any) {
+      console.error('Error handleSave:', err);
       setError(err.message || 'Error al guardar');
     } finally {
       setSaving(false);
@@ -262,6 +376,9 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
           {/* Section: Dirección de Casa */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>DIRECCIÓN DE CASA</Text>
+            <Text style={styles.helpText}>
+              Ingresá la dirección y se obtendrá la ubicación automáticamente
+            </Text>
             
             <View style={styles.field}>
               <Text style={styles.label}>Dirección *</Text>
@@ -273,33 +390,19 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
               />
             </View>
 
-            <View style={styles.row}>
-              <View style={[styles.field, styles.halfField]}>
-                <Text style={styles.label}>Latitud</Text>
-                <TextInput
-                  style={styles.input}
-                  value={homeLatitude}
-                  onChangeText={setHomeLatitude}
-                  placeholder="4.7110"
-                  keyboardType="numeric"
-                />
-              </View>
-              <View style={[styles.field, styles.halfField]}>
-                <Text style={styles.label}>Longitud</Text>
-                <TextInput
-                  style={styles.input}
-                  value={homeLongitude}
-                  onChangeText={setHomeLongitude}
-                  placeholder="-74.0721"
-                  keyboardType="numeric"
-                />
-              </View>
-            </View>
+            {(homeLatitude && homeLongitude) ? (
+              <Text style={styles.coordsText}>
+                📍 Coordenadas obtenidas
+              </Text>
+            ) : null}
           </View>
 
           {/* Section: Colegio */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>INFORMACIÓN DEL COLEGIO</Text>
+            <Text style={styles.helpText}>
+              Ingresá el nombre del colegio y se obtendrá la ubicación
+            </Text>
             
             <View style={styles.field}>
               <Text style={styles.label}>Nombre del colegio</Text>
@@ -311,28 +414,11 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
               />
             </View>
 
-            <View style={styles.row}>
-              <View style={[styles.field, styles.halfField]}>
-                <Text style={styles.label}>Latitud</Text>
-                <TextInput
-                  style={styles.input}
-                  value={schoolLatitude}
-                  onChangeText={setSchoolLatitude}
-                  placeholder="4.7200"
-                  keyboardType="numeric"
-                />
-              </View>
-              <View style={[styles.field, styles.halfField]}>
-                <Text style={styles.label}>Longitud</Text>
-                <TextInput
-                  style={styles.input}
-                  value={schoolLongitude}
-                  onChangeText={setSchoolLongitude}
-                  placeholder="-74.0800"
-                  keyboardType="numeric"
-                />
-              </View>
-            </View>
+            {(schoolLatitude && schoolLongitude) ? (
+              <Text style={styles.coordsText}>
+                📍 Coordenadas obtenidas
+              </Text>
+            ) : null}
           </View>
 
           {/* Section: Contacto de Emergencia */}
@@ -405,12 +491,12 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
             <View style={styles.checkboxRow}>
               <Pressable
                 style={styles.checkbox}
-                onPress={() => setIsEmergencyContact(!isEmergencyContact)}
+                onPress={() => handleEmergencyContactChange(!isEmergencyContact)}
               >
                 <View style={[styles.checkboxInner, isEmergencyContact && styles.checkboxChecked]}>
                   {isEmergencyContact && <Text style={styles.checkmark}>✓</Text>}
                 </View>
-                <Text style={styles.checkboxLabel}>Es contacto de emergencia</Text>
+                <Text style={styles.checkboxLabel}>Usar mis datos de contacto de emergencia</Text>
               </Pressable>
             </View>
 
@@ -495,6 +581,16 @@ const styles = StyleSheet.create({
   errorText: {
     color: '#dc2626',
     fontSize: 14,
+  },
+  helpText: {
+    fontSize: 12,
+    color: '#6b7280',
+    marginBottom: 12,
+  },
+  coordsText: {
+    fontSize: 12,
+    color: '#16a34a',
+    marginTop: 4,
   },
   section: {
     backgroundColor: '#ffffff',
