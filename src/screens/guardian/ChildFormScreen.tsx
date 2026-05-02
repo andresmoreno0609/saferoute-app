@@ -39,6 +39,7 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [guardianData, setGuardianData] = useState<any>(null);
+  const [userData, setUserData] = useState<any>(null);
 
   // Form fields
   const [name, setName] = useState('');
@@ -74,7 +75,8 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
       const userRes = await fetch(`${API_URL}/auth/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      const userData = await userRes.json();
+      const uData = await userRes.json();
+      setUserData(uData);
       
       // Get guardian profile
       const guardianRes = await fetch(`${API_URL}/guardians/user/${userData.user.id}`, {
@@ -85,10 +87,10 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
         const gData = await guardianRes.json();
         setGuardianData(gData);
         
-        // Pre-cargar contacto de emergencia si está seleccionado
+        // Pre-cargar contacto de emergencias con datos del guardian
         if (isEmergencyContact) {
-          setEmergencyContact(gData.emergencyContact || userData.user.name || '');
-          setEmergencyPhone(gData.emergencyPhone || '');
+          setEmergencyContact(uData.user.name || '');
+          setEmergencyPhone(gData.phone || '');
         }
       }
     } catch (err) {
@@ -105,20 +107,10 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
   const handleEmergencyContactChange = async (value: boolean) => {
     setIsEmergencyContact(value);
     
-    if (value && guardianData) {
-      // Pre-cargar datos del guardian
-      try {
-        const token = await AsyncStorage.getItem('accessToken');
-        const userRes = await fetch(`${API_URL}/auth/me`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const userData = await userRes.json();
-        
-        setEmergencyContact(guardianData?.emergencyContact || userData.user.name || '');
-        setEmergencyPhone(guardianData?.emergencyPhone || '');
-      } catch (err) {
-        console.error('Error precargando:', err);
-      }
+    if (value && guardianData && userData) {
+      // Pre-cargar con nombre y teléfono del guardian
+      setEmergencyContact(userData.user.name || guardianData.name || '');
+      setEmergencyPhone(guardianData.phone || '');
     } else {
       // Limpiar campos si se deselecciona
       setEmergencyContact('');
