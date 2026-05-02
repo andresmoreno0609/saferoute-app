@@ -10,6 +10,7 @@ import { StatusBar } from 'expo-status-bar';
 import LoginScreen from './src/screens/auth/LoginScreen';
 import RegisterScreen from './src/screens/auth/RegisterScreen';
 import GuardianDashboardScreen from './src/screens/guardian/DashboardScreen';
+import GuardianCompleteProfileScreen from './src/screens/guardian/CompleteProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,7 @@ export default function App() {
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="GuardianDashboard" component={GuardianDashboardScreen} />
+          <Stack.Screen name="GuardianCompleteProfile" component={GuardianCompleteProfileScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

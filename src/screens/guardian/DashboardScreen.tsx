@@ -192,7 +192,12 @@ function NotificationItem({ notification }: { notification: Notification }) {
 // ============================================
 // Pantalla Principal
 // ============================================
-export default function GuardianDashboardScreen() {
+// Props
+interface Props {
+  navigation?: any;
+}
+
+export default function GuardianDashboardScreen({ navigation }: Props) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<GuardianProfile | null>(null);
   const [students, setStudents] = useState<Student[]>([]);
@@ -280,16 +285,22 @@ export default function GuardianDashboardScreen() {
 
         {/* Banner: Complete Profile (solo si incompleto) */}
         {profileIncomplete && (
-          <Pressable style={styles.banner}>
+          <Pressable 
+            style={styles.banner}
+            onPress={() => navigation?.navigate('GuardianCompleteProfile')}
+          >
             <View style={styles.bannerContent}>
               <Text style={styles.bannerTitle}>💡 Completa tu perfil</Text>
               <Text style={styles.bannerDesc}>
                 Mejora la seguridad de tus hijos añadiendo contactos de emergencia.
               </Text>
-              <Pressable style={styles.bannerButton}>
-                <Text style={styles.bannerButtonText}>ACTUALIZAR</Text>
-              </Pressable>
             </View>
+            <Pressable 
+              style={styles.bannerButton}
+              onPress={() => navigation?.navigate('GuardianCompleteProfile')}
+            >
+              <Text style={styles.bannerButtonText}>ACTUALIZAR</Text>
+            </Pressable>
           </Pressable>
         )}
 
@@ -355,7 +366,7 @@ export default function GuardianDashboardScreen() {
 
       {/* Bottom Navigation (fija) */}
       <View style={styles.bottomNav}>
-        <Pressable style={styles.navItemActive}>
+        <Pressable style={[styles.navItem, styles.navItemActive]}>
           <Text style={styles.navIcon}>🏠</Text>
           <Text style={styles.navTextActive}>Inicio</Text>
         </Pressable>
@@ -588,19 +599,22 @@ const styles = StyleSheet.create({
     right: 0,
     flexDirection: 'row',
     justifyContent: 'space-around',
+    alignItems: 'center',
     backgroundColor: '#ffffff',
-    paddingBottom: 20,
+    paddingBottom: 24,
     paddingTop: 12,
     borderTopWidth: 1,
     borderTopColor: '#e0e3e5',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.04,
+    shadowRadius: 20,
   },
   navItem: {
+    flex: 1,
     alignItems: 'center',
-    padding: 8,
-  },
-  navItemActive: {
-    alignItems: 'center',
-    padding: 8,
+    justifyContent: 'center',
+    paddingVertical: 8,
   },
   navIcon: {
     fontSize: 24,
