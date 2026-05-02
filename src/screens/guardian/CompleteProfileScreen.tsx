@@ -32,6 +32,7 @@ export default function GuardianCompleteProfileScreen({ navigation }: { navigati
   const [error, setError] = useState('');
   
   // Section 1: Información Personal
+  const [phone, setPhone] = useState('');
   const [documentNumber, setDocumentNumber] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [address, setAddress] = useState('');
@@ -47,8 +48,23 @@ export default function GuardianCompleteProfileScreen({ navigation }: { navigati
   const handleSave = async () => {
     // Validation - all required
     if (!documentNumber || !birthDate || !address || !occupation || 
-        !workPhone || !emergencyContactName || !emergencyContactPhone) {
+        !workPhone || !emergencyContactName || !emergencyContactPhone || !phone) {
       setError('Por favor completa todos los campos');
+      return;
+    }
+    
+    // Validate date format (YYYY-MM-DD)
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!dateRegex.test(birthDate)) {
+      setError('La fecha debe tener formato YYYY-MM-DD (ej: 1990-02-03)');
+      return;
+    }
+    
+    // Validate date is valid
+    const [year, month, day] = birthDate.split('-').map(Number);
+    const dateObj = new Date(year, month - 1, day);
+    if (dateObj.getFullYear() !== year || dateObj.getMonth() !== month - 1 || dateObj.getDate() !== day) {
+      setError('La fecha no es válida');
       return;
     }
 
@@ -59,8 +75,12 @@ export default function GuardianCompleteProfileScreen({ navigation }: { navigati
       // Get token first
       authToken = await AsyncStorage.getItem('accessToken');
       
-      // Get guardian ID to update
+      // Get user info first
       const userRes = await fetchWithAuth(`${API_URL}/auth/me`);
+      if (!userRes.ok) {
+        const errData = await userRes.json().catch(() => ({}));
+        throw new Error(errData.message || 'Error al obtener usuario');
+      }
       const userData = await userRes.json();
       const userId = userData.user.id;
       
@@ -71,10 +91,19 @@ export default function GuardianCompleteProfileScreen({ navigation }: { navigati
       if (guardianRes.ok) {
         const guardianData = await guardianRes.json();
         guardianId = guardianData.id;
+      } else if (guardianRes.status !== 404) {
+        const errData = await guardianRes.json().catch(() => ({}));
+        throw new Error(errData.message || 'Error al obtener perfil');
       }
       
-      // Save profile data
+      // Save profile data - get name and phone from user data
+      const userName = userData.user.name || '';
+      const userEmail = userData.user.email || '';
+      
       const profileData = {
+        name: userName,
+        phone: phone,
+        email: userEmail,
         documentNumber,
         birthDate,
         address,
@@ -88,7 +117,7 @@ export default function GuardianCompleteProfileScreen({ navigation }: { navigati
       let saveRes;
       if (guardianId) {
         saveRes = await fetchWithAuth(`${API_URL}/guardians/${guardianId}`, {
-          method: 'PATCH',
+          method: 'PUT',
           body: JSON.stringify(profileData),
         });
       } else {
@@ -99,7 +128,8 @@ export default function GuardianCompleteProfileScreen({ navigation }: { navigati
       }
       
       if (!saveRes.ok) {
-        throw new Error('Error guardando perfil');
+        const errData = await saveRes.json().catch(() => ({}));
+        throw new Error(errData.message || 'Error guardando perfil');
       }
       
       const savedProfile = await saveRes.json();
@@ -115,7 +145,19 @@ export default function GuardianCompleteProfileScreen({ navigation }: { navigati
       ]);
       
     } catch (err: any) {
-      setError(err.message || 'Error al guardar');
+      // Log error to console for debugging (not shown to user)
+      console.error('Error guardando perfil:', err);
+      
+      // Show user-friendly message
+      const userMessage = err?.message?.includes('401') 
+        ? 'Tu sesión expiró. Iniciá sesión de nuevo.'
+        : err?.message?.includes('403')
+        ? 'No tenés permiso para guardar.'
+        : err?.message?.includes('500') || err?.message?.includes('Error')
+        ? 'Error del servidor. Intentá más tarde.'
+        : 'Error al guardar el perfil. Intentá de nuevo.';
+      
+      setError(userMessage);
     } finally {
       setLoading(false);
     }
@@ -149,6 +191,17 @@ export default function GuardianCompleteProfileScreen({ navigation }: { navigati
           <View style={styles.sectionTitle}>
             <Text style={styles.sectionIcon}>👤</Text>
             <Text style={styles.sectionTitleText}>Información Personal</Text>
+          </View>
+          
+          <View style={styles.field}>
+            <Text style={styles.label}>TELÉFONO</Text>
+            <TextInput
+              style={styles.input}
+              value={phone}
+              onChangeText={setPhone}
+              placeholder="Ej. +56 9 1234 5678"
+              keyboardType="phone-pad"
+            />
           </View>
           
           <View style={styles.field}>
