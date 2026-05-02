@@ -20,6 +20,29 @@ async function clearTokens() {
   }
 }
 
+// Tipos
+interface GuardianProfile {
+  id: string;
+  userId: string;
+  phone?: string;
+  documentNumber?: string;
+  birthDate?: string;
+  address?: string;
+  occupation?: string;
+  workPhone?: string;
+  emergencyContactName?: string;
+  emergencyContactPhone?: string;
+  infoValidate?: boolean;
+}
+
+interface DriverProfile {
+  id: string;
+  userId: string;
+  licenseNumber?: string;
+  vehicleId?: string;
+  isVerified?: boolean;
+}
+
 interface Props {
   navigation?: any;
 }
@@ -36,13 +59,15 @@ function getRoleLabel(role: string): string {
 
 export default function ProfileScreen({ navigation }: Props) {
   const [user, setUser] = useState<User | null>(null);
+  const [guardianProfile, setGuardianProfile] = useState<GuardianProfile | null>(null);
+  const [driverProfile, setDriverProfile] = useState<DriverProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadUser();
+    loadData();
   }, []);
 
-  async function loadUser() {
+  async function loadData() {
     try {
       const token = await AsyncStorage.getItem(ACCESS_TOKEN_KEY);
       if (!token) {
@@ -50,16 +75,39 @@ export default function ProfileScreen({ navigation }: Props) {
         return;
       }
 
-      const res = await fetch(`${API_URL}/auth/me`, {
+      // Cargar datos del usuario
+      const userRes = await fetch(`${API_URL}/auth/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      if (res.ok) {
-        const data = await res.json();
-        setUser(data);
+      if (userRes.ok) {
+        const userData = await userRes.json();
+        setUser(userData);
+
+        // Si es guardian, cargar perfil de guardian
+        if (userData.roles?.includes('GUARDIAN')) {
+          const guardianRes = await fetch(`${API_URL}/guardians/user/${userData.user.id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if (guardianRes.ok) {
+            const guardianData = await guardianRes.json();
+            setGuardianProfile(guardianData);
+          }
+        }
+
+        // Si es driver, cargar perfil de driver (endpoint puede no existir)
+        // if (userData.roles?.includes('DRIVER')) {
+        //   const driverRes = await fetch(`${API_URL}/drivers/user/${userData.user.id}`, {
+        //     headers: { Authorization: `Bearer ${token}` },
+        //   });
+        //   if (driverRes.ok) {
+        //     const driverData = await driverRes.json();
+        //     setDriverProfile(driverData);
+        //   }
+        // }
       }
     } catch (err) {
-      console.error('loadUser error:', err);
+      console.error('loadData error:', err);
     } finally {
       setLoading(false);
     }
@@ -172,10 +220,94 @@ export default function ProfileScreen({ navigation }: Props) {
           <View style={styles.field}>
             <Text style={styles.fieldLabel}>Teléfono</Text>
             <Text style={styles.fieldValue}>
-              {user?.phone || user?.telefono || '-'}
+              {user?.phone || '-'}
             </Text>
           </View>
         </View>
+
+        {/* Datos de Guardian */}
+        {role === 'GUARDIAN' && guardianProfile && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Información de Contacto</Text>
+            
+            <View style={styles.field}>
+              <Text style={styles.fieldLabel}>Número de Documento</Text>
+              <Text style={styles.fieldValue}>
+                {guardianProfile.documentNumber || '-'}
+              </Text>
+            </View>
+
+            <View style={styles.field}>
+              <Text style={styles.fieldLabel}>Fecha de Nacimiento</Text>
+              <Text style={styles.fieldValue}>
+                {guardianProfile.birthDate || '-'}
+              </Text>
+            </View>
+
+            <View style={styles.field}>
+              <Text style={styles.fieldLabel}>Dirección</Text>
+              <Text style={styles.fieldValue}>
+                {guardianProfile.address || '-'}
+              </Text>
+            </View>
+
+            <View style={styles.field}>
+              <Text style={styles.fieldLabel}>Ocupación</Text>
+              <Text style={styles.fieldValue}>
+                {guardianProfile.occupation || '-'}
+              </Text>
+            </View>
+
+            <View style={styles.field}>
+              <Text style={styles.fieldLabel}>Teléfono del Trabajo</Text>
+              <Text style={styles.fieldValue}>
+                {guardianProfile.workPhone || '-'}
+              </Text>
+            </View>
+
+            <View style={styles.sectionDivider} />
+
+            <Text style={styles.subsectionTitle}>Contacto de Emergencia</Text>
+
+            <View style={styles.field}>
+              <Text style={styles.fieldLabel}>Nombre</Text>
+              <Text style={styles.fieldValue}>
+                {guardianProfile.emergencyContactName || '-'}
+              </Text>
+            </View>
+
+            <View style={styles.field}>
+              <Text style={styles.fieldLabel}>Teléfono</Text>
+              <Text style={styles.fieldValue}>
+                {guardianProfile.emergencyContactPhone || '-'}
+              </Text>
+            </View>
+          </View>
+        )}
+
+        {/* Datos de Driver */}
+        {role === 'DRIVER' && driverProfile && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Información del Conductor</Text>
+            
+            <View style={styles.field}>
+              <Text style={styles.fieldLabel}>Licencia de Conducción</Text>
+              <Text style={styles.fieldValue}>
+                {driverProfile.licenseNumber || '-'}
+              </Text>
+            </View>
+
+            <View style={styles.field}>
+              <Text style={styles.fieldLabel}>Estado</Text>
+              <Text style={[
+                styles.fieldValue,
+                driverProfile.isVerified ? styles.statusVerified : styles.statusPending
+              ]}>
+                {driverProfile.isVerified ? 'Verificado' : 'Pendiente de verificación'}
+              </Text>
+            </View>
+          </View>
+        )}
 
         {/* Seguridad */}
         <View style={styles.section}>
@@ -403,5 +535,27 @@ const styles = StyleSheet.create({
     color: '#76777d',
     textAlign: 'center',
     marginTop: 4,
+  },
+  // Secciones adicionales
+  sectionDivider: {
+    height: 1,
+    backgroundColor: '#e0e3e5',
+    marginVertical: 16,
+  },
+  subsectionTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#45464d',
+    marginBottom: 12,
+    marginTop: 4,
+  },
+  // Estados de driver
+  statusVerified: {
+    backgroundColor: '#e6f7f5',
+    color: '#006a61',
+  },
+  statusPending: {
+    backgroundColor: '#fff3cd',
+    color: '#856404',
   },
 });
