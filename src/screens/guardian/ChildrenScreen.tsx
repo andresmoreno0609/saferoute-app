@@ -2,9 +2,10 @@
 // Flujo 17 - Gestionar hijos/estudiantes
 
 import { View, Text, StyleSheet, FlatList, RefreshControl, Pressable, Alert } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 import { Card, Avatar, Badge, Button, Spinner, EmptyState } from '../../components';
 import { studentsApi, authApi } from '../../lib/api';
 import type { Student } from '../../types';
@@ -21,6 +22,15 @@ export default function GuardianChildrenScreen({ navigation }: { navigation?: an
   useEffect(() => {
     initAndLoad();
   }, []);
+
+  // Recargar al volver a la pantalla (cuando se crea un hijo)
+  useFocusEffect(
+    useCallback(() => {
+      if (guardianId) {
+        loadStudents(guardianId);
+      }
+    }, [guardianId])
+  );
 
   const initAndLoad = async () => {
     try {
@@ -82,7 +92,16 @@ export default function GuardianChildrenScreen({ navigation }: { navigation?: an
       }
 
       const data = await res.json();
-      setStudents(data || []);
+      // Map response to Student format
+      const mappedStudents = (data || []).map((item: any) => ({
+        id: item.studentId,
+        name: item.studentName,
+        grade: item.grade,
+        status: item.status || 'SIN_RUTA',
+        routeId: item.routeId,
+        routeName: item.routeName,
+      }));
+      setStudents(mappedStudents);
       setError('');
     } catch (err: any) {
       setError('Ocurrió un error al cargar');

@@ -14,6 +14,8 @@ import GuardianCompleteProfileScreen from './src/screens/guardian/CompleteProfil
 import GuardianChildrenScreen from './src/screens/guardian/ChildrenScreen';
 import ChildDetailScreen from './src/screens/guardian/ChildDetailScreen';
 import ChildFormScreen from './src/screens/guardian/ChildFormScreen';
+import GuardianNotificationsScreen from './src/screens/guardian/NotificationsScreen';
+import ProfileScreen from './src/screens/shared/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +37,8 @@ export default function App() {
           <Stack.Screen name="GuardianChildren" component={GuardianChildrenScreen} />
           <Stack.Screen name="ChildDetail" component={ChildDetailScreen} />
           <Stack.Screen name="ChildForm" component={ChildFormScreen} />
+          <Stack.Screen name="GuardianNotifications" component={GuardianNotificationsScreen} />
+          <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

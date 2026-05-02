@@ -274,13 +274,15 @@ export default function GuardianDashboardScreen({ navigation }: Props) {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#006a61']} />
         }
       >
-        {/* Header */}
+        {/* Header: Avatar clickeable -> Perfil */}
         <View style={styles.header}>
           <View style={styles.headerLeft}>
             <Text style={styles.headerTitle}>SafeRoute</Text>
             <Text style={styles.headerSubtitle}>Hola, {user?.name?.split(' ')[0] || 'Usuario'}</Text>
           </View>
-          <Avatar uri={user?.photoUrl} name={user?.name || 'U'} />
+          <Pressable onPress={() => navigation?.navigate('ProfileScreen')}>
+            <Avatar uri={user?.photoUrl} name={user?.name || 'U'} />
+          </Pressable>
         </View>
 
         {/* Banner: Complete Profile (solo si incompleto) */}

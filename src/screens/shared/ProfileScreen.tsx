@@ -1,125 +1,125 @@
 // Shared: Profile Screen - SafeRoute
-// Flujo 20 - Perfil usuario (todas las vistas)
+// Simplified version
 
-import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
-import { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native-stack';
-import { Card, Button, Avatar, Input, Spinner } from '../../components';
-import { authApi, clearTokens } from '../../lib/api';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, Alert, Pressable } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { User } from '../../types';
 
-export default function ProfileScreen() {
-  const router = useRouter();
+const ACCESS_TOKEN_KEY = '@safeRouteAccessToken';
+const REFRESH_TOKEN_KEY = '@safeRouteRefreshToken';
+
+async function clearTokens() {
+  try {
+    await AsyncStorage.multiRemove([ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY]);
+  } catch (e) {
+    console.error('clearTokens error:', e);
+  }
+}
+
+interface Props {
+  navigation?: any;
+}
+
+export default function ProfileScreen({ navigation }: Props) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [loggingOut, setLoggingOut] = useState(false);
 
   useEffect(() => {
     loadUser();
   }, []);
 
-  const loadUser = async () => {
+  async function loadUser() {
     try {
-      const data = await authApi.me();
-      setUser(data);
+      const token = await AsyncStorage.getItem(ACCESS_TOKEN_KEY);
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+
+      const res = await fetch('http://192.168.1.6:8080/api/v1/auth/me', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data);
+      }
     } catch (err) {
-      console.error(err);
+      console.error('loadUser error:', err);
     } finally {
       setLoading(false);
     }
-  };
+  }
 
-  const handleLogout = async () => {
+  async function handleLogout() {
     Alert.alert(
       'Cerrar sesión',
-      '¿Estás seguro de que deseas cerrar sesión?',
+      '¿Seguris?',
       [
         { text: 'Cancelar', style: 'cancel' },
         {
-          text: 'Cerrar sesión',
+          text: 'Sí, salir',
           style: 'destructive',
           onPress: async () => {
-            setLoggingOut(true);
             try {
-              await authApi.logout();
-              await clearTokens();
-              router.replace('/login');
+              // Llamar al backend
+              const token = await AsyncStorage.getItem(ACCESS_TOKEN_KEY);
+              await fetch('http://192.168.1.6:8080/api/v1/auth/logout', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${token}`,
+                },
+              });
             } catch (err) {
-              // Still clear tokens and redirect
-              await clearTokens();
-              router.replace('/login');
+              console.error('Logout API error:', err);
             } finally {
-              setLoggingOut(false);
+              await clearTokens();
+              // Ir al login usando reset
+              if (navigation) {
+                navigation.reset({
+                  index: 0,
+                  routes: [{ name: 'Login' }],
+                });
+              }
             }
           },
         },
       ]
     );
-  };
-
-  if (loading) {
-    return <Spinner />;
   }
 
-  const role = user?.roles[0] || 'GUARDIAN';
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <Text>Cargando...</Text>
+      </View>
+    );
+  }
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      {/* Profile Header */}
-      <Card style={styles.profileCard}>
-        <Avatar name={user?.name || ''} size="lg" />
-        <Text style={styles.name}>{user?.name}</Text>
-        <Text style={styles.email}>{user?.email}</Text>
-        <View style={styles.roles}>
-          {user?.roles.map((r) => (
-            <View key={r} style={styles.roleBadge}>
-              <Text style={styles.roleText}>{r}</Text>
-            </View>
-          ))}
+    <ScrollView style={styles.container}>
+      <View style={styles.content}>
+        {/* Header */}
+        <View style={styles.header}>
+          <View style={styles.avatar}>
+            <Text style={styles.avatarText}>
+              {user?.name?.charAt(0) || '?'}
+            </Text>
+          </View>
+          <Text style={styles.name}>{user?.name || 'Usuario'}</Text>
+          <Text style={styles.email}>{user?.email || 'Sin email'}</Text>
         </View>
-      </Card>
 
-      {/* Profile Sections by Role */}
-      <Card style={styles.sectionCard}>
-        <Text style={styles.sectionTitle}>Información de perfil</Text>
-        
-        {role === 'DRIVER' && (
-          <Button
-            title="Completar datos del conductor"
-            variant="outline"
-            onPress={() => router.push('/driver/complete-profile')}
-          />
-        )}
-        
-        {role === 'GUARDIAN' && (
-          <Button
-            title="Completar datos de contacto"
-            variant="outline"
-            onPress={() => router.push('/guardian/complete-profile')}
-          />
-        )}
+        {/* Logout Button */}
+        <Pressable style={styles.logoutButton} onPress={handleLogout}>
+          <Text style={styles.logoutText}>Cerrar sesión</Text>
+        </Pressable>
 
-        <Button
-          title="Cambiar contraseña"
-          variant="ghost"
-          onPress={() => router.push('/change-password')}
-        />
-      </Card>
-
-      {/* App Info */}
-      <Card style={styles.infoCard}>
-        <Text style={styles.sectionTitle}>Acerca de la app</Text>
-        <Text style={styles.infoText}>SafeRoute v1.0.0</Text>
-        <Text style={styles.infoText}>Sistema de rutas escolares</Text>
-      </Card>
-
-      {/* Logout */}
-      <Button
-        title="Cerrar sesión"
-        variant="outline"
-        onPress={handleLogout}
-        loading={loggingOut}
-      />
+        {/* Version */}
+        <Text style={styles.version}>SafeRoute v1.0.0</Text>
+      </View>
     </ScrollView>
   );
 }
@@ -127,56 +127,56 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#f5f5f5',
   },
   content: {
-    padding: 16,
-    gap: 16,
+    padding: 20,
   },
-  profileCard: {
+  header: {
     alignItems: 'center',
-    gap: 8,
-    padding: 24,
+    marginBottom: 40,
+    marginTop: 40,
+  },
+  avatar: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#006a61',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  avatarText: {
+    color: '#fff',
+    fontSize: 32,
+    fontWeight: 'bold',
   },
   name: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#111827',
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 4,
   },
   email: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#666',
   },
-  roles: {
-    flexDirection: 'row',
-    gap: 8,
-    marginTop: 8,
+  logoutButton: {
+    backgroundColor: '#dc3545',
+    padding: 16,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 20,
   },
-  roleBadge: {
-    backgroundColor: '#dbeafe',
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    borderRadius: 12,
-  },
-  roleText: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#1d4ed8',
-  },
-  sectionCard: {
-    gap: 12,
-  },
-  sectionTitle: {
+  logoutText: {
+    color: '#fff',
     fontSize: 16,
     fontWeight: '600',
-    color: '#111827',
-    marginBottom: 8,
   },
-  infoCard: {
-    gap: 4,
-  },
-  infoText: {
-    fontSize: 14,
-    color: '#6b7280',
+  version: {
+    textAlign: 'center',
+    marginTop: 40,
+    color: '#999',
+    fontSize: 12,
   },
 });
