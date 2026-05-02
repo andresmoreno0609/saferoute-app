@@ -58,6 +58,11 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
   const [isEmergencyContact, setIsEmergencyContact] = useState(true);
   const [notifyEvents, setNotifyEvents] = useState(true);
 
+  // Handlers con transformación automática
+  const handleGradeChange = (text: string) => setGrade(text.toUpperCase());
+  const handleAddressChange = (text: string) => setAddress(text.toUpperCase());
+  const handleSchoolNameChange = (text: string) => setSchoolName(text.toUpperCase());
+
   useEffect(() => {
     initForm();
   }, [mode, studentId]);
@@ -379,7 +384,7 @@ relationship: RELATIONSHIP_MAP[relationship] || relationship,
               <TextInput
                 style={styles.input}
                 value={grade}
-                onChangeText={setGrade}
+                onChangeText={handleGradeChange}
                 placeholder="Ej. 5to Primaria"
               />
             </View>
@@ -397,7 +402,7 @@ relationship: RELATIONSHIP_MAP[relationship] || relationship,
               <TextInput
                 style={styles.input}
                 value={address}
-                onChangeText={setAddress}
+                onChangeText={handleAddressChange}
                 placeholder="Calle, número, ciudad"
               />
             </View>
@@ -421,7 +426,7 @@ relationship: RELATIONSHIP_MAP[relationship] || relationship,
               <TextInput
                 style={styles.input}
                 value={schoolName}
-                onChangeText={setSchoolName}
+                onChangeText={handleSchoolNameChange}
                 placeholder="Colegio San José"
               />
             </View>
