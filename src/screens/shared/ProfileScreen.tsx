@@ -62,6 +62,7 @@ export default function ProfileScreen({ navigation }: Props) {
   const [guardianProfile, setGuardianProfile] = useState<GuardianProfile | null>(null);
   const [driverProfile, setDriverProfile] = useState<DriverProfile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [debugInfo, setDebugInfo] = useState('');
 
   useEffect(() => {
     loadData();
@@ -88,34 +89,27 @@ export default function ProfileScreen({ navigation }: Props) {
         const userId = userData.user?.id || userData.id;
         const role = userData.roles?.[0];
         
-        console.log('=== PROFILE DEBUG ===');
-        console.log('userData:', JSON.stringify(userData));
-        console.log('userId:', userId);
-        console.log('role:', role);
+        // Mostrar en UI para debug
+        setDebugInfo(`userId: ${userId}, role: ${role}`);
 
         // Solo cargar perfil si es guardian
         if (role === 'GUARDIAN' && userId) {
-          console.log('Haciendo request a:', `${API_URL}/guardians/user/${userId}`);
-          
           const gRes = await fetch(`${API_URL}/guardians/user/${userId}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           
-          console.log('Guardian status:', gRes.status);
+          setDebugInfo(`status: ${gRes.status}`);
           
           if (gRes.ok) {
             const gData = await gRes.json();
-            console.log('Guardian data:', JSON.stringify(gData));
             setGuardianProfile(gData);
-          } else {
-            console.log('Guardian NO OK');
+            setDebugInfo(`guardian loaded: ${JSON.stringify(gData)}`);
           }
-        } else {
-          console.log('NO SE CARGO: role=', role, 'userId=', userId);
         }
       }
     } catch (err) {
       console.error('loadData error:', err);
+      setDebugInfo(`error: ${err}`);
     } finally {
       setLoading(false);
     }
@@ -187,7 +181,10 @@ export default function ProfileScreen({ navigation }: Props) {
           <Pressable onPress={handleBack} style={styles.backButton}>
             <Text style={styles.backIcon}>←</Text>
           </Pressable>
-          <Text style={styles.headerTitle}>Mi Perfil</Text>
+          <View style={styles.headerCenter}>
+            <Text style={styles.headerTitle}>Mi Perfil</Text>
+            {debugInfo ? <Text style={styles.debugText}>{debugInfo}</Text> : null}
+          </View>
           <View style={styles.headerRight} />
         </View>
 
@@ -364,23 +361,25 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   // Header
-  header: {
+header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 24,
   },
-  backButton: {
-    padding: 8,
-  },
-  backIcon: {
-    fontSize: 24,
-    color: '#45464d',
+  headerCenter: {
+    flex: 1,
+    alignItems: 'center',
   },
   headerTitle: {
     fontSize: 20,
     fontWeight: '700',
     color: '#191c1e',
+  },
+  debugText: {
+    fontSize: 10,
+    color: '#ff0000',
+    marginTop: 2,
   },
   headerRight: {
     width: 40,
