@@ -296,7 +296,17 @@ relationship: RELATIONSHIP_MAP[relationship] || relationship,
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
         console.error('Error guardando:', errData);
-        throw new Error(errData.message || 'Error al guardar');
+        
+        // Error friendly para el usuario
+        let userMessage = errData.message || 'Error al guardar';
+        
+        if (userMessage.includes('Relationship') || userMessage.includes('not one of the values')) {
+          userMessage = 'El tipo de relación no es válido. Intentá de nuevo.';
+        } else if (userMessage.includes('JSON parse')) {
+          userMessage = 'Error de datos. Verificá los campos e intentá de nuevo.';
+        }
+        
+        throw new Error(userMessage);
       }
 
       Alert.alert('Éxito', mode === 'edit' ? 'Hijo actualizado' : 'Hijo agregado', [
