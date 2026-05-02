@@ -63,8 +63,8 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
   const DEFAULT_SCHOOL_LAT = '10.963';
   const DEFAULT_SCHOOL_LON = '-74.779';
   const DEFAULT_ADDRESS = 'CRA. 20 SUR #95-74';
-  const DEFAULT_HOME_LAT = '10.963';
-  const DEFAULT_HOME_LON = '-74.779';
+  const DEFAULT_HOME_LAT = '6.247638';
+  const DEFAULT_HOME_LON = '-75.565835';
 
   // Handlers con transformación automática
   const handleGradeChange = (text: string) => setGrade(text.toUpperCase());
