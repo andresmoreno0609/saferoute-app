@@ -9,7 +9,17 @@
 | Objetivo | Crear, ver, actualizar y eliminar hijos |
 | Prioridad | Alta |
 
-## 2. API - Endpoints
+## 2. Navigation - Desde Dashboard (Flujo 16)
+
+```
+Dashboard Guardian
+│
+├── [Mis Hijos] → ChildrenListScreen (este flujo)
+│   ├── Tap hijo → ChildDetailScreen
+│   └── [+ Agregar] → ChildFormScreen (modo crear)
+```
+
+## 3. API - Endpoints
 
 | Operacion | Metodo | Endpoint |
 |-----------|-------|----------|
@@ -19,7 +29,147 @@
 | Update child | PUT | `/api/v1/guardians/{guardianId}/students/{studentId}` |
 | Delete child | DELETE | `/api/v1/guardians/{guardianId}/students/{studentId}` |
 
-## 3. Request - Create/Update Child
+## 4. Screens
+
+### 4.1 ChildrenListScreen - Lista de Hijos
+
+```
+┌─────────────────────────────────────┐
+│ ← Mis Hijos               [+ Agregar]│
+├─────────────────────────────────────┤
+│                                     │
+│ ┌─────────────────────────────────┐ │
+│ │ 🚸 Maria Garcia                  │ │
+│ │ 5to Primaria  🚌 En Ruta        │ │
+│ │ [Ver] [Editar]                 │ │
+│ └─────────────────────────────────┘ │
+│                                     │
+│ ┌─────────────────────────────────┐ │
+│ │ 🚸 Santiago                     │ │
+│ │ 3ro Primaria  🏠 En Casa      │ │
+│ │ [Ver] [Editar]                 │ │
+│ └─────────────────────────────────┘ │
+│                                     │
+│ ────────────────────────────────────│
+│ Total: 2 hijos                      │
+│                                     │
+│ [Mi Perfil] [Mis Hijos] [Notif]     │
+└─────────────────────────────────────┘
+```
+
+**Estados del hijo:**
+| Estado | Icono | Color |
+|--------|------|-------|
+| EN_RUTA | 🚌 | #006a61 |
+| EN_COLEGIO | 🏫 | #22c55e |
+| EN_CASA | 🏠 | #6b7280 |
+| SIN_RUTA | ❌ | #9ca3af |
+
+### 4.2 ChildDetailScreen - Detalle del Hijo
+
+```
+┌─────────────────────────────────────┐
+│ ← Detalle                [Editar] 🗑️│
+├─────────────────────────────────────┤
+│                                     │
+│         📷 Foto                     │
+│       Maria Garcia                 │
+│       5to Primaria              │
+│                                     │
+│ ───────────────────────────────────│
+│                                     │
+│ 📍 DIRECCIÓN DE CASA              │
+│ Calle 123, Bogotá                │
+│                                     │
+│ 🏫 COLEGIO                       │
+│ Colegio San José                 │
+│                                     │
+│ 👤 CONTACTO DE EMERGENCIA         │
+│ Juan García (+57 300 123 4567)   │
+│                                     │
+│ ⚕️ INFO MÉDICA                   │
+│ Alergia a frutos secos          │
+│                                     │
+│ ───────────────────────────────────│
+│ 📱 RASTREO                     │
+│ Última actualización: 7:30am   │
+│ ████████░░░░ 80% completado   │
+│                                     │
+│ ───────────────────────────────────│
+│ [Mi Perfil] [Mis Hijos] [Notif]     │
+└─────────────────────────────────────┘
+```
+
+### 4.3 ChildFormScreen - Crear/Editar
+
+```
+┌─────────────────────────────────────┐
+│ ← Nuevo Hijo / Editar Hijo    [Guardar]│
+├─────────────────────────────────────┤
+│                                     │
+│ ┌─────────────────────────────────┐ │
+│ │ INFORMACIÓN PERSONAL            │ │
+│ └─────────────────────────────────┘ │
+│                                     │
+│ Nombre *                          │
+│ [________________________________] │
+│                                     │
+│ Fecha de Nacimiento              │
+│ [________________________________] │
+│                                     │
+│ Grado/Curso *                    │
+│ [________________________________] │
+│                                     │
+│ ───────────────────────────────────│
+│ ┌─────────────────────────────────┐ │
+│ │ DIRECCIÓN DE CASA               │ │
+│ └─────────────────────────────────┘ │
+│                                     │
+│ Dirección *                     │
+│ [________________________________] │
+│                                     │
+│ 📍 Ubicación (mapa)             │
+│ [Seleccionar en mapa]            │
+│                                     │
+│ ───────────────────────────────────│
+│ ┌─────────────────────────────────┐ │
+│ │ INFORMACIÓN DEL COLEGIO         │ │
+│ └─────────────────────────────────┘ │
+│                                     │
+│ Nombre del Colegio                │
+│ [________________________________] │
+│                                     │
+│ 📍 Ubicación (mapa)             │
+│ [Seleccionar en mapa]            │
+│                                     │
+│ ───────────────────────────────────│
+│ ┌─────────────────────────────────┐ │
+│ │ CONTACTO DE EMERGENCIA         │ │
+│ └─────────────────────────────────┘ │
+│                                     │
+│ Nombre *                        │
+│ [________________________________] │
+│                                     │
+│ Teléfono *                     │
+│ [________________________________] │
+│                                     │
+│ Observaciones médicas           │
+│ [________________________________] │
+│                                     │
+│ ───────────────────────────────────│
+│ ┌─────────────────────────────────┐ │
+│ │ RELACIÓN CON EL ESTUDIANTE      │ │
+│ └─────────────────────────────────┘ │
+│                                     │
+│ Parentesco *                    │
+│ [PADRE ▼]                      │
+│                                     │
+│ ☑ Es contacto de emergencia      │
+│ ☑ Notificar eventos           │
+└─────────────────────────────────────┘
+```
+
+## 5. Request - Create/Update
 
 ```json
 {
@@ -43,7 +193,7 @@
 }
 ```
 
-## 4. Response
+## 6. Response
 
 ```json
 {
@@ -59,7 +209,7 @@
 }
 ```
 
-## 5. Relationship Types
+## 7. Relationship Types
 
 | Valor | Descripcion |
 |-------|-------------|
@@ -70,20 +220,28 @@
 | ABUELO | Abuelo/a |
 | OTRO | Otro familiar |
 
-## 6. Validaciones
+## 8. Validaciones
 
 - El guardian solo puede modificar sus propios hijos
 - No se puede eliminar si el hijo está en una ruta activa
 - La dirección y coordenadas de casa son obligatorias
+- Nombre, teléfono y parentesco son obligatorios
 
-## 7. Screens
+## 9. Manejo de Errores
 
-- **ChildrenListScreen**: Lista de hijos con estado de ruta
-- **ChildDetailScreen**: Ver detalle del hijo
-- **ChildFormScreen**: Crear/editar hijo
+| Error | Mensaje usuario |
+|-------|-----------------|
+| 400 | Datos inválidos. Verificá los campos |
+| 401 | Sesión expirada. Iniciá sesión |
+| 403 | No tenés permiso |
+| 404 | Estudiante no encontrado |
+| 409 | No se puede eliminar. Está en ruta activa |
+| 500 | Error del servidor. Intentá más tarde |
 
-## 8. Notas UX
-- Foto del estudiante
-- Indicador de estado de ruta (EN_RUTA, EN_COLEGIO, EN_CASA, SIN_RUTA)
-- Botón para agregar nuevo hijo
-- Swipe para editar/eliminar
+## 10. Notas UX
+- Pull-to-refresh en lista
+- Loading states durante llamadas API
+- Confirmación antes de eliminar
+- Campos obligatorios marcados con *
+- Selector de parentesco dropdown
+- Mapa para ubicación (opcional)
