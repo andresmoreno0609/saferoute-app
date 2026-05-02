@@ -16,7 +16,7 @@ import {
   DashboardStats,
 } from '../types';
 
-const BASE_URL = 'http://localhost:8080/api/v1';
+const BASE_URL = 'http://192.168.1.6:8080/api/v1';
 
 // Token storage
 const ACCESS_TOKEN_KEY = 'accessToken';
@@ -174,22 +174,29 @@ export const routesApi = {
   myRoutes: () => fetchApi<Route[]>('/routes/my-routes'),
 };
 
-// Students (Guardian)
+// Students (Guardian) - Flujo 17
 export const studentsApi = {
-  list: () => fetchApi<Student[]>('/students'),
+  list: (guardianId: string) => 
+    fetchApi<Student[]>(`/guardians/${guardianId}/students`),
 
-  get: (id: string) => fetchApi<Student>(`/students/${id}`),
+  get: (guardianId: string, studentId: string) => 
+    fetchApi<Student>(`/guardians/${guardianId}/students/${studentId}`),
 
-  create: (data: Omit<Student, 'id'>) =>
-    fetchApi<Student>('/students', {
+  create: (guardianId: string, data: Omit<Student, 'id'>) =>
+    fetchApi<Student>(`/guardians/${guardianId}/students`, {
       method: 'POST',
       body: JSON.stringify(data),
     }),
 
-  update: (id: string, data: Partial<Student>) =>
-    fetchApi<Student>(`/students/${id}`, {
-      method: 'PATCH',
+  update: (guardianId: string, studentId: string, data: Partial<Student>) =>
+    fetchApi<Student>(`/guardians/${guardianId}/students/${studentId}`, {
+      method: 'PUT',
       body: JSON.stringify(data),
+    }),
+
+  delete: (guardianId: string, studentId: string) =>
+    fetchApi<void>(`/guardians/${guardianId}/students/${studentId}`, {
+      method: 'DELETE',
     }),
 };
 
