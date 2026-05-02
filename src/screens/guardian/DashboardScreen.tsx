@@ -124,8 +124,8 @@ async function getMyChildren(guardianId: string): Promise<Student[]> {
   return students;
 }
 
-async function getNotifications(): Promise<Notification[]> {
-  const response = await fetchWithAuth(`${API_URL}/notifications?limit=5`);
+async function getNotifications(guardianId: string): Promise<Notification[]> {
+  const response = await fetchWithAuth(`${API_URL}/notifications/guardian/${guardianId}?limit=5`);
   if (!response.ok) return [];
   return response.json();
 }
@@ -220,8 +220,10 @@ export default function GuardianDashboardScreen() {
       }
       
       // 4. Get notifications
-      const notifData = await getNotifications();
-      setNotifications(notifData);
+      if (profileData?.id) {
+        const notifData = await getNotifications(profileData.id);
+        setNotifications(notifData);
+      }
       
     } catch (err: any) {
       console.error('❌ Error:', err.message);
