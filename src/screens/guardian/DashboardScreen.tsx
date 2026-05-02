@@ -308,7 +308,9 @@ export default function GuardianDashboardScreen({ navigation }: Props) {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Mis Hijos</Text>
-            <Text style={styles.sectionLink}>VER TODOS</Text>
+            <Pressable onPress={() => navigation?.navigate('GuardianChildren')}>
+              <Text style={styles.sectionLink}>VER TODOS</Text>
+            </Pressable>
           </View>
           
           <View style={styles.childrenGrid}>
@@ -316,7 +318,11 @@ export default function GuardianDashboardScreen({ navigation }: Props) {
               <Text style={styles.emptyText}>No hay hijos registrados</Text>
             ) : (
               students.map((student) => (
-                <Pressable key={student.id} style={styles.childCard}>
+                <Pressable 
+                  key={student.id} 
+                  style={styles.childCard}
+                  onPress={() => navigation?.navigate('GuardianChildren')}
+                >
                   <View style={styles.childCardHeader}>
                     <Avatar uri={student.photoUrl} name={student.name} size={56} />
                     <StatusBadge status={student.status} />
