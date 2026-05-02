@@ -181,12 +181,16 @@ export default function ProfileScreen({ navigation }: Props) {
           <Pressable onPress={handleBack} style={styles.backButton}>
             <Text style={styles.backIcon}>←</Text>
           </Pressable>
-          <View style={styles.headerCenter}>
-            <Text style={styles.headerTitle}>Mi Perfil</Text>
-            {debugInfo ? <Text style={styles.debugText}>{debugInfo}</Text> : null}
-          </View>
-          <View style={styles.headerRight} />
+          <Text style={styles.headerTitle}>Mi Perfil</Text>
+          <Text style={styles.debugIcon}>ⓘ</Text>
         </View>
+
+        {/* DEBUG INFO */}
+        {debugInfo ? (
+          <View style={styles.debugBox}>
+            <Text style={styles.debugBoxText}>{debugInfo}</Text>
+          </View>
+        ) : null}
 
         {/* Avatar Section */}
         <View style={styles.avatarSection}>
@@ -380,6 +384,21 @@ header: {
     fontSize: 10,
     color: '#ff0000',
     marginTop: 2,
+  },
+  debugIcon: {
+    fontSize: 18,
+    color: '#666',
+    padding: 8,
+  },
+  debugBox: {
+    backgroundColor: '#ffff00',
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 16,
+  },
+  debugBoxText: {
+    fontSize: 12,
+    color: '#000',
   },
   headerRight: {
     width: 40,
