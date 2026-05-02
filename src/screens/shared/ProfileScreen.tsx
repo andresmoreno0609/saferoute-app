@@ -1,11 +1,14 @@
 // Shared: Profile Screen - SafeRoute
-// Simplified version
+// Diseño: flujos-design/20-perfil-usuario.md
+// Estado: solo lectura (no editable)
 
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, Alert, Pressable } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { User } from '../../types';
 
+const API_URL = 'http://192.168.1.6:8080/api/v1';
 const ACCESS_TOKEN_KEY = '@safeRouteAccessToken';
 const REFRESH_TOKEN_KEY = '@safeRouteRefreshToken';
 
@@ -19,6 +22,16 @@ async function clearTokens() {
 
 interface Props {
   navigation?: any;
+}
+
+// Rol legible
+function getRoleLabel(role: string): string {
+  const mapping: Record<string, string> = {
+    GUARDIAN: 'Padre / Tutor',
+    DRIVER: 'Conductor',
+    ADMIN: 'Administrador',
+  };
+  return mapping[role] || role;
 }
 
 export default function ProfileScreen({ navigation }: Props) {
@@ -37,7 +50,7 @@ export default function ProfileScreen({ navigation }: Props) {
         return;
       }
 
-      const res = await fetch('http://192.168.1.6:8080/api/v1/auth/me', {
+      const res = await fetch(`${API_URL}/auth/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -55,7 +68,7 @@ export default function ProfileScreen({ navigation }: Props) {
   async function handleLogout() {
     Alert.alert(
       'Cerrar sesión',
-      '¿Seguris?',
+      '¿Estás seguro de que deseas cerrar sesión?',
       [
         { text: 'Cancelar', style: 'cancel' },
         {
@@ -63,9 +76,8 @@ export default function ProfileScreen({ navigation }: Props) {
           style: 'destructive',
           onPress: async () => {
             try {
-              // Llamar al backend
               const token = await AsyncStorage.getItem(ACCESS_TOKEN_KEY);
-              await fetch('http://192.168.1.6:8080/api/v1/auth/logout', {
+              await fetch(`${API_URL}/auth/logout`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -76,7 +88,6 @@ export default function ProfileScreen({ navigation }: Props) {
               console.error('Logout API error:', err);
             } finally {
               await clearTokens();
-              // Ir al login usando reset
               if (navigation) {
                 navigation.reset({
                   index: 0,
@@ -90,93 +101,307 @@ export default function ProfileScreen({ navigation }: Props) {
     );
   }
 
+  function handleBack() {
+    if (navigation) {
+      navigation.goBack();
+    }
+  }
+
+  // Loading
   if (loading) {
     return (
-      <View style={styles.container}>
-        <Text>Cargando...</Text>
-      </View>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.loading}>
+          <Text style={styles.loadingText}>Cargando...</Text>
+        </View>
+      </SafeAreaView>
     );
   }
 
+  const role = user?.roles?.[0] || 'GUARDIAN';
+
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.content}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView 
+        style={styles.scrollView}
+        contentContainerStyle={styles.content}
+      >
         {/* Header */}
         <View style={styles.header}>
-          <View style={styles.avatar}>
-            <Text style={styles.avatarText}>
-              {user?.name?.charAt(0) || '?'}
-            </Text>
-          </View>
-          <Text style={styles.name}>{user?.name || 'Usuario'}</Text>
-          <Text style={styles.email}>{user?.email || 'Sin email'}</Text>
+          <Pressable onPress={handleBack} style={styles.backButton}>
+            <Text style={styles.backIcon}>←</Text>
+          </Pressable>
+          <Text style={styles.headerTitle}>Mi Perfil</Text>
+          <View style={styles.headerRight} />
         </View>
 
-        {/* Logout Button */}
+        {/* Avatar Section */}
+        <View style={styles.avatarSection}>
+          <View style={styles.avatarContainer}>
+            <View style={styles.avatar}>
+              <Text style={styles.avatarText}>
+                {user?.name?.charAt(0) || '?'}
+              </Text>
+            </View>
+            <Pressable style={styles.editAvatarButton}>
+              <Text style={styles.editAvatarIcon}>✎</Text>
+            </Pressable>
+          </View>
+          <Text style={styles.userName}>{user?.name || 'Usuario'}</Text>
+          <View style={styles.roleBadge}>
+            <Text style={styles.roleText}>{getRoleLabel(role)}</Text>
+          </View>
+        </View>
+
+        {/* Datos Personales */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Datos Personales</Text>
+          
+          <View style={styles.field}>
+            <Text style={styles.fieldLabel}>Nombre Completo</Text>
+            <Text style={styles.fieldValue}>{user?.name || '-'}</Text>
+          </View>
+
+          <View style={styles.field}>
+            <Text style={styles.fieldLabel}>Correo Electrónico</Text>
+            <Text style={[styles.fieldValue, styles.fieldReadonly]}>
+              {user?.email || '-'}
+            </Text>
+          </View>
+
+          <View style={styles.field}>
+            <Text style={styles.fieldLabel}>Teléfono</Text>
+            <Text style={styles.fieldValue}>
+              {user?.phone || user?.telefono || '-'}
+            </Text>
+          </View>
+        </View>
+
+        {/* Seguridad */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Seguridad</Text>
+          
+          <Pressable style={styles.actionButton}>
+            <Text style={styles.actionIcon}>🔒</Text>
+            <Text style={styles.actionText}>Cambiar Contraseña</Text>
+            <Text style={styles.chevron}>›</Text>
+          </Pressable>
+        </View>
+
+        {/* Cerrar Sesión */}
         <Pressable style={styles.logoutButton} onPress={handleLogout}>
-          <Text style={styles.logoutText}>Cerrar sesión</Text>
+          <Text style={styles.logoutIcon}>🚪</Text>
+          <Text style={styles.logoutText}>Cerrar Sesión</Text>
         </Pressable>
 
         {/* Version */}
         <Text style={styles.version}>SafeRoute v1.0.0</Text>
-      </View>
-    </ScrollView>
+        <Text style={styles.versionSubtitle}>Sistema de rutas escolares</Text>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#f7f9fb',
+  },
+  scrollView: {
+    flex: 1,
   },
   content: {
     padding: 20,
+    paddingBottom: 40,
   },
-  header: {
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 40,
-    marginTop: 40,
+  },
+  loadingText: {
+    fontSize: 16,
+    color: '#666',
+  },
+  // Header
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 24,
+  },
+  backButton: {
+    padding: 8,
+  },
+  backIcon: {
+    fontSize: 24,
+    color: '#45464d',
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#191c1e',
+  },
+  headerRight: {
+    width: 40,
+  },
+  // Avatar Section
+  avatarSection: {
+    alignItems: 'center',
+    marginBottom: 32,
+    marginTop: 8,
+  },
+  avatarContainer: {
+    position: 'relative',
   },
   avatar: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: 96,
+    height: 96,
+    borderRadius: 48,
     backgroundColor: '#006a61',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 12,
+    borderWidth: 4,
+    borderColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   avatarText: {
     color: '#fff',
-    fontSize: 32,
-    fontWeight: 'bold',
+    fontSize: 40,
+    fontWeight: '700',
   },
-  name: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#333',
+  editAvatarButton: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    backgroundColor: '#89f5e7',
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  editAvatarIcon: {
+    fontSize: 16,
+    color: '#006a61',
+  },
+  userName: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#191c1e',
+    marginTop: 16,
+  },
+  roleBadge: {
+    backgroundColor: '#e6f7f5',
+    paddingHorizontal: 16,
+    paddingVertical: 6,
+    borderRadius: 20,
+    marginTop: 8,
+  },
+  roleText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#006a61',
+    textTransform: 'uppercase',
+    letterSpacing: 0.05,
+  },
+  // Sections
+  section: {
+    marginBottom: 24,
+  },
+  sectionTitle: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#76777d',
+    textTransform: 'uppercase',
+    letterSpacing: 0.05,
+    marginBottom: 16,
+    paddingBottom: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e3e5',
+  },
+  // Fields
+  field: {
+    marginBottom: 16,
+  },
+  fieldLabel: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#45464d',
     marginBottom: 4,
   },
-  email: {
-    fontSize: 14,
-    color: '#666',
-  },
-  logoutButton: {
-    backgroundColor: '#dc3545',
+  fieldValue: {
+    fontSize: 16,
+    color: '#191c1e',
+    backgroundColor: '#fff',
     padding: 16,
-    borderRadius: 8,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e0e3e5',
+  },
+  fieldReadonly: {
+    backgroundColor: '#f2f4f6',
+    color: '#76777d',
+  },
+  // Action Buttons
+  actionButton: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
+    backgroundColor: '#fff',
+    padding: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e0e3e5',
+  },
+  actionIcon: {
+    fontSize: 20,
+    marginRight: 12,
+  },
+  actionText: {
+    fontSize: 16,
+    color: '#191c1e',
+    flex: 1,
+    fontWeight: '500',
+  },
+  chevron: {
+    fontSize: 20,
+    color: '#c6c6cd',
+  },
+  // Logout
+  logoutButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 16,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: '#dc3545',
+    marginTop: 24,
+  },
+  logoutIcon: {
+    fontSize: 20,
+    marginRight: 8,
   },
   logoutText: {
-    color: '#fff',
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '700',
+    color: '#dc3545',
   },
+  // Version
   version: {
-    textAlign: 'center',
-    marginTop: 40,
-    color: '#999',
     fontSize: 12,
+    color: '#76777d',
+    textAlign: 'center',
+    marginTop: 32,
+  },
+  versionSubtitle: {
+    fontSize: 12,
+    color: '#76777d',
+    textAlign: 'center',
+    marginTop: 4,
   },
 });
