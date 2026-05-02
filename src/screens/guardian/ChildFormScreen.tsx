@@ -48,15 +48,20 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
   const [address, setAddress] = useState('');
   const [homeLatitude, setHomeLatitude] = useState('');
   const [homeLongitude, setHomeLongitude] = useState('');
-  const [schoolName, setSchoolName] = useState('');
-  const [schoolLatitude, setSchoolLatitude] = useState('');
-  const [schoolLongitude, setSchoolLongitude] = useState('');
+  const [schoolName, setSchoolName] = useState(DEFAULT_SCHOOL);
+  const [schoolLatitude, setSchoolLatitude] = useState(DEFAULT_SCHOOL_LAT);
+  const [schoolLongitude, setSchoolLongitude] = useState(DEFAULT_SCHOOL_LON);
   const [emergencyContact, setEmergencyContact] = useState('');
   const [emergencyPhone, setEmergencyPhone] = useState('');
   const [medicalInfo, setMedicalInfo] = useState('');
   const [relationship, setRelationship] = useState('Padre');
   const [isEmergencyContact, setIsEmergencyContact] = useState(true);
   const [notifyEvents, setNotifyEvents] = useState(true);
+
+  // Datos default para pruebas
+  const DEFAULT_SCHOOL = 'LA INSTITUCIÓN EDUCATIVA DISTRITAL LA MAGDALENA';
+  const DEFAULT_SCHOOL_LAT = '10.963';
+  const DEFAULT_SCHOOL_LON = '-74.779';
 
   // Handlers con transformación automática
   const handleGradeChange = (text: string) => setGrade(text.toUpperCase());
