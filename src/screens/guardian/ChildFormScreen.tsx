@@ -110,9 +110,17 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
       console.error('Error cargando datos del guardian:', err);
     }
 
-    // Cargar estudiante si es modo edición
+    // Cargar estudiante si es modo edición (no toca los defaults en modo crear)
     if (mode === 'edit' && studentId && guardianId) {
       await loadStudent();
+    } else if (mode === 'create') {
+      // En modo crear, asegurar que los defaults estén cargados
+      setAddress(DEFAULT_ADDRESS);
+      setHomeLatitude(DEFAULT_HOME_LAT);
+      setHomeLongitude(DEFAULT_HOME_LON);
+      setSchoolName(DEFAULT_SCHOOL);
+      setSchoolLatitude(DEFAULT_SCHOOL_LAT);
+      setSchoolLongitude(DEFAULT_SCHOOL_LON);
     }
   };
 
