@@ -37,7 +37,7 @@ export default function ChildDetailScreen({ navigation, route }: { navigation?: 
 
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
-        throw new Error(errData.message || 'Error al cargar');
+        throw new Error('Ocurrió un error');
       }
 
       const data = await res.json();
@@ -85,7 +85,7 @@ export default function ChildDetailScreen({ navigation, route }: { navigation?: 
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
         console.error('Error eliminando:', errData);
-        throw new Error(errData.message || 'Error al eliminar');
+        throw new Error('No se pudo eliminar');
       }
 
       Alert.alert('Éxito', 'Hijo eliminado', [

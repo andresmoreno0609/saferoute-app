@@ -161,7 +161,7 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
         console.error('Error cargando estudiante:', errData);
-        throw new Error(errData.message || 'Error al cargar');
+        throw new Error('Ocurrió un error. Intentá de nuevo');
       }
 
       const data = await res.json();
@@ -183,7 +183,7 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
       
     } catch (err: any) {
       console.error('Error loadStudent:', err);
-      setError(err.message || 'Error al cargar');
+      setError('Ocurrió un error al cargar');
     } finally {
       setLoading(false);
     }
@@ -307,7 +307,7 @@ relationship: RELATIONSHIP_MAP[relationship] || relationship,
 
     } catch (err: any) {
       console.error('Error handleSave:', err);
-      setError(err.message || 'Error al guardar');
+      setError('Ocurrió un error al guardar');
     } finally {
       setSaving(false);
     }

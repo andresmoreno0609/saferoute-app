@@ -36,7 +36,7 @@ export default function GuardianChildrenScreen({ navigation }: { navigation?: an
       });
       
       if (!userRes.ok) {
-        throw new Error('Error al obtener usuario');
+        throw new Error('Ocurrió un error');
       }
       
       const userData = await userRes.json();
@@ -48,7 +48,7 @@ export default function GuardianChildrenScreen({ navigation }: { navigation?: an
       });
       
       if (!guardianRes.ok) {
-        throw new Error('Error al obtener perfil');
+        throw new Error('Ocurrió un error');
       }
       
       const guardianData = await guardianRes.json();
@@ -58,7 +58,7 @@ export default function GuardianChildrenScreen({ navigation }: { navigation?: an
       await loadStudents(guardianData.id, token);
     } catch (err: any) {
       console.error('Error cargando hijos:', err);
-      setError(err.message || 'Error al cargar');
+      setError('Ocurrió un error');
     } finally {
       setLoading(false);
     }
@@ -78,14 +78,14 @@ export default function GuardianChildrenScreen({ navigation }: { navigation?: an
 
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
-        throw new Error(errData.message || 'Error al cargar hijos');
+        throw new Error('Ocurrió un error');
       }
 
       const data = await res.json();
       setStudents(data || []);
       setError('');
     } catch (err: any) {
-      setError(err.message || 'Error al cargar hijos');
+      setError('Ocurrió un error al cargar');
     }
   };
 
