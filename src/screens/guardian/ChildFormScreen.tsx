@@ -39,8 +39,8 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [guardianData, setGuardianData] = useState<any>(null);
-  const [userData, setUserData] = useState<any>(null);
-
+  const [currentUser, setCurrentUser] = useState<any>(null);
+  
   // Form fields
   const [name, setName] = useState('');
   const [birthDate, setBirthDate] = useState('');
@@ -75,11 +75,11 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
       const userRes = await fetch(`${API_URL}/auth/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      const uData = await userRes.json();
-      setUserData(uData);
+      const userData = await userRes.json();
+      setCurrentUser(userData);
       
       // Get guardian profile
-      const guardianRes = await fetch(`${API_URL}/guardians/user/${uData.user.id}`, {
+      const guardianRes = await fetch(`${API_URL}/guardians/user/${userData.user.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -89,7 +89,7 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
         
         // Pre-cargar contacto de emergencias con datos del guardian
         if (isEmergencyContact) {
-          setEmergencyContact(uData.user.name || '');
+          setEmergencyContact(userData.user.name || '');
           setEmergencyPhone(gData.phone || '');
         }
       }
@@ -107,9 +107,9 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
   const handleEmergencyContactChange = async (value: boolean) => {
     setIsEmergencyContact(value);
     
-    if (value && guardianData && uData) {
+    if (value && guardianData && currentUser) {
       // Pre-cargar con nombre y teléfono del guardian
-      setEmergencyContact(uData.user.name || '');
+      setEmergencyContact(currentUser.user.name || '');
       setEmergencyPhone(guardianData.phone || '');
     } else {
       // Limpiar campos si se deselecciona
@@ -236,7 +236,7 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
         });
         const userData = await userRes.json();
         
-        const guardianRes = await fetch(`${API_URL}/guardians/user/${uData.user.id}`, {
+        const guardianRes = await fetch(`${API_URL}/guardians/user/${userData.user.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const guardianData = await guardianRes.json();
