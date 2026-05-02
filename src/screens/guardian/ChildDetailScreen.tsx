@@ -84,6 +84,7 @@ export default function ChildDetailScreen({ navigation, route }: { navigation?: 
 
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
+        console.error('Error eliminando:', errData);
         throw new Error(errData.message || 'Error al eliminar');
       }
 
@@ -91,6 +92,7 @@ export default function ChildDetailScreen({ navigation, route }: { navigation?: 
         { text: 'OK', onPress: () => navigation?.goBack() }
       ]);
     } catch (err: any) {
+      console.error('Error deleteStudent:', err);
       Alert.alert('Error', err.message);
     }
   };
