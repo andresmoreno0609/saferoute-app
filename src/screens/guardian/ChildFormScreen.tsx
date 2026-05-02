@@ -11,6 +11,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const API_URL = 'http://192.168.1.6:8080/api/v1';
 
+// Mapping: frontend label -> backend enum value
+const RELATIONSHIP_MAP: Record<string, string> = {
+  'Padre': 'father',
+  'Madre': 'mother',
+  'Hermano/a': 'other',
+  'Tío/a': 'other',
+  'Abuelo/a': 'other',
+  'Otro': 'other',
+};
+
 const RELATIONSHIP_OPTIONS = [
   { value: 'PADRE', label: 'Padre' },
   { value: 'MADRE', label: 'Madre' },
@@ -43,7 +53,7 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
   const [emergencyContact, setEmergencyContact] = useState('');
   const [emergencyPhone, setEmergencyPhone] = useState('');
   const [medicalInfo, setMedicalInfo] = useState('');
-  const [relationship, setRelationship] = useState('PADRE');
+  const [relationship, setRelationship] = useState('Padre');
   const [isEmergencyContact, setIsEmergencyContact] = useState(true);
   const [notifyEvents, setNotifyEvents] = useState(true);
 
@@ -175,7 +185,7 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
       setEmergencyContact(data.emergencyContact || '');
       setEmergencyPhone(data.emergencyPhone || '');
       setMedicalInfo(data.medicalInfo || '');
-      setRelationship(data.relationship || 'PADRE');
+      setRelationship(data.relationship === 'father' ? 'Padre' : data.relationship === 'mother' ? 'Madre' : 'Otro');
       setIsEmergencyContact(data.isEmergencyContact ?? true);
       setNotifyEvents(data.notifyEvents ?? true);
       
@@ -263,7 +273,7 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
         emergencyContact: emergencyContact.trim(),
         emergencyPhone: emergencyPhone.trim(),
         medicalInfo: medicalInfo.trim() || null,
-        relationship,
+relationship: RELATIONSHIP_MAP[relationship] || relationship,
         isEmergencyContact,
         notifyEvents,
       };
