@@ -26,6 +26,10 @@ export async function getAccessToken(): Promise<string | null> {
   return AsyncStorage.getItem(ACCESS_TOKEN_KEY);
 }
 
+export async function getRefreshToken(): Promise<string | null> {
+  return AsyncStorage.getItem(REFRESH_TOKEN_KEY);
+}
+
 export async function setTokens(accessToken: string, refreshToken: string): Promise<void> {
   await AsyncStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
   await AsyncStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
@@ -35,10 +39,37 @@ export async function clearTokens(): Promise<void> {
   await AsyncStorage.multiRemove([ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY]);
 }
 
-// Generic fetch wrapper
+// Refresh access token usando refresh token
+async function refreshAccessToken(): Promise<boolean> {
+  try {
+    const refreshToken = await getRefreshToken();
+    if (!refreshToken) return false;
+
+    const response = await fetch(`${BASE_URL}/auth/refresh`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refreshToken }),
+    });
+
+    if (!response.ok) return false;
+
+    const data = await response.json();
+    if (data.accessToken) {
+      await AsyncStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
+      return true;
+    }
+    return false;
+  } catch (err) {
+    console.error('Refresh error:', err);
+    return false;
+  }
+}
+
+// Generic fetch wrapper con auto-refresh
 async function fetchApi<T>(
   endpoint: string,
-  options: RequestInit = {}
+  options: RequestInit = {},
+  retryOnUnauthorized = true
 ): Promise<T> {
   const accessToken = await getAccessToken();
   
@@ -53,12 +84,32 @@ async function fetchApi<T>(
     headers,
   });
 
+  // Si 401 y noch no intentamos refresh, intentamos y reintentamos
+  if (response.status === 401 && retryOnUnauthorized) {
+    const refreshed = await refreshAccessToken();
+    if (refreshed) {
+      // Retry request con nuevo token
+      return fetchApi<T>(endpoint, options, false);
+    }
+    // Refresh falló, limpiar tokens
+    await clearTokens();
+    throw new Error('Sesión expirada');
+  }
+
   if (!response.ok) {
     const error = await response.json().catch(() => ({ message: 'Error unknown' }));
     throw new Error(error.message || `HTTP ${response.status}`);
   }
 
   return response.json();
+}
+
+// Helper para requests directos con auto-refresh (igna el mismo patrón)
+export async function doFetch<T>(
+  endpoint: string,
+  options: RequestInit = {}
+): Promise<T> {
+  return fetchApi<T>(endpoint, options);
 }
 
 // Auth
