@@ -84,27 +84,21 @@ export default function ProfileScreen({ navigation }: Props) {
         const userData = await userRes.json();
         setUser(userData);
 
-        // Si es guardian, cargar perfil de guardian
-        if (userData.roles?.includes('GUARDIAN')) {
-          const guardianRes = await fetch(`${API_URL}/guardians/user/${userData.user.id}`, {
+        // Extraer userId - puede estar en diferentes lugares
+        const userId = userData.user?.id || userData.id;
+        console.log('UserId:', userId);
+
+        // Solo cargar perfil si es guardian
+        if (userData.roles?.[0] === 'GUARDIAN' && userId) {
+          const gRes = await fetch(`${API_URL}/guardians/user/${userId}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
-          if (guardianRes.ok) {
-            const guardianData = await guardianRes.json();
-            setGuardianProfile(guardianData);
+          
+          if (gRes.ok) {
+            const gData = await gRes.json();
+            setGuardianProfile(gData);
           }
         }
-
-        // Si es driver, cargar perfil de driver (endpoint puede no existir)
-        // if (userData.roles?.includes('DRIVER')) {
-        //   const driverRes = await fetch(`${API_URL}/drivers/user/${userData.user.id}`, {
-        //     headers: { Authorization: `Bearer ${token}` },
-        //   });
-        //   if (driverRes.ok) {
-        //     const driverData = await driverRes.json();
-        //     setDriverProfile(driverData);
-        //   }
-        // }
       }
     } catch (err) {
       console.error('loadData error:', err);
