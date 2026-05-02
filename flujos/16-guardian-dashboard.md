@@ -72,7 +72,6 @@ Al inicio, mostrar recordatorio si perfil incompleto (infoValidate = false).
 |-----------|-------|----------|
 | My user | GET | /api/v1/auth/me |
 | My guardian | GET | /api/v1/guardians/user/{userId} |
-| Update infoValidate | PUT | /api/v1/guardians/{id}/info-validate |
 | My children | GET | `/api/v1/student-guardians/guardian/{id}` |
 | Children details | GET | /api/v1/students/{id} |
 | My notifications | GET | /api/v1/notifications/guardian/{guardianId} |

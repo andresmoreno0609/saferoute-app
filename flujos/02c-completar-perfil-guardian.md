@@ -43,7 +43,7 @@ desde el Dashboard. Es opcional pero recomendado.
 | Operacion | Metodo | Endpoint |
 |-----------|-------|----------|
 | Create/update guardian | POST / PUT | `/api/v1/guardians` |
-| Update infoValidate | PUT | `/api/v1/guardians/{id}/info-validate` |
+| Update infoValidate | Se actualiza junto con el perfil |
 | Upload FCM token | PUT | `/api/v1/guardians/{id}/fcm-token` |
 
 ## 7. Request Create Guardian

@@ -110,7 +110,7 @@ Al inicio, mostrar recordatorio si perfil incompleto.
 |-----------|-------|----------|
 | My user | GET | /api/v1/auth/me |
 | My driver | GET | /api/v1/drivers/user/{userId} |
-| Update infoValidate | PUT | /api/v1/drivers/{id}/info-validate |
+| Update infoValidate | Se actualiza junto con el perfil |
 | My routes | GET | /api/v1/routes?driverId={id} |
 
 ## 7. Navigation
