@@ -85,31 +85,32 @@ export default function ProfileScreen({ navigation }: Props) {
         const userData = await userRes.json();
         setUser(userData);
 
-        // Extraer userId - puede estar en diferentes lugares
+        // userData puede tener guardian dentro si el backend lo incluye
+        // o puede necesitar /guardians/user/{id}
         const userId = userData.user?.id || userData.id;
-        const role = userData.roles?.[0];
         
-        // Mostrar en UI para debug
-        setDebugInfo(`userId: ${userId}, role: ${role}`);
+        setDebugInfo(`user: ${JSON.stringify(userData)}`);
 
-        // Solo cargar perfil si es guardian
-        if (role === 'GUARDIAN' && userId) {
-          const gRes = await fetch(`${API_URL}/guardians/user/${userId}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          
-          setDebugInfo(`status: ${gRes.status}`);
-          
-          if (gRes.ok) {
-            const gData = await gRes.json();
-            setGuardianProfile(gData);
-            setDebugInfo(`guardian loaded: ${JSON.stringify(gData)}`);
+        // Si el backend devuelve guardian en userData, usarlo
+        if (userData.guardian) {
+          setGuardianProfile(userData.guardian);
+        } else {
+          // Intentar endpoint propio
+          try {
+            const gRes = await fetch(`${API_URL}/guardians/user/${userId}`, {
+              headers: { Authorization: `Bearer ${token}` },
+            });
+            if (gRes.ok) {
+              const gData = await gRes.json();
+              setGuardianProfile(gData);
+            }
+          } catch (e) {
+            setDebugInfo(`guardian error: ${e}`);
           }
         }
       }
     } catch (err) {
       console.error('loadData error:', err);
-      setDebugInfo(`error: ${err}`);
     } finally {
       setLoading(false);
     }
