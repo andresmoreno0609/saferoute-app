@@ -164,6 +164,7 @@ export default function ProfileScreen({ navigation }: Props) {
       <SafeAreaView style={styles.container}>
         <View style={styles.loading}>
           <Text style={styles.loadingText}>Cargando...</Text>
+          <Button title="DEBUG" onPress={() => Alert.alert('DEBUG', debugInfo)} />
         </View>
       </SafeAreaView>
     );
