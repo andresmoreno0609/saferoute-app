@@ -4,10 +4,11 @@
 import { useState, useEffect } from 'react';
 import {
   View, Text, StyleSheet, ScrollView, TextInput,
-  Pressable, Alert, ActivityIndicator, KeyboardAvoidingView, Platform
+  Pressable, Alert, ActivityIndicator, KeyboardAvoidingView, Platform, Image
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as ImagePicker from 'expo-image-picker';
 
 const API_URL = 'http://192.168.1.8:8080/api/v1';
 
@@ -57,6 +58,7 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
   const [relationship, setRelationship] = useState('Padre');
   const [isEmergencyContact, setIsEmergencyContact] = useState(true);
   const [notifyEvents, setNotifyEvents] = useState(true);
+  const [photoUrl, setPhotoUrl] = useState('');
 
   // Datos default para pruebas
   const DEFAULT_SCHOOL = 'LA INSTITUCIÓN EDUCATIVA DISTRITAL LA MAGDALENA';
@@ -70,6 +72,47 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
   const handleGradeChange = (text: string) => setGrade(text.toUpperCase());
   const handleAddressChange = (text: string) => setAddress(text.toUpperCase());
   const handleSchoolNameChange = (text: string) => setSchoolName(text.toUpperCase());
+
+  // Función para seleccionar imagen de la galería
+  const pickImage = async () => {
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (!permissionResult.granted) {
+      Alert.alert('Permiso requerido', 'Necesitas permiso para acceder a tus fotos.');
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.8,
+    });
+
+    if (!result.canceled && result.assets[0]) {
+      setPhotoUrl(result.assets[0].uri);
+    }
+  };
+
+  // Función para tomar foto con cámara
+  const takePhoto = async () => {
+    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+
+    if (!permissionResult.granted) {
+      Alert.alert('Permiso requerido', 'Necesitas permiso para usar la cámara.');
+      return;
+    }
+
+    const result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.8,
+    });
+
+    if (!result.canceled && result.assets[0]) {
+      setPhotoUrl(result.assets[0].uri);
+    }
+  };
 
   useEffect(() => {
     initForm();
@@ -211,6 +254,7 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
       setEmergencyContact(data.emergencyContact || '');
       setEmergencyPhone(data.emergencyPhone || '');
       setMedicalInfo(data.medicalInfo || '');
+      setPhotoUrl(data.photoUrl || '');
 
       // Datos de la relación
       const relMap: Record<string, string> = {
@@ -293,7 +337,7 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
         await geocodeAddress(schoolName, 'school');
       }
 
-      const body = {
+const body = {
         name: name.trim(),
         address: address.trim(),
         homeLatitude: parseFloat(homeLatitude) || 0,
@@ -306,7 +350,8 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
         emergencyContact: emergencyContact.trim(),
         emergencyPhone: emergencyPhone.trim(),
         medicalInfo: medicalInfo.trim() || null,
-relationship: RELATIONSHIP_MAP[relationship] || relationship,
+        photoUrl: photoUrl || null,
+        relationship: RELATIONSHIP_MAP[relationship] || relationship,
         isEmergencyContact,
         notifyEvents,
       };
@@ -390,6 +435,35 @@ relationship: RELATIONSHIP_MAP[relationship] || relationship,
               <Text style={styles.errorText}>{error}</Text>
             </View>
           ) : null}
+
+          {/* Section: Foto */}
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>FOTO</Text>
+
+            <View style={styles.photoSection}>
+              {photoUrl ? (
+                <View style={styles.photoPreviewContainer}>
+                  <Image source={{ uri: photoUrl }} style={styles.photoPreview} />
+                  <Pressable style={styles.removePhotoButton} onPress={() => setPhotoUrl('')}>
+                    <Text style={styles.removePhotoIcon}>✕</Text>
+                  </Pressable>
+                </View>
+              ) : (
+                <View style={styles.photoPlaceholder}>
+                  <Text style={styles.photoPlaceholderIcon}>📷</Text>
+                </View>
+              )}
+
+              <View style={styles.photoButtons}>
+                <Pressable style={styles.photoButton} onPress={pickImage}>
+                  <Text style={styles.photoButtonText}>Galería</Text>
+                </Pressable>
+                <Pressable style={styles.photoButton} onPress={takePhoto}>
+                  <Text style={styles.photoButtonText}>Cámara</Text>
+                </Pressable>
+              </View>
+            </View>
+          </View>
 
           {/* Section: Datos Personales */}
           <View style={styles.section}>
@@ -762,5 +836,66 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 16,
     fontWeight: '600',
+  },
+  // Foto
+  photoSection: {
+    alignItems: 'center',
+  },
+  photoPlaceholder: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: '#f2f4f6',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 16,
+    borderWidth: 2,
+    borderColor: '#e5e7eb',
+    borderStyle: 'dashed',
+  },
+  photoPlaceholderIcon: {
+    fontSize: 40,
+  },
+  photoPreviewContainer: {
+    position: 'relative',
+    marginBottom: 16,
+  },
+  photoPreview: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+  },
+  removePhotoButton: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    backgroundColor: '#dc2626',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  removePhotoIcon: {
+    color: '#ffffff',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  photoButtons: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  photoButton: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 8,
+    backgroundColor: '#f2f4f6',
+    borderWidth: 1,
+    borderColor: '#c6c6cd',
+  },
+  photoButtonText: {
+    fontSize: 14,
+    color: '#45464d',
+    fontWeight: '500',
   },
 });

@@ -4,7 +4,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   View, Text, StyleSheet, ScrollView, Pressable,
-  Alert, ActivityIndicator
+  Alert, ActivityIndicator, Image
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
@@ -224,11 +224,15 @@ export default function ChildDetailScreen({ navigation, route }: { navigation?: 
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
         {/* Avatar & Name */}
         <View style={styles.profileSection}>
-          <View style={styles.avatar}>
-            <Text style={styles.avatarText}>
-              {student?.name?.charAt(0) || '?'}
-            </Text>
-          </View>
+          {student?.photoUrl ? (
+            <Image source={{ uri: student.photoUrl }} style={styles.avatarImage} />
+          ) : (
+            <View style={styles.avatar}>
+              <Text style={styles.avatarText}>
+                {student?.name?.charAt(0) || '?'}
+              </Text>
+            </View>
+          )}
           <Text style={styles.name}>{student?.name || 'Sin nombre'}</Text>
           <Text style={styles.grade}>{student?.grade || ''}</Text>
           
@@ -396,6 +400,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
+  },
+  avatarImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    marginBottom: 16,
+    borderWidth: 3,
+    borderColor: '#ffffff',
   },
   avatarText: {
     fontSize: 32,

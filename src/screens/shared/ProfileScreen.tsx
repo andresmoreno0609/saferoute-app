@@ -9,8 +9,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { User } from '../../types';
 
 const API_URL = 'http://192.168.1.8:8080/api/v1';
-const ACCESS_TOKEN_KEY = '@safeRouteAccessToken';
-const REFRESH_TOKEN_KEY = '@safeRouteRefreshToken';
+const ACCESS_TOKEN_KEY = 'accessToken';
+const REFRESH_TOKEN_KEY = 'refreshToken';
 
 async function clearTokens() {
   try {
@@ -62,7 +62,7 @@ export default function ProfileScreen({ navigation }: Props) {
   const [guardianProfile, setGuardianProfile] = useState<GuardianProfile | null>(null);
   const [driverProfile, setDriverProfile] = useState<DriverProfile | null>(null);
   const [loading, setLoading] = useState(true);
-  const [debugInfo, setDebugInfo] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     loadData();
@@ -71,46 +71,56 @@ export default function ProfileScreen({ navigation }: Props) {
   async function loadData() {
     try {
       const token = await AsyncStorage.getItem(ACCESS_TOKEN_KEY);
+      console.log('Token:', token ? 'existe' : 'no existe');
+
       if (!token) {
         setLoading(false);
+        setError('No hay sesión');
         return;
       }
 
       // Cargar datos del usuario
+      console.log('Haciendo request a /auth/me...');
       const userRes = await fetch(`${API_URL}/auth/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      if (userRes.ok) {
-        const userData = await userRes.json();
-        setUser(userData);
+      console.log('Response status:', userRes.status);
 
-        // userData puede tener guardian dentro si el backend lo incluye
-        // o puede necesitar /guardians/user/{id}
-        const userId = userData.user?.id || userData.id;
-        
-        setDebugInfo(`user: ${JSON.stringify(userData)}`);
+      if (!userRes.ok) {
+        setError('Error al cargar usuario');
+        setLoading(false);
+        return;
+      }
 
-        // Si el backend devuelve guardian en userData, usarlo
-        if (userData.guardian) {
-          setGuardianProfile(userData.guardian);
-        } else {
-          // Intentar endpoint propio
-          try {
-            const gRes = await fetch(`${API_URL}/guardians/user/${userId}`, {
-              headers: { Authorization: `Bearer ${token}` },
-            });
-            if (gRes.ok) {
-              const gData = await gRes.json();
-              setGuardianProfile(gData);
-            }
-          } catch (e) {
-            setDebugInfo(`guardian error: ${e}`);
+      const userData = await userRes.json();
+      console.log('User data:', userData);
+      setUser(userData);
+
+      // userData puede tener guardian dentro si el backend lo incluye
+      // o puede necesitar /guardians/user/{id}
+      const userId = userData.user?.id || userData.id;
+
+      // Si el backend devuelve guardian en userData, usarlo
+      if (userData.guardian) {
+        setGuardianProfile(userData.guardian);
+      } else {
+        // Intentar endpoint propio
+        try {
+          const gRes = await fetch(`${API_URL}/guardians/user/${userId}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if (gRes.ok) {
+            const gData = await gRes.json();
+            setGuardianProfile(gData);
           }
+        } catch (e) {
+          console.log('guardian error:', e);
         }
       }
     } catch (err) {
       console.error('loadData error:', err);
+      setError('Error de conexión');
     } finally {
       setLoading(false);
     }
@@ -158,13 +168,25 @@ export default function ProfileScreen({ navigation }: Props) {
     }
   }
 
-  // Loading
+  // Loading o Error
   if (loading) {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.loading}>
           <Text style={styles.loadingText}>Cargando...</Text>
-          <Button title="DEBUG" onPress={() => Alert.alert('DEBUG', debugInfo)} />
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  if (error) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.loading}>
+          <Text style={styles.errorText}>{error}</Text>
+          <Pressable style={styles.retryButton} onPress={loadData}>
+            <Text style={styles.retryButtonText}>Reintentar</Text>
+          </Pressable>
         </View>
       </SafeAreaView>
     );
@@ -184,15 +206,7 @@ export default function ProfileScreen({ navigation }: Props) {
             <Text style={styles.backIcon}>←</Text>
           </Pressable>
           <Text style={styles.headerTitle}>Mi Perfil</Text>
-          <Text style={styles.debugIcon}>ⓘ</Text>
         </View>
-
-        {/* DEBUG INFO */}
-        {debugInfo ? (
-          <View style={styles.debugBox}>
-            <Text style={styles.debugBoxText}>{debugInfo}</Text>
-          </View>
-        ) : null}
 
         {/* Avatar Section */}
         <View style={styles.avatarSection}>

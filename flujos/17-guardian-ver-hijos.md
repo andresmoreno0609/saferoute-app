@@ -277,6 +277,25 @@ Tamaños:
 └─────────────────────────────────────┘
 ```
 
+## 5. Foto del Estudiante
+
+El campo `photoUrl` permite agregar una foto del estudiante.
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| photoUrl | string (opcional) | URL de la imagen del estudiante |
+
+**Funcionalidad actual:**
+- Selector de galería (expo-image-picker)
+- Cámara para tomar foto directa
+- Preview de la imagen antes de guardar
+- La imagen se guarda como URI local temporalmente
+- Se envía al backend junto con los demás datos
+
+**Nota:** Actualmente la imagen se guarda como URI local. Cuando el backend tenga almacenamiento en la nube, se subirá la imagen y se obtendrá la URL pública.
+
+---
+
 ## 5. Request - Create/Update
 
 ```json
