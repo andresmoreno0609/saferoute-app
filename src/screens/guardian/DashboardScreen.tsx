@@ -154,15 +154,16 @@ function Avatar({ uri, name, size = 40 }: { uri?: string; name: string; size?: n
 
 function StatusBadge({ status }: { status: Student['status'] }) {
   const config = {
-    EN_RUTA: { text: 'En Ruta', bg: '#86f2e4', color: '#00201d' },
-    EN_COLEGIO: { text: 'En Colegio', bg: '#e0e3e5', color: '#45464d' },
-    EN_CASA: { text: 'En Casa', bg: '#d5e3fd', color: '#0d1c2f' },
-    SIN_RUTA: { text: 'Sin Ruta', bg: '#eceef0', color: '#76777d' },
+    EN_RUTA: { text: 'En Ruta', bg: '#DBFCE7', color: '#166534', icon: '🚌' },
+    EN_COLEGIO: { text: 'En Colegio', bg: '#DBEAFE', color: '#1E40AF', icon: '🏫' },
+    EN_CASA: { text: 'En Casa', bg: '#FEF3C7', color: '#92400E', icon: '🏠' },
+    SIN_RUTA: { text: 'Sin Ruta', bg: '#F1F5F9', color: '#64748B', icon: '❌' },
   };
-  const { text, bg, color } = config[status];
-  
+  const { text, bg, color, icon } = config[status];
+
   return (
     <View style={[styles.statusBadge, { backgroundColor: bg }]}>
+      <Text style={styles.statusIcon}>{icon}</Text>
       <Text style={[styles.statusBadgeText, { color }]}>{text}</Text>
     </View>
   );
@@ -178,8 +179,13 @@ function NotificationItem({ notification }: { notification: Notification }) {
   
   return (
     <View style={styles.notificationItem}>
-      <View style={[styles.notificationIcon, { backgroundColor: notification.type === 'error' ? '#ffdad6' : '#86f2e4' }]}>
-        <Text>{iconMap[notification.type]}</Text>
+      <View style={[styles.notificationIcon, {
+        backgroundColor:
+          notification.type === 'error' ? '#FEE2E2' :
+          notification.type === 'warning' ? '#FEF3C7' :
+          notification.type === 'success' ? '#DCFCE7' : '#DBEAFE'
+      }]}>
+        <Text style={styles.notificationIconText}>{iconMap[notification.type]}</Text>
       </View>
       <View style={styles.notificationContent}>
         <Text style={styles.notificationTitle}>{notification.title}</Text>
@@ -399,19 +405,19 @@ export default function GuardianDashboardScreen({ navigation }: Props) {
 }
 
 // ============================================
-// Estilos
+// Estilos - Diseño Mejorado
 // ============================================
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#f7f9fb',
+    backgroundColor: '#F8FAFC',
   },
   scrollView: {
     flex: 1,
   },
   scrollContent: {
     padding: 20,
-    paddingBottom: 100,
+    paddingBottom: 120,
   },
   loadingContainer: {
     flex: 1,
@@ -420,47 +426,60 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     marginTop: 12,
-    color: '#45464d',
+    color: '#64748B',
     fontSize: 16,
   },
-  // Header
+  // Header - más atractivo
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 24,
+    paddingVertical: 8,
   },
   headerLeft: {},
   headerTitle: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#006a61',
+    fontSize: 28,
+    fontWeight: '800',
+    color: '#0F172A',
+    letterSpacing: -0.5,
   },
   headerSubtitle: {
-    fontSize: 14,
-    color: '#45464d',
+    fontSize: 15,
+    color: '#64748B',
+    fontWeight: '500',
+    marginTop: 2,
   },
-  // Avatar
+  // Avatar - con gradiente visual
   avatar: {
-    borderWidth: 2,
-    borderColor: '#86f2e4',
+    borderWidth: 3,
+    borderColor: '#E2E8F0',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
   },
   avatarPlaceholder: {
-    backgroundColor: '#006a61',
+    backgroundColor: '#10B981',
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 3,
+    borderColor: '#fff',
   },
   avatarText: {
     color: '#fff',
-    fontWeight: '600',
+    fontWeight: '700',
+    fontSize: 18,
   },
-  // Banner
+  // Banner - más vibrante
   banner: {
-    backgroundColor: '#131b2e',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 24,
+    backgroundColor: '#1E293B',
+    borderRadius: 16,
+    padding: 20,
+    marginBottom: 28,
     overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#334155',
   },
   bannerContent: {
     position: 'relative',
@@ -468,160 +487,183 @@ const styles = StyleSheet.create({
   },
   bannerTitle: {
     fontSize: 18,
-    fontWeight: '600',
-    color: '#fff',
-    marginBottom: 4,
+    fontWeight: '700',
+    color: '#F8FAFC',
+    marginBottom: 6,
   },
   bannerDesc: {
     fontSize: 14,
-    color: '#c6c6cd',
-    marginBottom: 12,
+    color: '#94A3B8',
+    marginBottom: 16,
+    lineHeight: 20,
   },
   bannerButton: {
-    backgroundColor: '#006a61',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 8,
+    backgroundColor: '#10B981',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 10,
     alignSelf: 'flex-start',
   },
   bannerButtonText: {
     color: '#fff',
-    fontWeight: '600',
-    fontSize: 12,
+    fontWeight: '700',
+    fontSize: 13,
   },
-  // Section
+  // Section - más espacio
   section: {
-    marginBottom: 24,
+    marginBottom: 32,
   },
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 16,
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: '600',
-    color: '#191c1e',
+    fontWeight: '700',
+    color: '#0F172A',
+    letterSpacing: -0.3,
   },
   sectionLink: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '600',
-    color: '#006a61',
+    color: '#10B981',
   },
-  // Children Grid
+  // Children Grid - mejor separación
   childrenGrid: {
-    gap: 12,
+    gap: 16,
   },
   childCard: {
-    backgroundColor: '#ffffff',
-    borderRadius: 12,
-    padding: 16,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    padding: 18,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.04,
-    shadowRadius: 20,
+    shadowRadius: 12,
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
   },
   childCardHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: 12,
+    marginBottom: 14,
   },
-  childCardInfo: {},
+  childCardInfo: {
+    flex: 1,
+  },
   childName: {
     fontSize: 18,
-    fontWeight: '600',
-    color: '#191c1e',
-    marginBottom: 4,
+    fontWeight: '700',
+    color: '#1E293B',
+    marginBottom: 6,
   },
   childDetail: {
     fontSize: 14,
-    color: '#45464d',
+    color: '#64748B',
+    fontWeight: '500',
   },
-  // Status Badge
+  // Status Badge - más coloridos
   statusBadge: {
     paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 12,
+    paddingVertical: 5,
+    borderRadius: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  statusIcon: {
+    fontSize: 12,
   },
   statusBadgeText: {
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: '700',
     textTransform: 'uppercase',
+    letterSpacing: 0.5,
   },
-  // Notifications
+  // Notifications - más atractivo
   notificationsList: {
-    gap: 8,
+    gap: 12,
   },
   notificationItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderRadius: 12,
-    padding: 12,
-    borderLeftWidth: 4,
-    borderLeftColor: '#006a61',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 14,
+    padding: 14,
+    borderLeftWidth: 0,
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
   },
   notificationIcon: {
-    width: 36,
-    height: 36,
-    borderRadius: 8,
+    width: 40,
+    height: 40,
+    borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 12,
+    marginRight: 14,
+  },
+  notificationIconText: {
+    fontSize: 18,
   },
   notificationContent: {
     flex: 1,
   },
   notificationTitle: {
     fontSize: 14,
-    color: '#191c1e',
-    marginBottom: 2,
+    color: '#1E293B',
+    fontWeight: '600',
+    marginBottom: 4,
   },
   notificationTime: {
-    fontSize: 10,
-    color: '#76777d',
-    textTransform: 'uppercase',
+    fontSize: 11,
+    color: '#94A3B8',
+    fontWeight: '500',
+    textTransform: 'none',
   },
-  // Empty
+  // Empty - más atractivo
   emptyText: {
     fontSize: 14,
-    color: '#76777d',
+    color: '#94A3B8',
     textAlign: 'center',
-    padding: 20,
+    padding: 24,
   },
   emptyAddCard: {
-    backgroundColor: '#ffffff',
-    borderRadius: 12,
-    padding: 24,
+    backgroundColor: '#F1F5F9',
+    borderRadius: 16,
+    padding: 32,
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#e0e3e5',
+    borderColor: '#CBD5E1',
     borderStyle: 'dashed',
   },
   emptyAddIcon: {
-    fontSize: 32,
-    color: '#006a61',
-    marginBottom: 8,
+    fontSize: 36,
+    color: '#10B981',
+    marginBottom: 10,
   },
   emptyAddText: {
-    fontSize: 14,
-    color: '#006a61',
-    fontWeight: '600',
+    fontSize: 15,
+    color: '#10B981',
+    fontWeight: '700',
   },
   // Error
   errorContainer: {
-    backgroundColor: '#ffdad6',
-    borderRadius: 8,
-    padding: 12,
-    marginTop: 12,
+    backgroundColor: '#FEF2F2',
+    borderRadius: 12,
+    padding: 16,
+    marginTop: 16,
+    borderWidth: 1,
+    borderColor: '#FECACA',
   },
   errorText: {
-    color: '#ba1a1a',
+    color: '#DC2626',
     fontSize: 14,
+    fontWeight: '500',
   },
-  // Bottom Nav
+  // Bottom Nav - más atractivo
   bottomNav: {
     position: 'absolute',
     bottom: 0,
@@ -630,33 +672,34 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
-    paddingBottom: 24,
-    paddingTop: 12,
+    backgroundColor: '#FFFFFF',
+    paddingBottom: 28,
+    paddingTop: 14,
     borderTopWidth: 1,
-    borderTopColor: '#e0e3e5',
+    borderTopColor: '#E2E8F0',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.04,
+    shadowOpacity: 0.06,
     shadowRadius: 20,
   },
   navItem: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 8,
+    paddingVertical: 10,
   },
   navIcon: {
-    fontSize: 24,
+    fontSize: 26,
     marginBottom: 4,
   },
   navText: {
-    fontSize: 12,
-    color: '#76777d',
+    fontSize: 11,
+    color: '#94A3B8',
+    fontWeight: '600',
   },
   navTextActive: {
-    fontSize: 12,
-    color: '#006a61',
-    fontWeight: '600',
+    fontSize: 11,
+    color: '#10B981',
+    fontWeight: '700',
   },
 });
