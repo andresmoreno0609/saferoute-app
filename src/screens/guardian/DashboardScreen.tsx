@@ -48,12 +48,14 @@ interface Student {
 
 interface Notification {
   id: string;
+  guardianId: string;
   title: string;
   body: string;
-  type: 'info' | 'warning' | 'success' | 'error';
-  createdAt: string;
+  type: 'BOARD' | 'ARRIVAL' | 'DROP' | 'OBSERVATION';
+  referenceId?: string;
+  sentAt: string;
+  readAt?: string;
   read: boolean;
-  studentId?: string;
 }
 
 let authToken: string | null = null;
@@ -170,26 +172,24 @@ function StatusBadge({ status }: { status: Student['status'] }) {
 }
 
 function NotificationItem({ notification }: { notification: Notification }) {
-  const iconMap = {
-    info: '🚌',
-    warning: '⚠️',
-    success: '✅',
-    error: '🚨',
+  // Mapeo de colores según tipo
+  const typeConfig = {
+    BOARD: { border: '#10B981', bg: '#DCFCE7', icon: '🚌' },
+    ARRIVAL: { border: '#10B981', bg: '#DCFCE7', icon: '🏫' },
+    DROP: { border: '#10B981', bg: '#DCFCE7', icon: '🏠' },
+    OBSERVATION: { border: '#F59E0B', bg: '#FEF3C7', icon: '⚠️' },
   };
-  
+
+  const config = typeConfig[notification.type] || typeConfig.OBSERVATION;
+
   return (
-    <View style={styles.notificationItem}>
-      <View style={[styles.notificationIcon, {
-        backgroundColor:
-          notification.type === 'error' ? '#FEE2E2' :
-          notification.type === 'warning' ? '#FEF3C7' :
-          notification.type === 'success' ? '#DCFCE7' : '#DBEAFE'
-      }]}>
-        <Text style={styles.notificationIconText}>{iconMap[notification.type]}</Text>
+    <View style={[styles.notificationItem, { borderLeftColor: config.border, borderLeftWidth: 4 }]}>
+      <View style={[styles.notificationIcon, { backgroundColor: config.bg }]}>
+        <Text style={styles.notificationIconText}>{config.icon}</Text>
       </View>
       <View style={styles.notificationContent}>
         <Text style={styles.notificationTitle}>{notification.title}</Text>
-        <Text style={styles.notificationTime}>{notification.createdAt}</Text>
+        <Text style={styles.notificationTime}>{notification.sentAt}</Text>
       </View>
     </View>
   );
