@@ -17,7 +17,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 // Para Android emulator usa: http://10.0.2.2:8080
 // Para iOS simulator: http://localhost:8080
 // Para device físico: http://192.168.x.x:8080
-const API_URL = 'http://192.168.1.6:8080/api/v1';
+const API_URL = 'http://192.168.1.8:8080/api/v1';
 
 async function loginApi(email: string, password: string) {
   console.log('🔄 Intentando login a:', `${API_URL}/auth/login`);

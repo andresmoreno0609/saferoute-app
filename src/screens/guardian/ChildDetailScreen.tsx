@@ -1,47 +1,104 @@
 // Guardian: Child Detail Screen - SafeRoute
 // Flujo 17 - Ver detalle del hijo
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View, Text, StyleSheet, ScrollView, Pressable,
   Alert, ActivityIndicator
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_URL = 'http://192.168.1.6:8080/api/v1';
+const API_URL = 'http://192.168.1.8:8080/api/v1';
 
 export default function ChildDetailScreen({ navigation, route }: { navigation?: any; route?: any }) {
   const studentId = route?.params?.studentId;
-  const guardianId = route?.params?.guardianId;
+  const guardianIdParam = route?.params?.guardianId;
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [student, setStudent] = useState<any>(null);
+  const [guardianId, setGuardianId] = useState<string | null>(guardianIdParam || null);
 
   useEffect(() => {
-    if (studentId && guardianId) {
-      loadStudent();
-    }
-  }, [studentId, guardianId]);
+    loadData();
+  }, [studentId]);
 
-  const loadStudent = async () => {
-    if (!studentId || !guardianId) return;
+  // Recargar cuando la pantalla vuelve a tener foco (ej: después de editar)
+  useFocusEffect(
+    useCallback(() => {
+      if (studentId) {
+        loadData();
+      }
+    }, [studentId])
+  );
 
+  const loadData = async () => {
     setLoading(true);
+
+    // Determinar guardianId: de params o del perfil
+    let gId = guardianIdParam;
+
+    if (!gId) {
+      try {
+        const token = await AsyncStorage.getItem('accessToken');
+
+        // Get user
+        const userRes = await fetch(`${API_URL}/auth/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const userData = await userRes.json();
+        const userId = userData.user?.id || userData.id;
+
+        // Get guardian profile
+        const guardianRes = await fetch(`${API_URL}/guardians/user/${userId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const guardianData = await guardianRes.json();
+
+        gId = guardianData.id;
+        setGuardianId(gId);
+      } catch (err) {
+        console.error('Error obteniendo guardian:', err);
+        setError('No se pudo cargar la información');
+        setLoading(false);
+        return;
+      }
+    }
+
+    // Cargar estudiante
     try {
       const token = await AsyncStorage.getItem('accessToken');
-      const res = await fetch(`${API_URL}/guardians/${guardianId}/students/${studentId}`, {
+
+      // Primero obtener la relación
+      const relRes = await fetch(`${API_URL}/guardians/${gId}/students/${studentId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        throw new Error('Ocurrió un error');
+      if (!relRes.ok) {
+        throw new Error('No se encontró la relación');
       }
 
-      const data = await res.json();
-      setStudent(data);
+      const relation = await relRes.json();
+
+      // Luego obtener los datos del estudiante directamente
+      const studentRes = await fetch(`${API_URL}/students/${studentId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!studentRes.ok) {
+        throw new Error('No se encontró el estudiante');
+      }
+
+      const studentData = await studentRes.json();
+
+      // Combinar datos
+      setStudent({
+        ...studentData,
+        relationship: relation.relationship,
+        notifyEvents: relation.notifyEvents,
+      });
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -50,10 +107,11 @@ export default function ChildDetailScreen({ navigation, route }: { navigation?: 
   };
 
   const handleEdit = () => {
-    navigation?.navigate('ChildForm', { 
-      mode: 'edit', 
-      studentId, 
-      guardianId 
+    const gId = guardianIdParam || guardianId;
+    navigation?.navigate('ChildForm', {
+      mode: 'edit',
+      studentId,
+      guardianId: gId
     });
   };
 
@@ -73,11 +131,12 @@ export default function ChildDetailScreen({ navigation, route }: { navigation?: 
   };
 
   const deleteStudent = async () => {
-    if (!studentId || !guardianId) return;
+    const gId = guardianIdParam || guardianId;
+    if (!studentId || !gId) return;
 
     try {
       const token = await AsyncStorage.getItem('accessToken');
-      const res = await fetch(`${API_URL}/guardians/${guardianId}/students/${studentId}`, {
+      const res = await fetch(`${API_URL}/guardians/${gId}/students/${studentId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -134,7 +193,7 @@ export default function ChildDetailScreen({ navigation, route }: { navigation?: 
         </View>
         <View style={styles.errorContainer}>
           <Text style={styles.errorText}>{error}</Text>
-          <Pressable style={styles.retryButton} onPress={loadStudent}>
+          <Pressable style={styles.retryButton} onPress={loadData}>
             <Text style={styles.retryButtonText}>Reintentar</Text>
           </Pressable>
         </View>

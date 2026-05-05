@@ -10,7 +10,7 @@ import { Card, Avatar, Badge, Button, Spinner, EmptyState } from '../../componen
 import { studentsApi, authApi } from '../../lib/api';
 import type { Student } from '../../types';
 
-const API_URL = 'http://192.168.1.6:8080/api/v1';
+const API_URL = 'http://192.168.1.8:8080/api/v1';
 
 export default function GuardianChildrenScreen({ navigation }: { navigation?: any }) {
   const [students, setStudents] = useState<Student[]>([]);

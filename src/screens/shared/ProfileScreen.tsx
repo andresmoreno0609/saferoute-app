@@ -8,7 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { User } from '../../types';
 
-const API_URL = 'http://192.168.1.6:8080/api/v1';
+const API_URL = 'http://192.168.1.8:8080/api/v1';
 const ACCESS_TOKEN_KEY = '@safeRouteAccessToken';
 const REFRESH_TOKEN_KEY = '@safeRouteRefreshToken';
 

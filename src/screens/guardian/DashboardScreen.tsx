@@ -10,7 +10,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_URL = 'http://192.168.1.6:8080/api/v1';
+const API_URL = 'http://192.168.1.8:8080/api/v1';
 
 // ============================================
 // Tipos
@@ -310,20 +310,23 @@ export default function GuardianDashboardScreen({ navigation }: Props) {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Mis Hijos</Text>
-            <Pressable onPress={() => navigation?.navigate('GuardianChildren')}>
-              <Text style={styles.sectionLink}>VER TODOS</Text>
+            <Pressable onPress={() => navigation?.navigate('ChildForm', { mode: 'create' })}>
+              <Text style={styles.sectionLink}>+ AGREGAR</Text>
             </Pressable>
           </View>
-          
+
           <View style={styles.childrenGrid}>
             {students.length === 0 ? (
-              <Text style={styles.emptyText}>No hay hijos registrados</Text>
+              <Pressable style={styles.emptyAddCard} onPress={() => navigation?.navigate('ChildForm', { mode: 'create' })}>
+                <Text style={styles.emptyAddIcon}>+</Text>
+                <Text style={styles.emptyAddText}>Agregar hijo</Text>
+              </Pressable>
             ) : (
               students.map((student) => (
-                <Pressable 
-                  key={student.id} 
+                <Pressable
+                  key={student.id}
                   style={styles.childCard}
-                  onPress={() => navigation?.navigate('GuardianChildren')}
+                  onPress={() => navigation?.navigate('ChildDetail', { studentId: student.id })}
                 >
                   <View style={styles.childCardHeader}>
                     <Avatar uri={student.photoUrl} name={student.name} size={56} />
@@ -587,6 +590,25 @@ const styles = StyleSheet.create({
     color: '#76777d',
     textAlign: 'center',
     padding: 20,
+  },
+  emptyAddCard: {
+    backgroundColor: '#ffffff',
+    borderRadius: 12,
+    padding: 24,
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#e0e3e5',
+    borderStyle: 'dashed',
+  },
+  emptyAddIcon: {
+    fontSize: 32,
+    color: '#006a61',
+    marginBottom: 8,
+  },
+  emptyAddText: {
+    fontSize: 14,
+    color: '#006a61',
+    fontWeight: '600',
   },
   // Error
   errorContainer: {

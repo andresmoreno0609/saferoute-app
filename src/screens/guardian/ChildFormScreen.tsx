@@ -9,7 +9,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_URL = 'http://192.168.1.6:8080/api/v1';
+const API_URL = 'http://192.168.1.8:8080/api/v1';
 
 // Mapping: frontend label -> backend enum value
 const RELATIONSHIP_MAP: Record<string, string> = {
@@ -175,19 +175,32 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
     setLoading(true);
     try {
       const token = await AsyncStorage.getItem('accessToken');
-      const res = await fetch(`${API_URL}/guardians/${guardianId}/students/${studentId}`, {
+
+      // Obtener la relación
+      const relRes = await fetch(`${API_URL}/guardians/${guardianId}/students/${studentId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        console.error('Error cargando estudiante:', errData);
-        throw new Error('Ocurrió un error. Intentá de nuevo');
+      if (!relRes.ok) {
+        throw new Error('No se encontró la relación');
       }
 
-      const data = await res.json();
-      
+      const relation = await relRes.json();
+
+      // Obtener datos del estudiante
+      const studentRes = await fetch(`${API_URL}/students/${studentId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!studentRes.ok) {
+        throw new Error('No se encontró el estudiante');
+      }
+
+      const data = await studentRes.json();
+
+      // Precargar campos
       setName(data.name || '');
+      setBirthDate(data.birthDate || '');
       setGrade(data.grade || '');
       setAddress(data.address || '');
       setHomeLatitude(data.homeLatitude?.toString() || '');
@@ -198,10 +211,17 @@ export default function ChildFormScreen({ navigation, route }: { navigation?: an
       setEmergencyContact(data.emergencyContact || '');
       setEmergencyPhone(data.emergencyPhone || '');
       setMedicalInfo(data.medicalInfo || '');
-      setRelationship(data.relationship === 'father' ? 'Padre' : data.relationship === 'mother' ? 'Madre' : 'Otro');
-      setIsEmergencyContact(data.isEmergencyContact ?? true);
-      setNotifyEvents(data.notifyEvents ?? true);
-      
+
+      // Datos de la relación
+      const relMap: Record<string, string> = {
+        'father': 'Padre',
+        'mother': 'Madre',
+        'other': 'Otro',
+      };
+      setRelationship(relMap[relation.relationship] || 'Otro');
+      setIsEmergencyContact(relation.isEmergencyContact ?? true);
+      setNotifyEvents(relation.notifyEvents ?? true);
+
     } catch (err: any) {
       console.error('Error loadStudent:', err);
       setError('Ocurrió un error al cargar');
