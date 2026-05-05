@@ -362,14 +362,14 @@ export default function ProfileScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f7f9fb',
+    backgroundColor: '#F8FAFC',
   },
   scrollView: {
     flex: 1,
   },
   content: {
-    padding: 20,
-    paddingBottom: 40,
+    padding: 24,
+    paddingBottom: 60,
   },
   loading: {
     flex: 1,
@@ -378,14 +378,14 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     fontSize: 16,
-    color: '#666',
+    color: '#64748B',
   },
   // Header
 header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 24,
+    marginBottom: 28,
   },
   headerCenter: {
     flex: 1,
@@ -489,47 +489,48 @@ header: {
   },
   sectionTitle: {
     fontSize: 12,
-    fontWeight: '600',
-    color: '#76777d',
+    fontWeight: '700',
+    color: '#64748B',
     textTransform: 'uppercase',
-    letterSpacing: 0.05,
+    letterSpacing: 0.5,
     marginBottom: 16,
-    paddingBottom: 8,
+    paddingBottom: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#e0e3e5',
+    borderBottomColor: '#E2E8F0',
   },
   // Fields
   field: {
-    marginBottom: 16,
+    marginBottom: 18,
   },
   fieldLabel: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#45464d',
-    marginBottom: 4,
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#64748B',
+    marginBottom: 6,
   },
   fieldValue: {
     fontSize: 16,
-    color: '#191c1e',
-    backgroundColor: '#fff',
+    color: '#1E293B',
+    backgroundColor: '#FFFFFF',
     padding: 16,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#e0e3e5',
+    borderColor: '#E2E8F0',
+    fontWeight: '500',
   },
   fieldReadonly: {
-    backgroundColor: '#f2f4f6',
-    color: '#76777d',
+    backgroundColor: '#F8FAFC',
+    color: '#94A3B8',
   },
   // Action Buttons
   actionButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF',
     padding: 16,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#e0e3e5',
+    borderColor: '#E2E8F0',
   },
   actionIcon: {
     fontSize: 20,
@@ -551,32 +552,33 @@ header: {
     alignItems: 'center',
     justifyContent: 'center',
     padding: 16,
-    borderRadius: 12,
+    borderRadius: 14,
     borderWidth: 2,
-    borderColor: '#dc3545',
-    marginTop: 24,
+    borderColor: '#FEE2E2',
+    marginTop: 28,
+    backgroundColor: '#FEF2F2',
   },
   logoutIcon: {
     fontSize: 20,
-    marginRight: 8,
+    marginRight: 10,
   },
   logoutText: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: '700',
-    color: '#dc3545',
+    color: '#DC2626',
   },
   // Version
   version: {
     fontSize: 12,
-    color: '#76777d',
+    color: '#94A3B8',
     textAlign: 'center',
-    marginTop: 32,
+    marginTop: 36,
   },
   versionSubtitle: {
     fontSize: 12,
-    color: '#76777d',
+    color: '#94A3B8',
     textAlign: 'center',
-    marginTop: 4,
+    marginTop: 6,
   },
   // Secciones adicionales
   sectionDivider: {
